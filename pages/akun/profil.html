@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Profil — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Profil · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/akun/profil.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="masuk" data-menu="profil" data-judul="Profil">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Profil</h1>
+        <p class="sub">Kelola data akun kamu</p>
+      </div>
+    </div>
+
+    <div class="tumpuk">
+      <section class="kartu kepala-profil">
+        <span class="avatar besar" id="avatar">-</span>
+        <div>
+          <h2 id="nama">-</h2>
+          <p class="muted" id="ringkas">-</p>
+        </div>
+      </section>
+
+      <div class="grid-2 grid-atas">
+        <form class="kartu form" id="formProfil" novalidate>
+          <h2 class="kartu-judul">Data Diri</h2>
+          <div class="field">
+            <label class="label" for="nama2">Nama Lengkap</label>
+            <input class="input" id="nama2" name="nama" autocomplete="name">
+          </div>
+          <div class="field">
+            <label class="label" for="email">Email</label>
+            <input class="input" id="email" name="email" readonly>
+            <p class="bantuan">Email dipakai untuk masuk dan tidak bisa diubah.</p>
+          </div>
+          <div class="field">
+            <label class="label" for="hp">Nomor HP/WhatsApp</label>
+            <input class="input" id="hp" name="hp" type="tel" inputmode="tel">
+          </div>
+          <div class="kaki-form"><button class="tombol tombol--utama" type="submit">Simpan Perubahan</button></div>
+        </form>
+
+        <div class="tumpuk">
+          <section class="kartu" id="kartuSewa" hidden>
+            <h2 class="kartu-judul">Kamar &amp; Kontak Darurat</h2>
+            <div id="infoSewa"></div>
+          </section>
+
+          <form class="kartu form" id="formSandi" novalidate>
+            <h2 class="kartu-judul">Ganti Kata Sandi</h2>
+            <div class="field">
+              <label class="label" for="lama">Kata Sandi Lama</label>
+              <input class="input" id="lama" name="lama" type="password" autocomplete="current-password">
+            </div>
+            <div class="field">
+              <label class="label" for="baru">Kata Sandi Baru</label>
+              <input class="input" id="baru" name="baru" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter">
+            </div>
+            <div class="field">
+              <label class="label" for="baru2">Ulangi Kata Sandi Baru</label>
+              <input class="input" id="baru2" name="baru2" type="password" autocomplete="new-password">
+            </div>
+            <div class="kaki-form"><button class="tombol tombol--sekunder" type="submit">Ganti Kata Sandi</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

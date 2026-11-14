@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Daftar Akun — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Daftar Akun · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/auth/bersama.js" defer></script>
+  <script src="../../assets/js/pages/auth/daftar.js" defer></script>
+</head>
+<body data-layout="auth" data-akses="tamu" data-judul="Daftar Akun">
+  <main>
+    <div class="kartu tumpuk">
+      <div class="teks-tengah"><a class="logo" href="../../index.html"><span class="logo-nama">SIPENK<i data-ikon="home"></i>S</span><span class="logo-pemisah"></span><span class="logo-kos">Kos Bu Nining</span></a></div>
+
+      <div class="kotak-info kotak-info--biru" id="infoReservasi" hidden><i data-ikon="info"></i><p></p></div>
+
+      <h1 class="judul-auth">Buat Akun</h1>
+
+      <form class="form" id="formDaftar" novalidate>
+        <div class="field">
+          <label class="label" for="nama">Nama Lengkap</label>
+          <input class="input" id="nama" name="nama" autocomplete="name" placeholder="Sesuai KTP">
+        </div>
+        <div class="field">
+          <label class="label" for="nik">NIK</label>
+          <input class="input" id="nik" name="nik" inputmode="numeric" maxlength="16" placeholder="16 digit angka">
+        </div>
+        <div class="field">
+          <label class="label" for="hp">Nomor HP/WhatsApp</label>
+          <div class="input-ikon input-ikon--kiri">
+            <i data-ikon="call"></i>
+            <input class="input" id="hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="nama@email.com">
+        </div>
+        <div class="field">
+          <label class="label" for="sandi">Kata Sandi</label>
+          <div class="input-ikon">
+            <input class="input" id="sandi" name="sandi" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter">
+            <button type="button" class="tombol tombol--ikon" data-lihat-sandi="sandi" aria-label="Tampilkan kata sandi"><i data-ikon="visibility"></i></button>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="sandi2">Konfirmasi Kata Sandi</label>
+          <input class="input" id="sandi2" name="sandi2" type="password" autocomplete="new-password" placeholder="Ulangi kata sandi">
+        </div>
+        <div class="field">
+          <label class="cek"><input type="checkbox" name="setuju"><span>Saya menyetujui <a href="../publik/tentang.html#aturan" target="_blank">aturan kos</a></span></label>
+        </div>
+        <button type="submit" class="tombol tombol--utama tombol--penuh">Daftar</button>
+      </form>
+
+      <p class="kecil muted teks-tengah">Sudah punya akun? <a id="keMasuk" href="masuk.html">Masuk</a></p>
+    </div>
+  </main>
+</body>
+</html>

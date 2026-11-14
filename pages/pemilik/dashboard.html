@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard Pemilik — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Dashboard Pemilik · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/dashboard.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="pemilik" data-menu="dashboard" data-judul="Dashboard Pemilik">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1 id="sapaan">Selamat datang</h1>
+        <p class="sub">Ringkasan Kos Bu Nining hari ini</p>
+      </div>
+    </div>
+
+    <div class="grid-4 mb-6" id="statistik"></div>
+
+    <div class="grid-2 grid-atas">
+      <section class="kartu" aria-labelledby="judulTindakan">
+        <h2 class="kartu-judul" id="judulTindakan">Perlu Tindakan</h2>
+        <div class="daftar-item" id="tindakan"></div>
+      </section>
+      <section class="kartu" aria-labelledby="judulPendapatan">
+        <div class="kartu-kepala">
+          <h2 class="kartu-judul" id="judulPendapatan">Pendapatan 6 Bulan Terakhir</h2>
+          <a class="tautan-lihat" href="keuangan.html">Laporan Keuangan<i data-ikon="arrow_forward"></i></a>
+        </div>
+        <div class="grafik" id="grafik" role="img"></div>
+      </section>
+    </div>
+
+    <section class="kartu kartu--rapat mt-6" aria-labelledby="judulKetersediaan">
+      <div class="kartu-kepala kepala-tabel">
+        <h2 class="kartu-judul" id="judulKetersediaan">Ketersediaan Kamar</h2>
+        <a class="tautan-lihat" href="kamar.html">Kelola Kamar<i data-ikon="arrow_forward"></i></a>
+      </div>
+      <div class="tabel-gulir">
+        <table class="tabel tabel--responsif">
+          <caption class="sr-only">Ketersediaan kamar per tipe</caption>
+          <thead><tr><th scope="col">Tipe</th><th scope="col" class="angka">Harga / bulan</th><th scope="col" class="angka">Total</th><th scope="col" class="angka">Terisi</th><th scope="col" class="angka">Kosong</th><th scope="col">Status</th></tr></thead>
+          <tbody id="tabelTipe"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

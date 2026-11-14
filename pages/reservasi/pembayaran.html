@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pembayaran Sewa — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Pembayaran Sewa · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/reservasi/pembayaran.js" defer></script>
+</head>
+<body data-layout="alur" data-akses="calon" data-judul="Pembayaran Sewa">
+  <main>
+    <a class="tautan-kembali" id="kembali" href="formulir.html"><i data-ikon="arrow_back"></i>Kembali ke Formulir Reservasi</a>
+    <div id="langkah"></div>
+
+    <div class="kepala-halaman">
+      <div>
+        <h1>Pembayaran Sewa Kamar</h1>
+        <p class="sub">Selesaikan pembayaran sewa bulan pertama untuk memproses reservasi kamu</p>
+      </div>
+    </div>
+
+    <div class="kotak-status kotak-status--bahaya mb-6" id="infoDitolak" hidden>
+      <div class="kotak-status-teks">
+        <span class="badge badge--bahaya">Bukti Ditolak</span>
+        <p id="alasanDitolak"></p>
+      </div>
+    </div>
+
+    <div class="grid-2 grid-atas">
+      <section class="kartu" aria-labelledby="judulRincian">
+        <h2 class="kartu-judul" id="judulRincian">Rincian Pembayaran</h2>
+        <div id="rincian"></div>
+        <div class="rincian-total">
+          <span>Total dibayar</span>
+          <strong id="total">-</strong>
+        </div>
+        <div class="rekening mt-6" id="rekening"></div>
+      </section>
+
+      <section class="kartu tumpuk" aria-labelledby="judulUnggah">
+        <h2 class="kartu-judul" id="judulUnggah">Unggah Bukti Transfer</h2>
+        <div id="unggahBukti"></div>
+        <button type="button" class="tombol tombol--utama tombol--penuh" id="kirim" disabled><i data-ikon="send"></i>Kirim Bukti Pembayaran</button>
+        <p class="bantuan teks-tengah" id="bantuanWa"></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

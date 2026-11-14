@@ -1,0 +1,112 @@
+/* =========================================================
+   TOKENS — satu sumber untuk warna, huruf, jarak, sudut, bayangan.
+   Nilai diambil dari docs/DESIGN.md (sistem desain Figma SIPENKOS).
+   Ubah warna/ukuran DI SINI saja, jangan menulis kode warna di file lain.
+   ========================================================= */
+
+/* Font Plus Jakarta Sans disimpan lokal (assets/fonts) agar tetap tampil tanpa internet */
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/plus-jakarta-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/plus-jakarta-sans-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2");
+}
+
+:root {
+    /* ---------- warna merek ---------- */
+    --biru: #1a6fd8;            /* tombol utama, tautan, menu aktif, harga */
+    --biru-gelap: #1558ac;      /* hover tombol utama */
+    --biru-muda: #e8f2fd;       /* menu aktif, pilihan terpilih */
+    --biru-garis: #c7ddf8;
+    --navy: #1e3a8a;            /* logo & footer */
+    --hijau-wa: #16a34a;        /* khusus tombol WhatsApp */
+    --hijau-wa-gelap: #15803d;
+
+    /* ---------- teks & garis ---------- */
+    --teks: #1f2937;
+    --teks-2: #4b5563;          /* label tabel, teks agak penting */
+    --teks-muted: #6b7280;      /* subjudul, keterangan */
+    --teks-pudar: #9ca3af;      /* placeholder, nonaktif */
+    --garis: #e5e7eb;
+    --garis-kuat: #d1d5db;
+
+    /* ---------- latar ---------- */
+    --putih: #ffffff;
+    --panel: #f8fafc;           /* panel di dalam kartu */
+    --panel-2: #f1f5f9;
+    --nonaktif: #e5e7eb;
+    --latar-halaman: linear-gradient(180deg, #ffffff 0%, #e8f2fd 100%);
+
+    /* ---------- status ---------- */
+    --sukses: #15803d;
+    --sukses-muda: #dcfce7;
+    --sukses-garis: #86efac;
+    --peringatan: #b45309;
+    --peringatan-muda: #fef3c7;
+    --peringatan-garis: #fcd34d;
+    --bahaya: #b91c1c;
+    --bahaya-muda: #fee2e2;
+    --bahaya-garis: #fca5a5;
+    --info: #1a6fd8;
+    --info-muda: #e8f2fd;
+    --info-garis: #c7ddf8;
+
+    /* ---------- huruf ---------- */
+    --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --fs-judul-halaman: 28px;
+    --fs-judul-kartu: 18px;
+    --fs-isi: 15px;
+    --fs-kecil: 13px;
+    --fs-mini: 12px;
+
+    /* ---------- jarak (kelipatan 4/8) ---------- */
+    --s-1: 4px;
+    --s-2: 8px;
+    --s-3: 12px;
+    --s-4: 16px;
+    --s-5: 20px;
+    --s-6: 24px;
+    --s-8: 32px;
+    --s-10: 40px;
+    --s-12: 48px;
+
+    /* ---------- sudut & bayangan ---------- */
+    --r-kecil: 4px;
+    --r: 8px;
+    --r-besar: 12px;
+    --r-pil: 999px;
+    --bayangan: 0 1px 2px rgb(15 23 42 / 4%), 0 2px 8px rgb(15 23 42 / 4%);
+    --bayangan-tinggi: 0 12px 32px rgb(15 23 42 / 14%);
+    --fokus: 0 0 0 3px rgb(26 111 216 / 25%);
+
+    /* ---------- ukuran kerangka ---------- */
+    --tinggi-header: 64px;
+    --lebar-sidebar: 260px;
+    --lebar-konten: 1280px;
+    --tinggi-kontrol: 44px;
+}

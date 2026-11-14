@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detail Kamar — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Detail Kamar · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/pages/publik.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/publik/detail-kamar.js" defer></script>
+</head>
+<body data-layout="tamu" data-akses="publik" data-menu="kamar" data-judul="Detail Kamar">
+  <main>
+    <a class="tautan-kembali" href="kamar.html"><i data-ikon="arrow_back"></i>Kembali ke Daftar Kamar</a>
+
+    <div id="tidakAda" hidden></div>
+
+    <div id="isi" hidden>
+      <div class="kepala-halaman">
+        <h1 id="judul">-</h1>
+        <span class="chip-alamat"><i data-ikon="location_on" class="kecil"></i><span id="alamat"></span></span>
+      </div>
+
+      <div class="detail-atas">
+        <div>
+          <div class="galeri-utama"><img id="fotoUtama" alt=""></div>
+          <div class="galeri-thumb" id="thumb" aria-label="Foto lainnya"></div>
+        </div>
+
+        <aside class="kartu tumpuk" aria-label="Reservasi">
+          <div>
+            <p class="label-blok">Status Ketersediaan</p>
+            <div id="status"></div>
+          </div>
+          <div class="blok-harga">
+            <p class="label-blok">Biaya Sewa</p>
+            <strong id="harga">-</strong> <small>/ bulan</small>
+          </div>
+          <fieldset class="fieldset">
+            <legend class="label-blok">Pilihan Durasi Sewa</legend>
+            <div class="opsi-grid" id="durasi"></div>
+          </fieldset>
+          <div>
+            <button type="button" class="tombol tombol--utama tombol--penuh" id="tombolReservasi">Reservasi Sekarang</button>
+            <p class="bantuan teks-tengah mt-2" id="catatanReservasi">Kamu perlu masuk atau daftar akun untuk reservasi</p>
+          </div>
+        </aside>
+      </div>
+
+      <section class="kartu">
+        <h2 class="kartu-judul">Deskripsi Kamar</h2>
+        <p class="muted" id="deskripsi"></p>
+        <h3 class="sub-bagian">Fasilitas Kamar</h3>
+        <div class="chip-grid" id="fasilitasKamar"></div>
+        <h3 class="sub-bagian">Fasilitas Bersama &amp; Umum</h3>
+        <div class="chip-grid" id="fasilitasBersama"></div>
+        <div class="kotak-info mt-6">
+          <i data-ikon="info"></i>
+          <p>Ingin tahu jam bertamu dan tata tertib hunian? <a href="tentang.html#aturan">Baca aturan kos selengkapnya</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

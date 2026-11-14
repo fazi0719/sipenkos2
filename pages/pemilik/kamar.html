@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kamar — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Kamar · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/kamar.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="pemilik" data-menu="kamar" data-judul="Kamar">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Kamar</h1>
+        <p class="sub">Atur harga tipe kamar dan status setiap kamar</p>
+      </div>
+    </div>
+
+    <section class="kartu kartu--rapat mb-6" aria-labelledby="judulTipe">
+      <div class="kartu-kepala kepala-tabel"><h2 class="kartu-judul" id="judulTipe">Tipe Kamar</h2></div>
+      <div class="tabel-gulir">
+        <table class="tabel tabel--responsif">
+          <caption class="sr-only">Tipe kamar</caption>
+          <thead><tr><th scope="col">Tipe</th><th scope="col" class="angka">Harga / bulan</th><th scope="col" class="angka">Terisi</th><th scope="col">Ketersediaan</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
+          <tbody id="tabelTipe"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="judulUnit">
+      <div class="kartu-kepala">
+        <h2 class="kartu-judul" id="judulUnit">Daftar Kamar</h2>
+      </div>
+      <div id="filter" aria-label="Saring status kamar"></div>
+      <section class="kartu kartu--rapat">
+        <div class="tabel-gulir">
+          <table class="tabel tabel--responsif">
+            <caption class="sr-only">Daftar kamar</caption>
+            <thead><tr><th scope="col">Kamar</th><th scope="col">Tipe</th><th scope="col">Status</th><th scope="col">Penghuni</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
+            <tbody id="tabelUnit"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

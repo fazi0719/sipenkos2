@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SIPENKOS — cek kamar kosong dan reservasi langsung di Kos Bu Nining, Malang.">
+  <title>Beranda · SIPENKOS</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages/publik.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="assets/js/core/config.js" defer></script>
+  <script src="assets/js/core/icons.js" defer></script>
+  <script src="assets/js/core/format.js" defer></script>
+  <script src="assets/js/core/seed.js" defer></script>
+  <script src="assets/js/core/store.js" defer></script>
+  <script src="assets/js/core/ui.js" defer></script>
+  <script src="assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="assets/js/pages/publik/beranda.js" defer></script>
+</head>
+<body data-layout="tamu" data-akses="publik" data-menu="beranda" data-judul="Beranda">
+  <main>
+    <section class="hero" id="hero" aria-labelledby="judulHero">
+      <div class="hero-isi">
+        <span class="hero-chip"><i data-ikon="location_on" class="kecil"></i>Kos Bu Nining Malang</span>
+        <h1 id="judulHero">Lagi nyari kos? <span>SIPENKOS</span> aja</h1>
+        <p>Kos Bu Nining, dekat kampus di Malang. Cek kamar kosong dan reservasi langsung dari sini.</p>
+        <div class="baris-tombol">
+          <a class="tombol tombol--utama" href="pages/publik/kamar.html">Lihat Kamar</a>
+          <a class="tombol tombol--sekunder" href="pages/publik/tentang.html">Tentang Kos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="kartu fasilitas-ringkas" aria-label="Fasilitas kos">
+      <div class="chip-grid" id="fasilitas"></div>
+    </section>
+
+    <section aria-labelledby="judulTipe">
+      <div class="bagian-kepala">
+        <h2 class="judul-bagian" id="judulTipe">Pilihan Tipe Kamar</h2>
+        <p>Pilih kamar yang paling pas dengan kebutuhan dan kenyamanan kamu.</p>
+      </div>
+      <div class="grid-4" id="daftarTipe"></div>
+    </section>
+  </main>
+</body>
+</html>

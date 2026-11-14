@@ -1,0 +1,14 @@
+/* =========================================================
+   MAIN — satu-satunya CSS yang ditautkan di setiap halaman.
+   Urutan muat penting (yang bawah boleh menimpa yang atas):
+     1. tokens     : variabel warna, huruf, jarak
+     2. base       : reset & tipografi
+     3. layout     : header, sidebar, footer, kerangka halaman
+     4. components : tombol, kartu, badge, form, tabel, timeline, ...
+   CSS khusus satu halaman ada di assets/css/pages/ dan ditautkan
+   SETELAH main.css di halaman itu saja.
+   ========================================================= */
+@import url("tokens.css");
+@import url("base.css");
+@import url("layout.css");
+@import url("components.css");

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Perpanjangan Sewa — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Perpanjangan Sewa · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/pages/penghuni.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/perpanjangan.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="penghuni" data-menu="perpanjangan" data-judul="Perpanjangan Sewa">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Perpanjangan Sewa</h1>
+        <p class="sub">Pilih durasi untuk memperpanjang masa sewa kamu</p>
+      </div>
+    </div>
+
+    <form class="kartu form form-sempit" id="formPerpanjangan" novalidate>
+      <div class="info-sewa">
+        <p class="label-kecil">Informasi Kamar &amp; Sewa Saat Ini</p>
+        <h2 class="kartu-judul" id="infoKamar">-</h2>
+        <p class="muted kecil" id="infoPeriode">-</p>
+      </div>
+
+      <fieldset class="fieldset">
+        <legend>Pilih Tipe Kamar</legend>
+        <div class="opsi-grid opsi-4" id="pilihanTipe"></div>
+        <p class="bantuan mt-2" id="catatanPindah" hidden>Pindah tipe kamar: nomor kamar baru ditentukan pemilik kos saat verifikasi.</p>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend>Pilih Durasi Perpanjangan</legend>
+        <div class="opsi-grid" id="pilihanDurasi"></div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend>Pilih Skema Pembayaran</legend>
+        <div class="opsi-grid">
+          <label class="opsi"><input type="radio" name="skema" value="dp" checked><span>DP (Down Payment)</span></label>
+          <label class="opsi"><input type="radio" name="skema" value="lunas"><span>Lunas</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend>Pilih Metode Pembayaran</legend>
+        <div class="opsi-grid" id="pilihanMetode"></div>
+      </fieldset>
+
+      <ul class="ringkasan" id="ringkasan" aria-live="polite"></ul>
+
+      <div class="kaki-form">
+        <button type="submit" class="tombol tombol--utama">Ajukan Perpanjangan</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

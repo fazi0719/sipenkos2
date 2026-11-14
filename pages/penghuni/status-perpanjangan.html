@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Status Perpanjangan Sewa — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Status Perpanjangan Sewa · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/pages/penghuni.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/status-perpanjangan.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="penghuni" data-menu="perpanjangan" data-judul="Status Perpanjangan Sewa">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Status Perpanjangan Sewa</h1>
+        <p class="sub">Pantau pengajuan perpanjangan sewa kamu</p>
+      </div>
+    </div>
+
+    <div id="kosong" hidden></div>
+
+    <div id="isi" hidden>
+      <div class="kotak-status mb-6" id="kotakStatus">
+        <div class="kotak-status-teks">
+          <span id="badgeStatus"></span>
+          <p id="pesanStatus"></p>
+        </div>
+      </div>
+
+      <div class="grid-2 grid-atas">
+        <section class="kartu" aria-labelledby="judulDetail">
+          <h2 class="kartu-judul" id="judulDetail">Detail Pengajuan</h2>
+          <div id="rincian"></div>
+          <div class="baris-tombol mt-6" id="aksi"></div>
+          <p class="kaki-kartu"><span><i data-ikon="description" class="kecil"></i>No. Permohonan: <strong id="nomor">-</strong></span><span>Diajukan secara mandiri</span></p>
+        </section>
+        <section class="kartu" aria-labelledby="judulProses">
+          <h2 class="kartu-judul" id="judulProses">Proses Perpanjangan</h2>
+          <div id="timeline"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

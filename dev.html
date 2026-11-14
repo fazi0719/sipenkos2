@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Uji · SIPENKOS</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/core/config.js" defer></script>
+  <script src="assets/js/core/icons.js" defer></script>
+  <script src="assets/js/core/format.js" defer></script>
+  <script src="assets/js/core/seed.js" defer></script>
+  <script src="assets/js/core/store.js" defer></script>
+  <script src="assets/js/core/ui.js" defer></script>
+  <script src="assets/js/core/shell.js" defer></script>
+  <script src="assets/js/pages/dev.js" defer></script>
+</head>
+<!--
+  Panel Uji — halaman bantu untuk developer (bukan bagian aplikasi).
+  Isinya: masuk cepat sebagai akun demo, reset data, daftar semua halaman,
+  dan isi "database" (localStorage). Hapus file ini saat aplikasi rilis.
+-->
+<body data-layout="tamu" data-akses="publik" data-judul="Panel Uji">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Panel Uji</h1>
+        <p class="sub">Alat bantu mengetes SIPENKOS. Bukan bagian aplikasi.</p>
+      </div>
+      <button type="button" class="tombol tombol--sekunder" id="reset"><i data-ikon="sync"></i>Reset Data Demo</button>
+    </div>
+
+    <div class="tumpuk">
+      <section class="kartu">
+        <h2 class="kartu-judul">Masuk cepat</h2>
+        <p class="kecil muted mb-6" id="sesiSekarang"></p>
+        <div class="grid-4" id="akunDemo"></div>
+      </section>
+
+      <section class="kartu">
+        <h2 class="kartu-judul">Semua halaman</h2>
+        <div class="grid-4" id="daftarHalaman"></div>
+      </section>
+
+      <section class="kartu kartu--rapat">
+        <div class="kartu-kepala kepala-tabel"><h2 class="kartu-judul">Isi data (localStorage)</h2></div>
+        <div class="tabel-gulir">
+          <table class="tabel">
+            <thead><tr><th scope="col">Tabel</th><th scope="col" class="angka">Jumlah baris</th><th scope="col">Contoh baris pertama</th></tr></thead>
+            <tbody id="isiData"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

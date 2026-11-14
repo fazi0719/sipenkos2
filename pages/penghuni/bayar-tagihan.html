@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bayar Tagihan — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Bayar Tagihan · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/bayar-tagihan.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="penghuni" data-menu="tagihan" data-judul="Bayar Tagihan">
+  <main>
+    <a class="tautan-kembali" href="tagihan.html"><i data-ikon="arrow_back"></i>Kembali ke Tagihan</a>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Bayar Tagihan</h1>
+        <p class="sub">Transfer sesuai nominal lalu unggah bukti pembayaran</p>
+      </div>
+    </div>
+
+    <div id="tidakAda" hidden></div>
+
+    <div class="grid-2 grid-atas" id="isi" hidden>
+      <section class="kartu" aria-labelledby="judulRincian">
+        <h2 class="kartu-judul" id="judulRincian">Rincian Tagihan</h2>
+        <div id="rincian"></div>
+        <div class="rincian-total"><span>Total dibayar</span><strong id="total">-</strong></div>
+        <div class="rekening mt-6" id="rekening"></div>
+      </section>
+
+      <section class="kartu tumpuk" aria-labelledby="judulKanan">
+        <h2 class="kartu-judul" id="judulKanan">Unggah Bukti Transfer</h2>
+        <div id="panelKanan"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

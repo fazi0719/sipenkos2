@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Riwayat Pembayaran — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Riwayat Pembayaran · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/riwayat.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="penghuni" data-menu="riwayat" data-judul="Riwayat Pembayaran">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Riwayat Pembayaran</h1>
+        <p class="sub">Daftar transaksi pembayaran sewa kamu</p>
+      </div>
+      <div class="field">
+        <label class="sr-only" for="tahun">Tahun</label>
+        <div class="input-ikon"><select class="select" id="tahun"></select><i data-ikon="expand_more"></i></div>
+      </div>
+    </div>
+
+    <section class="kartu kartu--rapat">
+      <div class="tabel-gulir">
+        <table class="tabel tabel--responsif">
+          <caption class="sr-only">Riwayat pembayaran</caption>
+          <thead><tr><th scope="col">Tanggal Bayar</th><th scope="col">Periode</th><th scope="col">Jenis</th><th scope="col" class="angka">Jumlah</th><th scope="col">Metode</th><th scope="col">Status</th><th scope="col" class="aksi">Bukti</th></tr></thead>
+          <tbody id="isiTabel"></tbody>
+        </table>
+      </div>
+      <div id="kosong" hidden></div>
+    </section>
+    <p class="kecil muted mt-2" id="ringkasTahun"></p>
+  </main>
+</body>
+</html>

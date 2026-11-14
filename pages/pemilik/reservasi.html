@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reservasi — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Reservasi · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/reservasi.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="pemilik" data-menu="reservasi" data-judul="Reservasi">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Reservasi</h1>
+        <p class="sub">Periksa data calon penghuni dan bukti pembayaran bulan pertama</p>
+      </div>
+    </div>
+    <div id="filter" aria-label="Saring status reservasi"></div>
+    <section class="kartu kartu--rapat">
+      <div class="tabel-gulir">
+        <table class="tabel tabel--responsif">
+          <caption class="sr-only">Daftar reservasi</caption>
+          <thead><tr><th scope="col">Pemohon</th><th scope="col">Tipe Kamar</th><th scope="col">Mulai · Durasi</th><th scope="col">Bukti Dikirim</th><th scope="col">Status</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
+          <tbody id="isiTabel"></tbody>
+        </table>
+      </div>
+      <div id="kosong" hidden></div>
+    </section>
+  </main>
+</body>
+</html>

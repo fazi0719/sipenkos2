@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tentang Kos — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Tentang Kos · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/pages/publik.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/publik/tentang.js" defer></script>
+</head>
+<body data-layout="tamu" data-akses="publik" data-menu="tentang" data-judul="Tentang Kos">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Tentang Kos Bu Nining</h1>
+        <p class="sub">Hunian kos yang tenang, aman, dan nyaman di Malang.</p>
+      </div>
+    </div>
+
+    <div class="foto-tiga">
+      <figure><img src="../../assets/images/tampak-depan.jpg" alt="Tampak depan dan pagar utama kos" loading="lazy"><figcaption class="label-foto">Tampak Depan</figcaption></figure>
+      <figure><img src="../../assets/images/ruang-tamu.jpg" alt="Ruang tamu bersama" loading="lazy"><figcaption class="label-foto">Ruang Tamu</figcaption></figure>
+      <figure><img src="../../assets/images/parkiran.jpg" alt="Parkir motor berkanopi" loading="lazy"><figcaption class="label-foto">Parkiran</figcaption></figure>
+    </div>
+
+    <div class="grid-2 mb-6">
+      <section class="kartu">
+        <h2 class="kartu-judul">Fasilitas &amp; Keunggulan</h2>
+        <ul class="daftar-ikon">
+          <li><i data-ikon="location_on"></i>Lokasi strategis dekat kampus, minimarket, dan tempat makan</li>
+          <li><i data-ikon="shield"></i>Keamanan dengan pagar terkunci dan CCTV</li>
+          <li><i data-ikon="wifi"></i>Wi-Fi, dapur bersama, dan area jemuran</li>
+          <li><i data-ikon="cleaning_services"></i>Area bersama dibersihkan rutin</li>
+        </ul>
+      </section>
+
+      <section class="kartu">
+        <h2 class="kartu-judul">Lokasi &amp; Kontak</h2>
+        <ul class="daftar-ikon">
+          <li><i data-ikon="location_on"></i><span id="alamat"></span></li>
+          <li><i data-ikon="schedule"></i><span id="jam"></span></li>
+        </ul>
+        <div class="peta">
+          <iframe title="Peta lokasi Kos Bu Nining" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=Jl.%20Pisang%20Agung%20III%20No.%2029%20Malang&z=16&output=embed"></iframe>
+        </div>
+        <div class="baris-tombol">
+          <a class="tombol tombol--sekunder" id="tombolPeta" target="_blank" rel="noopener"><i data-ikon="open_in_new"></i>Buka di Google Maps</a>
+          <a class="tombol tombol--wa" id="tombolWa" target="_blank" rel="noopener"><i data-ikon="chat"></i>Chat WhatsApp</a>
+        </div>
+      </section>
+    </div>
+
+    <section class="kartu" id="aturan" aria-labelledby="judulAturan">
+      <h2 class="kartu-judul" id="judulAturan">Aturan Kos Bu Nining</h2>
+      <div id="isiAturan"></div>
+    </section>
+  </main>
+</body>
+</html>

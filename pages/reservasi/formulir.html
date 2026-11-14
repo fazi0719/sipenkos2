@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulir Reservasi — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Formulir Reservasi · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/reservasi/formulir.js" defer></script>
+</head>
+<body data-layout="alur" data-akses="calon" data-judul="Formulir Reservasi">
+  <main>
+    <a class="tautan-kembali" id="kembali" href="../publik/kamar.html"><i data-ikon="arrow_back"></i>Kembali ke Detail Kamar</a>
+    <div id="langkah"></div>
+
+    <div class="kepala-halaman">
+      <div>
+        <h1>Formulir Reservasi</h1>
+        <p class="sub">Lengkapi data reservasi untuk melanjutkan proses sewa</p>
+      </div>
+    </div>
+
+    <div id="belumPilih" hidden></div>
+
+    <form id="formReservasi" class="tumpuk" novalidate hidden>
+      <div class="kartu grid-2 grid-atas">
+        <section class="panel" aria-labelledby="judulPilihan">
+          <h2 class="kartu-judul" id="judulPilihan">Kamar Pilihan</h2>
+          <img class="foto-kartu" id="fotoKamar" alt="">
+          <h3 class="kartu-judul" id="namaKamar">-</h3>
+          <p><strong class="harga" id="hargaKamar">-</strong> <span class="muted kecil">/ bulan</span></p>
+          <div class="chip-grid mt-6" id="fasilitasKamar"></div>
+        </section>
+
+        <section class="form" aria-labelledby="judulDetail">
+          <h2 class="kartu-judul" id="judulDetail">Detail Reservasi</h2>
+          <div class="baris-field">
+            <div class="field">
+              <label class="label" for="tglMulai">Tanggal Mulai Kos</label>
+              <input class="input" type="date" id="tglMulai" name="tglMulai">
+            </div>
+            <div class="field">
+              <label class="label" for="durasi">Durasi Sewa</label>
+              <div class="input-ikon">
+                <select class="select" id="durasi" name="durasi"></select>
+                <i data-ikon="expand_more"></i>
+              </div>
+            </div>
+          </div>
+          <div class="baris-field">
+            <div class="field">
+              <label class="label" for="kontakNama">Nama Kontak Darurat</label>
+              <input class="input" id="kontakNama" name="kontakNama" autocomplete="off" placeholder="Nama lengkap">
+            </div>
+            <div class="field">
+              <label class="label" for="kontakHubungan">Hubungan</label>
+              <div class="input-ikon">
+                <select class="select" id="kontakHubungan" name="kontakHubungan"></select>
+                <i data-ikon="expand_more"></i>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="kontakHp">Nomor Kontak Darurat</label>
+            <div class="input-ikon input-ikon--kiri">
+              <i data-ikon="call"></i>
+              <input class="input" id="kontakHp" name="kontakHp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
+            </div>
+          </div>
+          <div class="field">
+            <span class="label" id="labelKtp">Foto KTP</span>
+            <div id="unggahKtp" aria-labelledby="labelKtp"></div>
+          </div>
+          <div class="field">
+            <label class="cek"><input type="checkbox" name="setuju"><span>Saya sudah membaca dan menyetujui <a href="../publik/tentang.html#aturan" target="_blank">aturan kos</a></span></label>
+          </div>
+        </section>
+      </div>
+
+      <section class="kartu" aria-labelledby="judulRincian">
+        <h2 class="kartu-judul" id="judulRincian">Rincian Harga</h2>
+        <div id="rincian"></div>
+        <div class="rincian-total">
+          <span>Dibayar sekarang<small>sewa bulan pertama</small></span>
+          <strong id="dibayarSekarang">-</strong>
+        </div>
+      </section>
+
+      <div class="kaki-form">
+        <p class="bantuan">Setelah ini kamu akan diarahkan untuk membayar sewa bulan pertama</p>
+        <a class="tombol tombol--batal" id="batal" href="../publik/kamar.html">Batalkan</a>
+        <button type="submit" class="tombol tombol--utama">Lanjutkan ke Pembayaran<i data-ikon="arrow_forward"></i></button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

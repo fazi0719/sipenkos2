@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Daftar Kamar — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Daftar Kamar · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/pages/publik.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/publik/kamar.js" defer></script>
+</head>
+<body data-layout="tamu" data-akses="publik" data-menu="kamar" data-judul="Daftar Kamar">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Daftar Kamar Kos</h1>
+        <p class="sub">Pilih tipe kamar yang sesuai kebutuhan kamu</p>
+      </div>
+    </div>
+
+    <div id="filter" aria-label="Saring tipe kamar"></div>
+    <div class="grid-4" id="daftarTipe"></div>
+    <div id="kosong" hidden></div>
+
+    <div class="kotak-info kotak-info--aksi mt-8">
+      <i data-ikon="info"></i>
+      <p class="isi-lentur">Semua tipe kamar sudah termasuk: Wi-Fi, dapur bersama, parkir motor, CCTV, dan area jemuran.</p>
+      <a class="tombol tombol--wa" id="tanyaWa" target="_blank" rel="noopener"><i data-ikon="chat"></i>Tanya via WhatsApp</a>
+    </div>
+  </main>
+</body>
+</html>

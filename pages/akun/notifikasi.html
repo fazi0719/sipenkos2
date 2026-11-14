@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Notifikasi — SIPENKOS, sistem pengelolaan dan reservasi Kos Bu Nining Malang.">
+  <title>Notifikasi · SIPENKOS</title>
+  <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+
+  <!-- inti aplikasi (urutan penting) -->
+  <script src="../../assets/js/core/config.js" defer></script>
+  <script src="../../assets/js/core/icons.js" defer></script>
+  <script src="../../assets/js/core/format.js" defer></script>
+  <script src="../../assets/js/core/seed.js" defer></script>
+  <script src="../../assets/js/core/store.js" defer></script>
+  <script src="../../assets/js/core/ui.js" defer></script>
+  <script src="../../assets/js/core/shell.js" defer></script>
+
+  <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/akun/notifikasi.js" defer></script>
+</head>
+<body data-layout="akun" data-akses="masuk" data-menu="notifikasi" data-judul="Notifikasi">
+  <main>
+    <div class="kepala-halaman">
+      <div>
+        <h1>Notifikasi</h1>
+        <p class="sub">Kabar terbaru tentang reservasi, tagihan, dan laporan kamu</p>
+      </div>
+      <button type="button" class="tombol tombol--teks" id="tandaiSemua"><i data-ikon="done_all"></i>Tandai semua sudah dibaca</button>
+    </div>
+
+    <div id="filter" aria-label="Saring notifikasi"></div>
+    <div class="daftar-item" id="daftar"></div>
+  </main>
+</body>
+</html>
