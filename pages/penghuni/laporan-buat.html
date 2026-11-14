@@ -33,7 +33,7 @@
     <form class="kartu form form-sempit" id="formLaporan" novalidate>
       <div class="field">
         <label class="label" for="lokasi">Lokasi</label>
-        <div class="input-ikon"><input class="input" id="lokasi" readonly><i data-ikon="lock"></i></div>
+        <div class="input-ikon"><input type="text" class="input" id="lokasi" readonly><i data-ikon="lock"></i></div>
       </div>
       <div class="field">
         <label class="label" for="kategori">Kategori</label>
@@ -41,7 +41,7 @@
       </div>
       <div class="field">
         <label class="label" for="judul">Judul Kerusakan</label>
-        <input class="input" id="judul" name="judul" maxlength="80" placeholder="Contoh: Keran air wastafel patah">
+        <input type="text" class="input" id="judul" name="judul" maxlength="80" placeholder="Contoh: Keran air wastafel patah">
       </div>
       <div class="field">
         <label class="label" for="deskripsi">Deskripsi</label>
@@ -49,7 +49,7 @@
       </div>
       <div class="field">
         <span class="label" id="labelFoto">Foto Kerusakan <span class="opsional">(Opsional)</span></span>
-        <div id="unggahFoto" aria-labelledby="labelFoto"></div>
+        <div id="unggahFoto" role="group" aria-labelledby="labelFoto"></div>
       </div>
       <div class="kaki-form">
         <a class="tombol tombol--batal" href="laporan.html">Batal</a>

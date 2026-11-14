@@ -38,7 +38,7 @@
       <div class="kartu grid-2 grid-atas">
         <section class="panel" aria-labelledby="judulPilihan">
           <h2 class="kartu-judul" id="judulPilihan">Kamar Pilihan</h2>
-          <img class="foto-kartu" id="fotoKamar" alt="">
+          <img class="foto-kartu" id="fotoKamar" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
           <h3 class="kartu-judul" id="namaKamar">-</h3>
           <p><strong class="harga" id="hargaKamar">-</strong> <span class="muted kecil">/ bulan</span></p>
           <div class="chip-grid mt-6" id="fasilitasKamar"></div>
@@ -62,7 +62,7 @@
           <div class="baris-field">
             <div class="field">
               <label class="label" for="kontakNama">Nama Kontak Darurat</label>
-              <input class="input" id="kontakNama" name="kontakNama" autocomplete="off" placeholder="Nama lengkap">
+              <input type="text" class="input" id="kontakNama" name="kontakNama" autocomplete="off" placeholder="Nama lengkap">
             </div>
             <div class="field">
               <label class="label" for="kontakHubungan">Hubungan</label>
@@ -81,7 +81,7 @@
           </div>
           <div class="field">
             <span class="label" id="labelKtp">Foto KTP</span>
-            <div id="unggahKtp" aria-labelledby="labelKtp"></div>
+            <div id="unggahKtp" role="group" aria-labelledby="labelKtp"></div>
           </div>
           <div class="field">
             <label class="cek"><input type="checkbox" name="setuju"><span>Saya sudah membaca dan menyetujui <a href="../publik/tentang.html#aturan" target="_blank">aturan kos</a></span></label>

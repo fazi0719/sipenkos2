@@ -324,7 +324,7 @@
 }
 
 .badge--info {
-    color: var(--biru);
+    color: var(--biru-gelap);
     background: var(--biru-muda);
 }
 
@@ -419,7 +419,7 @@
     left: var(--s-3);
 }
 
-.kartu-kamar h3 {
+.kartu-kamar-judul {
     margin-bottom: var(--s-1);
     font-size: var(--fs-judul-kartu);
     font-weight: 600;
@@ -457,7 +457,7 @@
 }
 
 .kartu-kamar.penuh .kartu-kamar-harga strong {
-    color: var(--teks-pudar);
+    color: var(--teks-muted);
 }
 
 /* ---------- FORM ---------- */
@@ -867,6 +867,13 @@
     border-radius: var(--r);
 }
 
+/* tautan di dalam kalimat diberi garis bawah agar tidak hanya dibedakan warna */
+.kotak-info a,
+.cek a,
+.bantuan a {
+    text-decoration: underline;
+}
+
 .kotak-info > .ikon {
     color: var(--biru);
 }
@@ -1111,6 +1118,10 @@ a.item:hover {
     border-color: var(--info-garis);
 }
 
+.item.belum-dibaca .item-ket {
+    color: var(--teks-2);
+}
+
 .item.belum-dibaca .item-judul::after {
     content: "";
     display: inline-block;
@@ -1250,7 +1261,7 @@ a.item:hover {
 }
 
 .opsi:has(input:checked) {
-    color: var(--biru);
+    color: var(--biru-gelap);
     background: var(--biru-muda);
     border: 2px solid var(--biru);
 }
@@ -1902,4 +1913,8 @@ a.item:hover {
 
 .tombol-akun:hover {
     border-color: var(--biru);
+}
+
+.opsi:has(input:checked) small {
+    color: var(--biru-gelap);
 }

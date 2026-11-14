@@ -28,9 +28,10 @@ SIPENKOS.halaman(async ({ pengguna }) => {
 
   // masa sewa
   $("masaSewa").textContent = F.rentang(sewa.mulai, sewa.akhir);
+  const sudahBerakhir = sewa.akhir < F.keISO(new Date());
   $("ketSewa").textContent = perpanjangan?.status === "menunggu"
     ? "Pengajuan perpanjangan sedang diverifikasi"
-    : `Berakhir ${F.tanggalPanjang(sewa.akhir)}`;
+    : sudahBerakhir ? "Masa sewa sudah berakhir. Ajukan perpanjangan." : `Berakhir ${F.tanggalPanjang(sewa.akhir)}`;
 
   // laporan kerusakan
   const aktif = laporan.filter((l) => l.status !== "selesai");

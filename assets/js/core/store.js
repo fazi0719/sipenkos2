@@ -18,6 +18,10 @@
   const { AWALAN_KUNCI, VERSI_DATA, aturanBisnis } = S.config;
   const F = S.format;
 
+  // Error yang pesannya aman ditampilkan ke pengguna
+  class GagalStore extends Error {}
+  S.GagalStore = GagalStore;
+
   // ---------------------------------------------------------
   // Lapisan paling bawah: baca/tulis tabel di localStorage
   // ---------------------------------------------------------
@@ -28,7 +32,7 @@
     try {
       const isi = localStorage.getItem(AWALAN_KUNCI + nama);
       return isi === null ? bawaan : JSON.parse(isi);
-    } catch (e) {
+    } catch {
       return bawaan;
     }
   };
@@ -36,7 +40,7 @@
   const tulis = (nama, nilai) => {
     try {
       localStorage.setItem(AWALAN_KUNCI + nama, JSON.stringify(nilai));
-    } catch (e) {
+    } catch {
       throw new GagalStore("Penyimpanan browser penuh. Coba gunakan foto yang lebih kecil.");
     }
   };
@@ -70,10 +74,6 @@
   // bukti/foto boleh dikirim sebagai teks data URL atau objek { nama, ukuran, data }
   const ambilGambar = (berkas) => (typeof berkas === "string" ? berkas : berkas?.data || null);
 
-  // Error yang pesannya aman ditampilkan ke pengguna
-  class GagalStore extends Error {}
-  S.GagalStore = GagalStore;
-
   // Isi data demo bila belum ada / versinya berubah
   const siapkanData = () => {
     if (baca("versi", 0) === VERSI_DATA) return;
@@ -81,6 +81,7 @@
     TABEL.forEach((t) => tulis(t, data[t]));
     tulis("aturan", data.aturan);
     tulis("sesi", null);
+    try { sessionStorage.removeItem(AWALAN_KUNCI + "sesi"); } catch { /* abaikan */ }
     tulis("versi", VERSI_DATA);
   };
   siapkanData();
@@ -90,7 +91,7 @@
   // ---------------------------------------------------------
   const tanpaSandi = (p) => {
     if (!p) return null;
-    const { sandi, ...sisa } = p;
+    const { sandi: _sandi, ...sisa } = p; // kata sandi tidak pernah dikirim ke halaman
     return sisa;
   };
 
@@ -109,8 +110,26 @@
     return reservasiDiterima(p.id) ? "penghuni" : "calon";
   };
 
+  // Sesi disimpan di localStorage bila "Ingat saya" dicentang,
+  // atau di sessionStorage (hilang saat browser ditutup) bila tidak.
+  const KUNCI_SESI = AWALAN_KUNCI + "sesi";
+  const bacaSesi = () => {
+    try {
+      return JSON.parse(sessionStorage.getItem(KUNCI_SESI) || "null") || baca("sesi", null);
+    } catch {
+      return null;
+    }
+  };
+  const simpanSesi = (sesi, ingat = true) => {
+    try { sessionStorage.removeItem(KUNCI_SESI); } catch { /* abaikan */ }
+    tulis("sesi", null);
+    if (!sesi) return;
+    if (ingat) tulis("sesi", sesi);
+    else sessionStorage.setItem(KUNCI_SESI, JSON.stringify(sesi));
+  };
+
   const penggunaSesi = () => {
-    const sesi = baca("sesi", null);
+    const sesi = bacaSesi();
     return sesi ? cariPengguna(sesi.penggunaId) : null;
   };
 
@@ -136,6 +155,14 @@
       semua.push({ id: idBaru("NTF"), penggunaId, judul, isi, ikon, tautan, dibaca: false, waktu: sekarang() });
     });
     tulis("notifikasi", semua);
+  };
+
+  // tagihan "aktif" = dari reservasi yang sudah diterima, atau dari perpanjangan.
+  // Tagihan reservasi yang ditolak/ditinggalkan tidak dihitung (bukan tunggakan).
+  const tagihanAktif = (t) => {
+    if (t.perpanjanganId) return true;
+    const r = baca("reservasi").find((x) => x.id === t.reservasiId);
+    return r?.status === "diterima";
   };
 
   // tambahkan info sisa kamar ke tipe
@@ -203,10 +230,10 @@
       return p ? { ...tanpaSandi(p), jenis: jenisAkun(p) } : null;
     },
 
-    async masuk({ email, sandi }) {
+    async masuk({ email, sandi, ingat = true }) {
       const p = baca("pengguna").find((x) => x.email.toLowerCase() === String(email).trim().toLowerCase());
       if (!p || p.sandi !== sandi) throw new GagalStore("Email atau kata sandi salah.");
-      tulis("sesi", { penggunaId: p.id, masukPada: sekarang() });
+      simpanSesi({ penggunaId: p.id, masukPada: sekarang() }, ingat);
       return { ...tanpaSandi(p), jenis: jenisAkun(p) };
     },
 
@@ -220,12 +247,12 @@
         sandi, role: "penghuni", dibuatPada: sekarang()
       };
       tambahBaris("pengguna", p);
-      tulis("sesi", { penggunaId: p.id, masukPada: sekarang() });
+      simpanSesi({ penggunaId: p.id, masukPada: sekarang() });
       return { ...tanpaSandi(p), jenis: "calon" };
     },
 
     async keluar() {
-      tulis("sesi", null);
+      simpanSesi(null);
     },
 
     async perbaruiProfil({ nama, hp }) {
@@ -430,7 +457,7 @@
   store.tagihan = {
     async milikSaya() {
       const p = wajibMasuk();
-      return baca("tagihan").filter((t) => t.penggunaId === p.id)
+      return baca("tagihan").filter((t) => t.penggunaId === p.id && tagihanAktif(t))
         .sort((a, b) => b.jatuhTempo.localeCompare(a.jatuhTempo));
     },
 
@@ -726,7 +753,7 @@
       const hariIni = F.keISO(new Date());
       return baca("pengguna").filter((p) => p.role === "penghuni" && reservasiDiterima(p.id))
         .map((p) => {
-          const tagihan = baca("tagihan").filter((t) => t.penggunaId === p.id);
+          const tagihan = baca("tagihan").filter((t) => t.penggunaId === p.id && tagihanAktif(t));
           return {
             ...tanpaSandi(p),
             sewa: hitungSewa(p.id),
@@ -745,13 +772,14 @@
       wajibPemilik();
       const hariIni = F.keISO(new Date());
       const semua = baca("tagihan");
-      const lunas = semua.filter((t) => t.status === "lunas" && t.dibayarPada && t.dibayarPada.startsWith(String(tahun)));
+      const aktif = semua.filter(tagihanAktif);
+      const lunas = aktif.filter((t) => t.status === "lunas" && t.dibayarPada && t.dibayarPada.startsWith(String(tahun)));
       const perBulan = F.BULAN.map((nama, i) => {
         const kode = `${tahun}-${String(i + 1).padStart(2, "0")}`;
         const isi = lunas.filter((t) => t.dibayarPada.startsWith(kode));
         return { kode, nama, jumlah: isi.reduce((s, t) => s + t.jumlah, 0), transaksi: isi.length };
       });
-      const tunggakan = semua.filter((t) => ["belum", "ditolak"].includes(t.status) && t.jatuhTempo < hariIni);
+      const tunggakan = aktif.filter((t) => ["belum", "ditolak"].includes(t.status) && t.jatuhTempo < hariIni);
       const menunggu = semua.filter((t) => t.status === "menunggu");
       return {
         perBulan,

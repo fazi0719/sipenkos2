@@ -237,11 +237,16 @@
       wadah.className = "kerangka-auth";
       main.replaceWith(wadah);
       wadah.append(main);
+      // dari tombol Reservasi Sekarang (?tipe=) kembali ke Detail Kamar; selain itu ke Beranda
+      const tipe = ui.param("tipe");
+      const kembali = tipe
+        ? { href: `pages/publik/detail-kamar.html?tipe=${encodeURIComponent(tipe)}`, teks: "Kembali ke Detail Kamar" }
+        : { href: "index.html", teks: "Kembali ke Beranda" };
       wadah.insertAdjacentHTML("beforeend", `
-        <div class="auth-bawah">
-          <a class="tautan-kembali" style="margin:0" href="${S.url(ui.param("kembali") || "index.html")}">${ikon("arrow_back")}${ui.param("kembali") ? "Kembali ke halaman sebelumnya" : "Kembali ke Beranda"}</a>
+        <footer class="auth-bawah">
+          <a class="tautan-kembali" href="${S.url(kembali.href)}">${ikon("arrow_back")}${kembali.teks}</a>
           <span>© 2026 SIPENKOS · ${esc(config.kos.nama)} Malang</span>
-        </div>`);
+        </footer>`);
     } else {
       const hitungan = await store.hitungan.menu();
       const adaNotif = hitungan.notifikasi > 0;

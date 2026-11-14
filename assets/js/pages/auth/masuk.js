@@ -35,7 +35,7 @@ SIPENKOS.halaman(async () => {
 
     try {
       const p = await ui.sibuk(form.querySelector("[type=submit]"), () =>
-        store.auth.masuk({ email: form.email.value, sandi: form.sandi.value }));
+        store.auth.masuk({ email: form.email.value, sandi: form.sandi.value, ingat: form.ingat.checked }));
       const reservasi = p.jenis === "calon" ? await store.reservasi.milikSaya() : null;
       const tujuan = kembali
         || (p.jenis === "calon" ? (reservasi ? config.beranda.calon : config.beranda.calonBaru) : config.beranda[p.jenis]);

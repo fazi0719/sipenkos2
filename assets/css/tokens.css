@@ -40,12 +40,12 @@
 :root {
     /* ---------- warna merek ---------- */
     --biru: #1a6fd8;            /* tombol utama, tautan, menu aktif, harga */
-    --biru-gelap: #1558ac;      /* hover tombol utama */
+    --biru-gelap: #1558ac;      /* hover tombol utama & teks biru di atas latar biru muda (kontras AA) */
     --biru-muda: #e8f2fd;       /* menu aktif, pilihan terpilih */
     --biru-garis: #c7ddf8;
     --navy: #1e3a8a;            /* logo & footer */
-    --hijau-wa: #16a34a;        /* khusus tombol WhatsApp */
-    --hijau-wa-gelap: #15803d;
+    --hijau-wa: #15803d;        /* khusus tombol WhatsApp (digelapkan dari #16A34A agar teks putih terbaca, kontras AA) */
+    --hijau-wa-gelap: #166534;
 
     /* ---------- teks & garis ---------- */
     --teks: #1f2937;

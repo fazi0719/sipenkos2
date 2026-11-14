@@ -89,9 +89,11 @@
       S.pasangIkon(d);
       const form = d.querySelector("form");
 
+      const pemicu = document.activeElement;
       const tutup = (nilai) => {
         d.close();
         d.remove();
+        if (pemicu && document.contains(pemicu)) pemicu.focus();
         selesai(nilai);
       };
 
@@ -215,7 +217,7 @@
         <img src="${esc(UI.gambar(tipe.foto))}" alt="Foto ${esc(tipe.nama)}" loading="lazy">
         ${UI.badgeKetersediaan(tipe)}
       </div>
-      <h3>${esc(tipe.nama)} ${esc(tipe.ringkas)}</h3>
+      <h2 class="kartu-kamar-judul">${esc(tipe.nama)} ${esc(tipe.ringkas)}</h2>
       <p>${esc(tipe.deskripsi)}</p>
       <div class="kartu-kamar-harga">
         <span>Biaya sewa</span>
@@ -312,7 +314,7 @@
     try {
       await navigator.clipboard.writeText(teks);
       UI.toast("Disalin ke papan klip");
-    } catch (e) {
+    } catch {
       UI.toast("Tidak bisa menyalin otomatis. Salin manual: " + teks, "info");
     }
     tombol?.focus();
@@ -358,6 +360,26 @@
       if (e.target.getAttribute("aria-invalid") === "true") UI.tandaiError(e.target, "");
     });
   };
+
+  // perkecil foto (maks 1000px, JPEG 75%) supaya muat di localStorage (± 5 MB)
+  const perkecil = (file) => new Promise((ok, gagal) => {
+    const baca = new FileReader();
+    baca.onerror = gagal;
+    baca.onload = () => {
+      const img = new Image();
+      img.onerror = gagal;
+      img.onload = () => {
+        const skala = Math.min(1, 1000 / Math.max(img.width, img.height));
+        const c = document.createElement("canvas");
+        c.width = Math.round(img.width * skala);
+        c.height = Math.round(img.height * skala);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        ok(c.toDataURL("image/jpeg", 0.75));
+      };
+      img.src = baca.result;
+    };
+    baca.readAsDataURL(file);
+  });
 
   // ---------- komponen unggah foto ----------
   // UI.unggah(wadahEl, { nama, teks, onUbah }) -> { nilai(), kosongkan(), tandaiError(pesan) }
@@ -418,7 +440,7 @@
         berkas = { nama: file.name, ukuran: file.size, data: await perkecil(file) };
         gambarTerisi();
         onUbah?.(berkas);
-      } catch (e) {
+      } catch {
         tampilError("File tidak bisa dibaca. Coba file lain.");
       }
     };
@@ -430,26 +452,6 @@
       tandaiError: tampilError
     };
   };
-
-  // perkecil foto (maks 1200px, JPEG 80%) supaya muat di localStorage
-  const perkecil = (file) => new Promise((ok, gagal) => {
-    const baca = new FileReader();
-    baca.onerror = gagal;
-    baca.onload = () => {
-      const img = new Image();
-      img.onerror = gagal;
-      img.onload = () => {
-        const skala = Math.min(1, 1200 / Math.max(img.width, img.height));
-        const c = document.createElement("canvas");
-        c.width = Math.round(img.width * skala);
-        c.height = Math.round(img.height * skala);
-        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
-        ok(c.toDataURL("image/jpeg", 0.8));
-      };
-      img.src = baca.result;
-    };
-    baca.readAsDataURL(file);
-  });
 
   // ---------- filter pil ----------
   // UI.filterPil(wadahEl, [{nilai, label}], onPilih)

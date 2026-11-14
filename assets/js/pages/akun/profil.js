@@ -43,7 +43,11 @@ SIPENKOS.halaman(async ({ pengguna }) => {
       const p = await ui.sibuk(form.querySelector("[type=submit]"), () =>
         store.auth.perbaruiProfil({ nama: form.nama.value, hp: form.hp.value }));
       tampilkanKepala(p);
+      // perbarui juga nama & inisial di header
       document.querySelectorAll(".profil-nama").forEach((el) => { el.textContent = F.namaDepan(p.nama); });
+      document.querySelectorAll(".profil-tombol .avatar").forEach((el) => { el.textContent = F.inisial(p.nama); });
+      const info = document.querySelector(".profil-menu-info strong");
+      if (info) info.textContent = p.nama;
       ui.toast("Profil berhasil disimpan");
     } catch (err) {
       ui.gagal(err);
