@@ -7,6 +7,8 @@
   <title>Status Reservasi · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/status-reservasi.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -22,36 +24,68 @@
 </head>
 <body data-layout="akun" data-akses="calon penghuni" data-menu="status-reservasi" data-judul="Status Reservasi">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Status Reservasi &amp; Pembayaran</h1>
-        <p class="sub">Pantau proses reservasi dan pembayaran kamu</p>
-      </div>
+    <div class="card-box" id="kosong" hidden>
+      <h2 class="judul-box">Belum ada reservasi</h2>
+      <p class="deskripsi">Pilih kamar yang kamu inginkan, lalu tekan Reservasi Sekarang.</p>
+      <a href="../publik/kamar.html" class="btn btn-primary">Lihat Kamar</a>
     </div>
-
-    <div id="kosong" hidden></div>
-
     <div id="isi" hidden>
-      <div id="langkah"></div>
-      <div class="kotak-status mb-6" id="kotakStatus">
-        <div class="kotak-status-teks">
-          <span id="badgeStatus"></span>
-          <p id="pesanStatus"></p>
-        </div>
-        <div class="baris-tombol" id="aksiStatus"></div>
+  <a href="pembayaran.html" id="kembali" class="back-link">
+    ← Kembali ke Pembayaran
+  </a>
+
+  <div class="section-header">
+    <h1 class="judul-section">Status Reservasi &amp; Pembayaran</h1>
+    <p class="deskripsi">Pantau proses reservasi dan pembayaran kamu</p>
+  </div>
+
+  <div class="alur-card" aria-label="Tahapan reservasi">
+    <div class="alur-sewa completed">
+      <span class="nomor">✓</span>
+      <span class="alur-label">Formulir Reservasi</span>
+    </div>
+    <span class="step-arrow">→</span>
+    <div class="alur-sewa completed">
+      <span class="nomor">✓</span>
+      <span class="alur-label">Pembayaran</span>
+    </div>
+    <span class="step-arrow">→</span>
+    <div class="alur-sewa active" id="langkahVerifikasi">
+      <span class="nomor" id="langkahNomor">3</span>
+      <span class="alur-label" id="langkahLabel">Menunggu Verifikasi</span>
+    </div>
+  </div>
+
+  <section class="status-banner status-banner--menunggu" id="statusBanner" aria-live="polite">
+    <span class="status-ikon" id="statusIkon" aria-hidden="true">◷</span>
+    <div class="status-isi">
+      <span class="status-pill" id="statusPill">Menunggu Verifikasi</span>
+      <p id="statusPesan"></p>
+    </div>
+    <a href="#" class="btn btn-outline" id="statusAksi"></a>
+  </section>
+
+  <div class="grid-dua-kolom grid-dua-kolom--sama">
+    <section class="card-box">
+      <h2 class="judul-box">Ringkasan Reservasi</h2>
+
+      <div class="foto-kamar">
+        <img id="fotoKamar" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Foto kamar">
       </div>
 
-      <div class="grid-2 grid-atas">
-        <section class="kartu" aria-labelledby="judulRingkasan">
-          <h2 class="kartu-judul" id="judulRingkasan">Ringkasan Reservasi</h2>
-          <img class="foto-kartu" id="fotoKamar" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-          <div id="ringkasan"></div>
-        </section>
-        <section class="kartu" aria-labelledby="judulAlur">
-          <h2 class="kartu-judul" id="judulAlur">Alur Reservasi</h2>
-          <div id="timeline"></div>
-        </section>
+      <div class="rincian-list" id="ringkasanList"></div>
+
+      <div class="total-box">
+        <span id="nominalLabel">Dibayar</span>
+        <strong id="nominalDibayar">Rp 0</strong>
       </div>
+    </section>
+
+    <section class="card-box">
+      <h2 class="judul-box">Alur Reservasi</h2>
+      <ol class="timeline" id="timelineList"></ol>
+    </section>
+  </div>
     </div>
   </main>
 </body>

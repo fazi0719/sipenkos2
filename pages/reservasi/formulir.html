@@ -7,6 +7,8 @@
   <title>Formulir Reservasi · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/reservasi.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -22,88 +24,102 @@
 </head>
 <body data-layout="alur" data-akses="calon" data-judul="Formulir Reservasi">
   <main>
-    <a class="tautan-kembali" id="kembali" href="../publik/kamar.html"><i data-ikon="arrow_back"></i>Kembali ke Detail Kamar</a>
-    <div id="langkah"></div>
-
-    <div class="kepala-halaman">
-      <div>
-        <h1>Formulir Reservasi</h1>
-        <p class="sub">Lengkapi data reservasi untuk melanjutkan proses sewa</p>
+    <a href="../publik/kamar.html" class="back-link" id="kembali">← Kembali ke Detail Kamar</a>
+    <div class="section-header">
+      <h1 class="judul-section">Formulir Reservasi</h1>
+      <p class="deskripsi">Lengkapi data reservasi untuk melanjutkan proses sewa</p>
+    </div>
+    <div class="alur-card">
+      <div class="alur-sewa active">
+        <span class="nomor">1</span>
+        <span class="alur-label">Formulir Reservasi</span>
+      </div>
+      <span class="step-arrow">→</span>
+      <div class="alur-sewa">
+        <span class="nomor">2</span>
+        <span class="alur-label">Pembayaran</span>
+      </div>
+      <span class="step-arrow">→</span>
+      <div class="alur-sewa">
+        <span class="nomor">3</span>
+        <span class="alur-label">Menunggu Verifikasi</span>
       </div>
     </div>
 
-    <div id="belumPilih" hidden></div>
+    <div class="card-box" id="belumPilih" hidden>
+      <h2 class="judul-box" id="belumPilihJudul">Pilih kamar terlebih dahulu</h2>
+      <p class="deskripsi">Lihat daftar kamar lalu tekan Reservasi Sekarang pada kamar yang kamu inginkan.</p>
+      <a href="../publik/kamar.html" class="btn btn-primary">Lihat Daftar Kamar</a>
+    </div>
 
-    <form id="formReservasi" class="tumpuk" novalidate hidden>
-      <div class="kartu grid-2 grid-atas">
-        <section class="panel" aria-labelledby="judulPilihan">
-          <h2 class="kartu-judul" id="judulPilihan">Kamar Pilihan</h2>
-          <img class="foto-kartu" id="fotoKamar" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-          <h3 class="kartu-judul" id="namaKamar">-</h3>
-          <p><strong class="harga" id="hargaKamar">-</strong> <span class="muted kecil">/ bulan</span></p>
-          <div class="chip-grid mt-6" id="fasilitasKamar"></div>
-        </section>
-
-        <section class="form" aria-labelledby="judulDetail">
-          <h2 class="kartu-judul" id="judulDetail">Detail Reservasi</h2>
-          <div class="baris-field">
-            <div class="field">
-              <label class="label" for="tglMulai">Tanggal Mulai Kos</label>
-              <input class="input" type="date" id="tglMulai" name="tglMulai">
+    <div id="isiFormulir" hidden>
+      <section class="grid-shell" aria-label="Informasi kamar dan formulir reservasi">
+        <div class="grid-dua-kolom grid-dua-kolom--kiri-sempit">
+          <div class="card-box kamar-pilihan-box">
+            <span class="badge">KAMAR PILIHAN</span>
+            <div class="card-kamar">
+              <img id="kamarGambar" alt="Kamar Pilihan" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             </div>
-            <div class="field">
-              <label class="label" for="durasi">Durasi Sewa</label>
-              <div class="input-ikon">
-                <select class="select" id="durasi" name="durasi"></select>
-                <i data-ikon="expand_more"></i>
+            <h3 class="tipe-kamar" id="tipeKamar">-</h3>
+            <div class="harga"><span class="nominal" id="hargaKamar">-</span> / bulan</div>
+            <div class="fasilitas-wrapper">
+              <span class="subjudul-box">Fasilitas Termasuk:</span>
+              <ul class="fasilitas" id="fasilitasKamar"></ul>
+            </div>
+          </div>
+          <div class="card-box form-reservasi-box">
+            <h2 class="judul-box">Detail Reservasi</h2>
+            <div id="pesanPenolakan" class="rejection-notice" role="alert" hidden></div>
+            <form id="formSewa" class="sewa-form" novalidate>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="tglMulai" class="form-label">Tanggal Mulai Kos</label>
+                  <input type="date" id="tglMulai" name="tglMulai" class="form-input">
+                </div>
+                <div class="form-group">
+                  <label for="durasiSewa" class="form-label">Durasi Sewa</label>
+                  <input type="text" id="durasiSewa" name="durasiSewa" class="form-input readonly-input" value="Memuat durasi..." readonly aria-readonly="true">
+                  <small class="catatan">Untuk mengubahnya durasi sewa, kembali ke halaman sebelumnya.</small>
+                </div>
+                <div class="form-group">
+                  <label for="namaKontak" class="form-label">Nama Kontak Darurat</label>
+                  <input type="text" id="namaKontak" name="kontakNama" class="form-input" placeholder="Masukkan nama orang tua/wali">
+                </div>
+                <div class="form-group">
+                  <label for="hubungan" class="form-label">Hubungan</label>
+                  <input type="text" id="hubungan" name="kontakHubungan" class="form-input" placeholder="Contoh: Orang Tua, Kakak">
+                </div>
+                <div class="form-group">
+                  <label for="noKontak" class="form-label">Nomor Kontak Darurat</label>
+                  <input type="tel" id="noKontak" name="kontakHp" class="form-input" placeholder="Contoh: 081234567890" inputmode="tel">
+                </div>
+                <div class="form-group">
+                  <label for="fotoKtp" class="form-label">Foto KTP Penyewa</label>
+                  <input type="file" id="fotoKtp" name="ktp" class="form-input-file" accept="image/jpeg,image/png,image/webp">
+                  <p class="catatan">💡 KTP digunakan khusus untuk pendataan ke pengurus RT/RW demi keamanan kos.</p>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
-          <div class="baris-field">
-            <div class="field">
-              <label class="label" for="kontakNama">Nama Kontak Darurat</label>
-              <input type="text" class="input" id="kontakNama" name="kontakNama" autocomplete="off" placeholder="Nama lengkap">
-            </div>
-            <div class="field">
-              <label class="label" for="kontakHubungan">Hubungan</label>
-              <div class="input-ikon">
-                <select class="select" id="kontakHubungan" name="kontakHubungan"></select>
-                <i data-ikon="expand_more"></i>
-              </div>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label" for="kontakHp">Nomor Kontak Darurat</label>
-            <div class="input-ikon input-ikon--kiri">
-              <i data-ikon="call"></i>
-              <input class="input" id="kontakHp" name="kontakHp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
-            </div>
-          </div>
-          <div class="field">
-            <span class="label" id="labelKtp">Foto KTP</span>
-            <div id="unggahKtp" role="group" aria-labelledby="labelKtp"></div>
-          </div>
-          <div class="field">
-            <label class="cek"><input type="checkbox" name="setuju"><span>Saya sudah membaca dan menyetujui <a href="../publik/tentang.html#aturan" target="_blank">aturan kos</a></span></label>
-          </div>
-        </section>
-      </div>
-
-      <section class="kartu" aria-labelledby="judulRincian">
-        <h2 class="kartu-judul" id="judulRincian">Rincian Harga</h2>
-        <div id="rincian"></div>
-        <div class="rincian-total">
-          <span>Dibayar sekarang<small>sewa bulan pertama</small></span>
-          <strong id="dibayarSekarang">-</strong>
         </div>
       </section>
 
-      <div class="kaki-form">
-        <p class="bantuan">Setelah ini kamu akan diarahkan untuk membayar sewa bulan pertama</p>
-        <a class="tombol tombol--batal" id="batal" href="../publik/kamar.html">Batalkan</a>
-        <button type="submit" class="tombol tombol--utama">Lanjutkan ke Pembayaran<i data-ikon="arrow_forward"></i></button>
+      <div class="card-box rincian-biaya-box">
+        <h2 class="judul-box">Rincian Biaya Reservasi</h2>
+        <div class="rincian-list" id="rincianBiayaList"></div>
       </div>
-    </form>
+
+      <div class="action-bar-card">
+        <div class="info-action">
+          <span class="icon">ℹ️</span>
+          <span>Pengajuan akan diperiksa oleh admin. Pembayaran baru dapat dilakukan setelah pengajuan disetujui.</span>
+        </div>
+        <div class="buttons-action">
+          <a href="../publik/kamar.html" class="btn btn-outline" id="batal">Batalkan</a>
+          <button type="submit" form="formSewa" id="btnKirimPengajuan" class="btn btn-primary">Kirim Pengajuan Sewa</button>
+        </div>
+      </div>
+    </div>
   </main>
 </body>
 </html>

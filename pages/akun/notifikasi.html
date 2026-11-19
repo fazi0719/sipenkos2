@@ -7,6 +7,9 @@
   <title>Notifikasi · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/notifikasi.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -22,16 +25,9 @@
 </head>
 <body data-layout="akun" data-akses="masuk" data-menu="notifikasi" data-judul="Notifikasi">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Notifikasi</h1>
-        <p class="sub">Kabar terbaru tentang reservasi, tagihan, dan laporan kamu</p>
-      </div>
-      <button type="button" class="tombol tombol--teks" id="tandaiSemua"><i data-ikon="done_all"></i>Tandai semua sudah dibaca</button>
-    </div>
-
-    <div id="filter" role="group" aria-label="Saring notifikasi"></div>
-    <div class="daftar-item" id="daftar"></div>
+    <!-- isi dipasang notifikasi.js sesuai role:
+         penghuni/calon → gaya penghuni/notifikasi.php · pemilik → gaya admin/pages/notifikasi.php -->
+    <div id="wadahNotifikasi"></div>
   </main>
 </body>
 </html>

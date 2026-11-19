@@ -7,6 +7,8 @@
   <title>Daftar Akun · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/auth.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -23,51 +25,59 @@
 </head>
 <body data-layout="auth" data-akses="tamu" data-judul="Daftar Akun">
   <main>
-    <div class="kartu tumpuk">
-      <div class="teks-tengah"><a class="logo" href="../../index.html"><span class="logo-nama">SIPENK<i data-ikon="home"></i>S</span><span class="logo-pemisah"></span><span class="logo-kos">Kos Bu Nining</span></a></div>
-
-      <div class="kotak-info kotak-info--biru" id="infoReservasi" hidden><i data-ikon="info"></i><p></p></div>
-
-      <h1 class="judul-auth">Buat Akun</h1>
-
-      <form class="form" id="formDaftar" novalidate>
-        <div class="field">
-          <label class="label" for="nama">Nama Lengkap</label>
-          <input type="text" class="input" id="nama" name="nama" autocomplete="name" placeholder="Sesuai KTP">
+    <div class="auth-container">
+      <div class="card-box auth-card">
+        <div class="auth-logo">
+          <a href="../../index.html" class="logo">
+            <span class="logo-judul">SIPENKOS</span>
+            <span class="logo-divider">|</span>
+            <span class="logo-pendukung">Kos Bu Nining</span>
+          </a>
         </div>
-        <div class="field">
-          <label class="label" for="nik">NIK</label>
-          <input type="text" class="input" id="nik" name="nik" inputmode="numeric" maxlength="16" placeholder="16 digit angka">
+        <div class="informasi" id="infoReservasi">
+          <span class="icon">ℹ️</span>
+          <span id="infoReservasiTeks">Buat akun untuk melanjutkan reservasi kamar yang anda pilih</span>
         </div>
-        <div class="field">
-          <label class="label" for="hp">Nomor HP/WhatsApp</label>
-          <div class="input-ikon input-ikon--kiri">
-            <i data-ikon="call"></i>
-            <input class="input" id="hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx">
+        <div class="auth-header">
+          <h1 class="judul-box">Buat Akun</h1>
+          <p class="deskripsi">Lengkapi data diri kamu untuk mulai membuat akun.</p>
+        </div>
+        <form class="auth-form" id="formDaftar" novalidate>
+          <div class="form-group">
+            <label for="nama" class="form-label">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" class="form-input" placeholder="Nama lengkap sesuai KTP" autocomplete="name">
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="email">Email</label>
-          <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="nama@email.com">
-        </div>
-        <div class="field">
-          <label class="label" for="sandi">Kata Sandi</label>
-          <div class="input-ikon">
-            <input class="input" id="sandi" name="sandi" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter">
-            <button type="button" class="tombol tombol--ikon" data-lihat-sandi="sandi" aria-label="Tampilkan kata sandi"><i data-ikon="visibility"></i></button>
+          <div class="form-group">
+            <label for="hp" class="form-label">Nomor HP / WhatsApp</label>
+            <input type="tel" id="hp" name="hp" class="form-input" placeholder="08xxxxxxxxxx" inputmode="tel" autocomplete="tel">
           </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="nama@email.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="sandi" class="form-label">Kata Sandi</label>
+            <div class="input-password-wrapper">
+              <input type="password" id="sandi" name="sandi" class="form-input" placeholder="Masukkan kata sandi kamu" autocomplete="new-password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sandi2" class="form-label">Konfirmasi Kata Sandi</label>
+            <div class="input-password-wrapper">
+              <input type="password" id="sandi2" name="sandi2" class="form-input" placeholder="Ulangi kata sandi kamu" autocomplete="new-password">
+            </div>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="persetujuan" name="setuju">
+            <label for="persetujuan">Saya menyetujui <a href="../akun/aturan.html" target="_blank" rel="noopener">aturan kos</a></label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Daftar</button>
+        </form>
+        <div class="auth-footer-card">
+          Sudah punya akun? <a href="masuk.html" class="link-auth" id="keMasuk">Masuk</a>
         </div>
-        <div class="field">
-          <label class="label" for="sandi2">Konfirmasi Kata Sandi</label>
-          <input class="input" id="sandi2" name="sandi2" type="password" autocomplete="new-password" placeholder="Ulangi kata sandi">
-        </div>
-        <div class="field">
-          <label class="cek"><input type="checkbox" name="setuju"><span>Saya menyetujui <a href="../publik/tentang.html#aturan" target="_blank">aturan kos</a></span></label>
-        </div>
-        <button type="submit" class="tombol tombol--utama tombol--penuh">Daftar</button>
-      </form>
-
-      <p class="kecil muted teks-tengah">Sudah punya akun? <a id="keMasuk" href="masuk.html">Masuk</a></p>
+      </div>
+      <a href="../publik/kamar.html" class="back-link back-link-center">← Kembali ke Daftar Kamar</a>
     </div>
   </main>
 </body>

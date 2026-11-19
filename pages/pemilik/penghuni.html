@@ -7,6 +7,8 @@
   <title>Penghuni · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,30 +20,39 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
   <script src="../../assets/js/pages/pemilik/penghuni.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="penghuni" data-judul="Penghuni">
   <main>
-    <div class="kepala-halaman">
+    <div class="page-header">
       <div>
-        <h1>Penghuni</h1>
-        <p class="sub">Data penghuni aktif Kos Bu Nining</p>
-      </div>
-      <div class="field">
-        <label class="sr-only" for="cari">Cari penghuni</label>
-        <div class="input-ikon input-ikon--kiri"><i data-ikon="search"></i><input class="input" id="cari" type="search" placeholder="Cari nama atau nomor kamar"></div>
+        <h1 class="page-title">Data Penghuni</h1>
+        <p class="page-subtitle">Daftar seluruh penghuni aktif dan calon penyewa kos</p>
       </div>
     </div>
-    <section class="kartu kartu--rapat">
-      <div class="tabel-gulir">
-        <table class="tabel tabel--responsif">
-          <caption class="sr-only">Daftar penghuni</caption>
-          <thead><tr><th scope="col">Kamar</th><th scope="col">Nama</th><th scope="col">Nomor HP</th><th scope="col">Masa Sewa</th><th scope="col">Pembayaran</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
-          <tbody id="isiTabel"></tbody>
-        </table>
+    <div class="list-section">
+      <div class="toolbar toolbar-end">
+        <label class="search"><i class="icon icon-search" aria-hidden="true"></i><span class="sr-only">Cari nama penghuni...</span><input type="search" placeholder="Cari nama penghuni..." id="cari" autocomplete="off"></label>
       </div>
-      <div id="kosong" hidden></div>
-    </section>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table table-penghuni">
+            <thead>
+              <tr>
+                <th>Penghuni</th>
+                <th>Kamar</th>
+                <th>Tipe Kamar</th>
+                <th class="ta-center">Mulai Sewa</th>
+                <th class="ta-right">Dokumen</th>
+              </tr>
+            </thead>
+            <tbody id="isiTabel"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="kosong" hidden>Penghuni tidak ditemukan.</div>
+      </div>
+    </div>
   </main>
 </body>
 </html>

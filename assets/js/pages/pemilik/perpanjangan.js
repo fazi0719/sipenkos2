@@ -3,27 +3,32 @@
 // Bila penghuni pindah tipe, pemilik memilih nomor kamar baru.
 // =========================================================
 SIPENKOS.halaman(async () => {
-  const { store, ui, ikon, config, format: F } = SIPENKOS;
-  const semua = await store.perpanjangan.semua();
+  const { store, ui, ikon, config, format: F, adminUI: A } = SIPENKOS; // gaya tabel admin kelompok
+  const semua = (await store.perpanjangan.semua()).sort((a, b) => b.dibuatPada.localeCompare(a.dibuatPada));
   let saring = "menunggu";
 
   const pindah = (x) => x.kamarLama?.tipeId !== x.tipeId;
 
   const tampilkan = () => {
+    chip.gambar({ menunggu: semua.filter((x) => x.status === "menunggu").length, semua: semua.length });
     const isi = saring === "semua" ? semua : semua.filter((x) => x.status === saring);
     document.getElementById("isiTabel").innerHTML = isi.map((x) => `
       <tr>
-        <td data-label="Penghuni"><span class="tabel-utama">${F.esc(x.pengguna.nama)}</span><span class="tabel-sub">Kamar ${F.esc(x.kamarLama?.nomor || "-")}</span></td>
-        <td data-label="Pengajuan">${x.durasi} bulan · ${F.esc(x.tipe.nama)}${pindah(x) ? ' <span class="badge badge--info">Pindah tipe</span>' : ""}<span class="tabel-sub">${x.skema === "dp" ? "DP " + config.aturanBisnis.persenDp + "%" : "Lunas"} · ${F.esc(x.metode)}</span></td>
-        <td data-label="Masa Sewa Baru">${F.rentang(x.mulaiBaru, x.akhirBaru)}</td>
-        <td data-label="Total" class="angka">${F.rupiah(x.total)}</td>
-        <td data-label="Status">${ui.badge("perpanjangan", x.status)}</td>
-        <td class="aksi"><button type="button" class="tombol ${x.status === "menunggu" ? "tombol--utama" : "tombol--sekunder"} tombol--kecil" data-id="${F.esc(x.id)}">${x.status === "menunggu" ? "Tinjau" : "Detail"}</button></td>
+        <td class="nowrap">${F.tanggal(x.dibuatPada)}</td>
+        <td>
+          <div class="person">
+            <span class="avatar">${F.esc(A.inisial(x.pengguna.nama))}</span>
+            <div><p class="person-name">${F.esc(x.pengguna.nama)}</p><p class="person-sub">Kamar ${F.esc(x.kamarLama?.nomor || "-")}</p></div>
+          </div>
+        </td>
+        <td><p class="cell-main">${x.durasi} bulan · ${F.esc(x.tipe.nama)}${pindah(x) ? " (pindah tipe)" : ""}</p><p class="cell-sub">${x.skema === "dp" ? "DP " + config.aturanBisnis.persenDp + "%" : "Lunas"} · ${F.esc(x.metode)} · ${F.rupiah(x.total)}</p></td>
+        <td class="nowrap">${F.rentang(x.mulaiBaru, x.akhirBaru)}</td>
+        <td>${A.status("perpanjangan", x.status)}</td>
+        <td class="ta-right"><button type="button" class="btn ${x.status === "menunggu" ? "btn-primary" : "btn-secondary"} btn-sm" data-id="${F.esc(x.id)}">${x.status === "menunggu" ? "Tinjau" : "Detail"}</button></td>
       </tr>`).join("");
-    const kosong = document.getElementById("kosong");
-    kosong.hidden = isi.length > 0;
-    kosong.innerHTML = ui.kosong({ ikon: "event_repeat", judul: "Tidak ada pengajuan" });
+    document.getElementById("kosong").hidden = isi.length > 0;
   };
+  const chip = A.chip(document.getElementById("filter"), [["menunggu", "Menunggu"], ["disetujui", "Disetujui"], ["ditolak", "Ditolak"], ["semua", "Semua"]], (v) => { saring = v; tampilkan(); }, "menunggu");
 
   const tinjau = async (x) => {
     const unit = x.status === "menunggu" && pindah(x) ? await store.kamar.unitKosong(x.tipeId) : [];
@@ -69,13 +74,6 @@ SIPENKOS.halaman(async () => {
       ui.gagal(e);
     }
   };
-
-  ui.filterPil(document.getElementById("filter"), [
-    { nilai: "menunggu", label: `Menunggu (${semua.filter((x) => x.status === "menunggu").length})` },
-    { nilai: "disetujui", label: "Disetujui" },
-    { nilai: "ditolak", label: "Ditolak" },
-    { nilai: "semua", label: "Semua" }
-  ], (v) => { saring = v; tampilkan(); }, "menunggu");
 
   document.getElementById("isiTabel").addEventListener("click", (e) => {
     const b = e.target.closest("[data-id]");

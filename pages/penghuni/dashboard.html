@@ -7,7 +7,7 @@
   <title>Dashboard · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/pages/penghuni.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/dashboard.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -23,50 +23,44 @@
 </head>
 <body data-layout="akun" data-akses="penghuni" data-menu="dashboard" data-judul="Dashboard">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1 id="sapaan">Selamat datang</h1>
-        <p class="sub" id="subKamar">-</p>
-      </div>
+    <div class="welcome-heading">
+      <h1 id="sapaan">Selamat datang</h1>
+      <p id="subKamar">Berikut ringkasan informasi hunian kamu.</p>
     </div>
 
-    <div class="kotak-status kotak-status--peringatan mb-6" id="bannerTagihan" hidden>
-      <i data-ikon="schedule"></i>
-      <p class="isi-lentur" id="teksTagihan"></p>
-      <a class="tombol tombol--utama" id="tombolBayar" href="#">Bayar Sekarang</a>
-    </div>
+    <section class="bill-alert" id="bannerTagihan" hidden>
+      <div class="bill-alert-copy"><span class="alert-clock" aria-hidden="true">◷</span><span id="teksTagihan">Memuat informasi tagihan...</span></div>
+      <a href="#" class="primary-button" id="tombolBayar">Bayar Sekarang</a>
+    </section>
 
-    <div class="grid-3 mb-6">
-      <section class="kartu statistik" aria-labelledby="lblSewa">
-        <p class="statistik-label" id="lblSewa"><i data-ikon="calendar_today" class="kecil"></i>Masa Sewa</p>
-        <p class="statistik-nilai sedang" id="masaSewa">-</p>
-        <p class="statistik-ket" id="ketSewa"></p>
-        <a class="tautan-lihat" href="perpanjangan.html">Perpanjang<i data-ikon="arrow_forward"></i></a>
-      </section>
-      <section class="kartu statistik" aria-labelledby="lblLaporan">
-        <p class="statistik-label" id="lblLaporan"><i data-ikon="build" class="kecil"></i>Laporan Kerusakan</p>
-        <p class="statistik-nilai sedang" id="jumlahLaporan">-</p>
-        <p class="statistik-ket" id="ketLaporan"></p>
-        <a class="tautan-lihat" id="lihatLaporan" href="laporan.html">Lihat<i data-ikon="arrow_forward"></i></a>
-      </section>
-      <section class="kartu statistik" aria-labelledby="lblBayar">
-        <p class="statistik-label" id="lblBayar"><i data-ikon="history" class="kecil"></i>Pembayaran Terakhir</p>
-        <p class="statistik-nilai sedang" id="bayarTerakhir">-</p>
-        <p class="statistik-ket" id="ketBayar"></p>
-        <a class="tautan-lihat" href="riwayat.html">Riwayat<i data-ikon="arrow_forward"></i></a>
-      </section>
-    </div>
+    <section class="summary-grid" aria-label="Ringkasan penghuni">
+      <article class="summary-card">
+        <p class="card-label">Masa Sewa</p>
+        <h2 id="masaSewa">-</h2>
+        <a href="perpanjangan.html">Perpanjang <span>→</span></a>
+      </article>
+      <article class="summary-card">
+        <p class="card-label">Laporan Kerusakan</p>
+        <h2 id="jumlahLaporan">Belum ada laporan</h2>
+        <a href="laporan.html" id="lihatLaporan">Lihat <span>→</span></a>
+      </article>
+      <article class="summary-card">
+        <p class="card-label">Pembayaran Terakhir</p>
+        <div class="last-payment-line"><h2 id="bayarTerakhir">-</h2><span class="status-pill" id="statusBayar" hidden>Lunas</span></div>
+        <a href="riwayat.html">Riwayat <span>→</span></a>
+      </article>
+    </section>
 
-    <section class="kartu" aria-labelledby="judulKamar">
-      <h2 class="kartu-judul" id="judulKamar">Kamar Saya</h2>
-      <div class="ringkas-kamar kamar-saya">
-        <img id="fotoKamar" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-        <div>
-          <h3 id="namaKamar">-</h3>
-          <p><strong class="harga" id="hargaKamar">-</strong> <span class="muted kecil">/ bulan</span></p>
-          <p class="kecil muted" id="periodeKamar"></p>
+    <section class="room-card">
+      <h2 class="section-card-title">Kamar Saya</h2>
+      <div class="room-detail">
+        <img id="fotoKamar" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Foto kamar penghuni">
+        <div class="room-info">
+          <h3 id="namaKamar">Informasi kamar</h3>
+          <p class="room-price" id="hargaKamar">-</p>
+          <p class="room-period">Periode sewa: <span id="periodeKamar">-</span></p>
+          <a href="#" class="secondary-button" id="detailKamar">Lihat Detail Kamar</a>
         </div>
-        <a class="tombol tombol--sekunder" id="detailKamar" href="#">Lihat Detail Kamar</a>
       </div>
     </section>
   </main>

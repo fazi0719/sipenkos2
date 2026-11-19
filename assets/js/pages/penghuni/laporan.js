@@ -1,39 +1,49 @@
 // =========================================================
-// Laporan Kerusakan — daftar laporan milik penghuni + filter
+// Laporan Kerusakan (Figma frame 20) — daftar + filter status.
+// Tampilan mengikuti penghuni/laporan-kerusakan.php kelompok.
 // =========================================================
 SIPENKOS.halaman(async () => {
-  const { store, ui, ikon, format: F } = SIPENKOS;
+  const { store, ui, format: F, laporanK: K } = SIPENKOS;
+  const $ = (id) => document.getElementById(id);
   const semua = await store.laporan.milikSaya();
-  const daftar = document.getElementById("daftar");
+  let filterAktif = "semua";
 
-  const tampilkan = (saring) => {
-    const isi = saring === "semua" ? semua : semua.filter((l) => l.status === saring);
-    daftar.innerHTML = isi.length
-      ? isi.map((l) => `
-        <article class="item">
-          <div class="item-gambar">${l.foto ? `<img src="${F.esc(ui.gambar(l.foto))}" alt="">` : ikon(ui.ikonKategori(l.kategori))}</div>
-          <div>
-            <h2 class="item-judul">${F.esc(l.judul)}</h2>
-            <p class="item-ket">${F.esc(l.kategori)} · ${F.tanggal(l.dibuatPada)}</p>
-          </div>
-          <div class="item-kanan">
-            ${ui.badge("laporan", l.status)}
-            <a class="tautan-lihat" href="laporan-detail.html?id=${encodeURIComponent(l.id)}" aria-label="Lihat detail laporan ${F.esc(l.judul)}">Lihat Detail${ikon("arrow_forward")}</a>
-          </div>
-        </article>`).join("")
-      : `<div class="kartu">${ui.kosong({
-          ikon: "build",
-          judul: semua.length ? "Tidak ada laporan dengan status ini" : "Belum ada laporan",
-          pesan: semua.length ? "Coba pilih filter lain." : "Ada fasilitas kamar yang rusak? Buat laporan agar pemilik kos bisa segera menindaklanjuti.",
-          aksi: semua.length ? "" : '<a class="tombol tombol--sekunder" href="laporan-buat.html">Buat Laporan</a>'
-        })}</div>`;
+  const item = (l) => `
+    <li class="card-box item-laporan">
+      <div class="thumb">${l.foto ? `<img src="${F.esc(ui.gambar(l.foto))}" alt="">` : K.ikonKategori(l.kategori)}</div>
+      <div>
+        <h2 class="item-judul">${F.esc(l.judul)}</h2>
+        <p class="item-meta">${F.esc(l.kategori)}  ·  ${F.tanggal(l.dibuatPada)}</p>
+      </div>
+      <div class="item-kanan">
+        <span class="${K.kelasStatus(l.status)}">${K.label(l.status)}</span>
+        <a class="link-detail" href="laporan-detail.html?id=${encodeURIComponent(l.id)}" aria-label="Lihat detail laporan ${F.esc(l.judul)}">Lihat Detail ${K.IKON.panah}</a>
+      </div>
+    </li>`;
+
+  const tampilkan = () => {
+    const hasil = filterAktif === "semua" ? semua : semua.filter((l) => l.status === filterAktif);
+    $("daftarLaporan").innerHTML = hasil.map(item).join("");
+    $("kosong").hidden = hasil.length > 0;
+    if (!hasil.length) {
+      const belumAda = semua.length === 0;
+      $("kosongJudul").textContent = belumAda ? "Belum ada laporan" : `Tidak ada laporan berstatus ${K.label(filterAktif)}`;
+      $("kosongPesan").textContent = belumAda
+        ? "Ada fasilitas kamar yang rusak? Buat laporan agar pemilik kos bisa segera menindaklanjuti."
+        : "Coba pilih filter status yang lain.";
+    }
   };
 
-  ui.filterPil(document.getElementById("filter"), [
-    { nilai: "semua", label: "Semua" },
-    { nilai: "baru", label: "Baru" },
-    { nilai: "diproses", label: "Diproses" },
-    { nilai: "selesai", label: "Selesai" }
-  ], tampilkan);
-  tampilkan("semua");
+  $("filterStatus").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-filter]");
+    if (!b) return;
+    filterAktif = b.dataset.filter.toLowerCase();
+    $("filterStatus").querySelectorAll("[data-filter]").forEach((x) => {
+      const aktif = x === b;
+      x.classList.toggle("aktif", aktif);
+      x.setAttribute("aria-pressed", String(aktif));
+    });
+    tampilkan();
+  });
+  tampilkan();
 });

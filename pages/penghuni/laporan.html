@@ -7,6 +7,7 @@
   <title>Laporan Kerusakan · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/laporan-kerusakan.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,20 +19,41 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/laporan-ikon.js" defer></script>
   <script src="../../assets/js/pages/penghuni/laporan.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="penghuni" data-menu="laporan" data-judul="Laporan Kerusakan">
   <main>
-    <div class="kepala-halaman">
-      <div>
+    <div class="judul-baris">
+      <div class="laporan-heading">
         <h1>Laporan Kerusakan</h1>
-        <p class="sub">Laporkan dan pantau perbaikan fasilitas kamar kamu</p>
+        <p>Laporkan dan pantau perbaikan fasilitas kamar kamu</p>
       </div>
-      <a class="tombol tombol--utama" href="laporan-buat.html"><i data-ikon="add"></i>Buat Laporan</a>
+      <a href="laporan-buat.html" class="btn-utama">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Buat Laporan
+      </a>
     </div>
 
-    <div id="filter" role="group" aria-label="Saring status laporan"></div>
-    <div class="daftar-item" id="daftar"></div>
+    <!-- Filter status -->
+    <div class="filter-status" role="group" aria-label="Filter status laporan" id="filterStatus">
+      <button type="button" class="filter-pill aktif" data-filter="Semua" aria-pressed="true">Semua</button>
+      <button type="button" class="filter-pill" data-filter="Baru" aria-pressed="false">Baru</button>
+      <button type="button" class="filter-pill" data-filter="Diproses" aria-pressed="false">Diproses</button>
+      <button type="button" class="filter-pill" data-filter="Selesai" aria-pressed="false">Selesai</button>
+    </div>
+
+    <!-- Daftar laporan (diisi oleh laporan-kerusakan.js) -->
+    <ul class="daftar-laporan" id="daftarLaporan"></ul>
+
+    <!-- Bila belum ada laporan / tidak ada yang cocok dengan filter -->
+    <div class="card-box kosong" id="kosong" hidden>
+      <div class="kosong-ikon" aria-hidden="true">
+        <svg class="ikon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h2 id="kosongJudul">Belum ada laporan</h2>
+      <p id="kosongPesan">Ada fasilitas kamar yang rusak? Buat laporan agar pemilik kos bisa segera menindaklanjuti.</p>
+    </div>
   </main>
 </body>
 </html>

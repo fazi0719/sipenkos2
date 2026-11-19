@@ -1,0 +1,552 @@
+/* Disalin dari repo kelompok, setiap selector diberi awalan body.tema-kelompok.kerangka-sidebar */
+body.tema-kelompok.kerangka-sidebar .ikon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+body.tema-kelompok.kerangka-sidebar .perpanjangan-heading {
+    margin-bottom: 24px;
+}
+body.tema-kelompok.kerangka-sidebar .perpanjangan-heading h1 {
+    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+}
+body.tema-kelompok.kerangka-sidebar .perpanjangan-heading p {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .card-box {
+    padding: 26px 32px;
+    background: var(--bg-white);
+    border: 1px solid #edf1f6;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #15233b0a;
+}
+body.tema-kelompok.kerangka-sidebar .btn-utama, body.tema-kelompok.kerangka-sidebar .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 0 22px;
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+body.tema-kelompok.kerangka-sidebar .btn-utama {
+    color: #ffffff;
+    background: var(--primary-blue);
+    border: none;
+}
+body.tema-kelompok.kerangka-sidebar .btn-utama:hover {
+    background: var(--primary-hover);
+}
+body.tema-kelompok.kerangka-sidebar .btn-outline {
+    color: var(--text-dark);
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .btn-outline:hover {
+    background: var(--bg-light);
+}
+body.tema-kelompok.kerangka-sidebar .form-perpanjangan {
+    max-width: 820px;
+}
+body.tema-kelompok.kerangka-sidebar .info-sewa {
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .label-kecil {
+    margin-bottom: 8px;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+body.tema-kelompok.kerangka-sidebar .info-sewa h2 {
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-size: 17px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .info-periode {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+body.tema-kelompok.kerangka-sidebar .grup-pilihan {
+    margin-bottom: 22px;
+    border: none;
+}
+body.tema-kelompok.kerangka-sidebar .grup-pilihan legend {
+    margin-bottom: 14px;
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .pilihan {
+    display: grid;
+    gap: 16px;
+}
+body.tema-kelompok.kerangka-sidebar .pilihan-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+body.tema-kelompok.kerangka-sidebar .pilihan-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body.tema-kelompok.kerangka-sidebar .pilihan-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body.tema-kelompok.kerangka-sidebar .opsi {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 6px 40px;
+
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+
+    background: var(--bg-white);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px #15233b14;
+    cursor: pointer;
+    transition: 0.18s;
+}
+body.tema-kelompok.kerangka-sidebar .opsi:hover {
+    border-color: #c7dbfb;
+}
+body.tema-kelompok.kerangka-sidebar .opsi input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+body.tema-kelompok.kerangka-sidebar .opsi::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transform: translateY(-50%) scale(0.6);
+    opacity: 0;
+    transition: 0.18s;
+    background: var(--primary-blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+body.tema-kelompok.kerangka-sidebar .opsi:has(input:checked) {
+    color: var(--primary-blue);
+    background: #eef4fd;
+    border-color: var(--primary-blue);
+    box-shadow: none;
+}
+body.tema-kelompok.kerangka-sidebar .opsi:has(input:checked)::after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+body.tema-kelompok.kerangka-sidebar .opsi:has(input:focus-visible) {
+    outline: 3px solid #2563eb40;
+    outline-offset: 2px;
+}
+body.tema-kelompok.kerangka-sidebar .opsi.nonaktif {
+    flex-direction: column;
+    gap: 0;
+    color: #94a3b8;
+    background: #f8fafc;
+    box-shadow: none;
+    border: 2px dashed #e2e8f0;
+    cursor: not-allowed;
+}
+body.tema-kelompok.kerangka-sidebar .opsi.nonaktif small {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+body.tema-kelompok.kerangka-sidebar .ringkasan {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    margin-top: 26px;
+    padding: 18px 20px;
+
+    list-style: none;
+    background: #f1f5f9;
+    border-radius: 8px;
+}
+body.tema-kelompok.kerangka-sidebar .ringkasan li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+body.tema-kelompok.kerangka-sidebar .ringkasan li .ikon {
+    color: var(--primary-blue);
+}
+body.tema-kelompok.kerangka-sidebar .ringkasan b {
+    font-weight: 500;
+}
+body.tema-kelompok.kerangka-sidebar .aksi-form {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-height: 58px;
+    margin-bottom: 24px;
+    padding: 12px 18px;
+
+    color: var(--text-dark);
+    font-size: 14px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner p {
+    flex: 1;
+}
+body.tema-kelompok.kerangka-sidebar .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 11px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .status-pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+body.tema-kelompok.kerangka-sidebar .status-ikon {
+    width: 20px;
+    height: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--menunggu {
+    background: #fef7d6;
+    border-color: #fde68a;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--menunggu .status-pill {
+    color: var(--badge-yellow-text);
+    background: #fdecb2;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--menunggu .status-ikon {
+    color: #c2410c;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--disetujui {
+    background: #f0fdf4;
+    border-color: #86efac;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--disetujui .status-pill {
+    color: var(--badge-green-text);
+    background: var(--badge-green-bg);
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--ditolak {
+    background: #fff1f2;
+    border-color: #fda4af;
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--ditolak .status-pill {
+    color: var(--badge-red-text);
+    background: var(--badge-red-bg);
+}
+body.tema-kelompok.kerangka-sidebar .status-banner--disetujui .status-ikon, body.tema-kelompok.kerangka-sidebar .status-banner--ditolak .status-ikon {
+    display: none;
+}
+body.tema-kelompok.kerangka-sidebar .status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 26px;
+}
+body.tema-kelompok.kerangka-sidebar .status-grid .card-box {
+    padding: 26px 24px;
+}
+body.tema-kelompok.kerangka-sidebar .judul-card {
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail {
+    padding: 4px 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail > div:last-child {
+    border-bottom: none;
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail dt {
+    color: #475569;
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail dd {
+    color: var(--text-dark);
+    font-weight: 600;
+    text-align: right;
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail .panel-pemisah {
+    padding-bottom: 4px;
+    border-bottom: none;
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail > div:has(+ .panel-pemisah) {
+    border-bottom: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail .baris-rapat {
+    padding: 4px 0;
+    border-bottom: none;
+}
+body.tema-kelompok.kerangka-sidebar .panel-detail .baris-rapat:last-child {
+    padding-bottom: 14px;
+}
+body.tema-kelompok.kerangka-sidebar .aksi-detail {
+    margin-top: 28px;
+}
+body.tema-kelompok.kerangka-sidebar .aksi-detail .btn-utama {
+    min-height: 38px;
+    padding: 0 16px;
+    font-size: 13px;
+}
+body.tema-kelompok.kerangka-sidebar .detail-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    margin-top: 44px;
+    padding-top: 16px;
+
+    color: #475569;
+    font-size: 12px;
+    border-top: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .nomor-permohonan {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+body.tema-kelompok.kerangka-sidebar .nomor-permohonan .ikon {
+    width: 17px;
+    height: 17px;
+}
+body.tema-kelompok.kerangka-sidebar .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    margin-left: 16px;
+    padding-left: 8px;
+    list-style: none;
+    border-left: 2px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    margin-left: -26px;
+}
+body.tema-kelompok.kerangka-sidebar .timeline-dot {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-white);
+}
+body.tema-kelompok.kerangka-sidebar .timeline-dot .ikon {
+    width: 18px;
+    height: 18px;
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.selesai .timeline-dot {
+    color: var(--badge-green-text);
+    background: var(--badge-green-bg);
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.berjalan .timeline-dot {
+    color: var(--primary-blue);
+    background: #eef4fd;
+    box-shadow: 0 0 0 4px #e8f1ff;
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.menunggu .timeline-dot {
+    color: #94a3b8;
+    background: #f8fafc;
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.gagal .timeline-dot {
+    color: var(--badge-red-text);
+    background: var(--badge-red-bg);
+}
+body.tema-kelompok.kerangka-sidebar .timeline-judul {
+    margin-top: 5px;
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.berjalan .timeline-judul, body.tema-kelompok.kerangka-sidebar .timeline-item.aktif .timeline-judul {
+    color: var(--primary-blue);
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.menunggu .timeline-judul {
+    color: #475569;
+    font-weight: 500;
+}
+body.tema-kelompok.kerangka-sidebar .timeline-item.gagal .timeline-judul {
+    color: var(--badge-red-text);
+}
+body.tema-kelompok.kerangka-sidebar .timeline-ket {
+    max-width: 280px;
+    margin-top: 3px;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+body.tema-kelompok.kerangka-sidebar .empty-state {
+    max-width: 560px;
+}
+body.tema-kelompok.kerangka-sidebar .empty-state h2 {
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .empty-state p {
+    margin-bottom: 18px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+body.tema-kelompok.kerangka-sidebar [hidden] {
+    display: none !important;
+}
+@media (max-width: 680px) {
+  body.tema-kelompok.kerangka-sidebar .main-area {
+        margin-left: 0;
+    }
+  body.tema-kelompok.kerangka-sidebar .perpanjangan-heading {
+        font-size: 21px;
+    }
+  body.tema-kelompok.kerangka-sidebar .pilihan-3, body.tema-kelompok.kerangka-sidebar .pilihan-2 {
+        gap: 10px;
+    }
+  body.tema-kelompok.kerangka-sidebar .opsi {
+        min-height: 44px;
+        padding: 6px 24px 6px 10px;
+        font-size: 13px;
+    }
+  body.tema-kelompok.kerangka-sidebar .opsi::after {
+        right: 7px;
+        width: 15px;
+        height: 15px;
+        background-size: 10px;
+    }
+  body.tema-kelompok.kerangka-sidebar .status-banner {
+        flex-wrap: wrap;
+    }
+}
+body.tema-kelompok.kerangka-sidebar .btn-utama:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+body.tema-kelompok.kerangka-sidebar .info-pengajuan {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    max-width: 820px;
+    margin-bottom: 16px;
+    padding: 14px 18px;
+
+    font-size: 13px;
+    background: #fef7d6;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .info-pengajuan--disetujui {
+    background: #f0fdf4;
+    border-color: #86efac;
+}
+body.tema-kelompok.kerangka-sidebar .info-pengajuan--ditolak {
+    background: #fff1f2;
+    border-color: #fda4af;
+}
+body.tema-kelompok.kerangka-sidebar .info-pengajuan .btn-outline {
+    flex-shrink: 0;
+    min-height: 38px;
+    padding: 0 16px;
+    font-size: 13px;
+    text-decoration: none;
+}
+body.tema-kelompok.kerangka-sidebar .simulasi-verifikasi {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: var(--bg-white);
+    border: 1px dashed #94a3b8;
+    border-radius: 14px;
+}
+body.tema-kelompok.kerangka-sidebar .simulasi-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .simulasi-header p {
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .simulasi-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+body.tema-kelompok.kerangka-sidebar .btn-simulasi {
+    min-height: 40px;
+    padding: 0 18px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+}
+body.tema-kelompok.kerangka-sidebar .btn-simulasi.btn-terima {
+    color: var(--badge-green-text);
+    background: var(--badge-green-bg);
+    border-color: #86efac;
+}
+body.tema-kelompok.kerangka-sidebar .btn-simulasi.btn-tolak {
+    color: var(--badge-red-text);
+    background: var(--badge-red-bg);
+    border-color: #fda4af;
+}
+@media (max-width: 640px) {
+  body.tema-kelompok.kerangka-sidebar .info-pengajuan {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

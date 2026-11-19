@@ -201,23 +201,13 @@
     // CATATAN: isi aturan masih contoh — ganti dengan aturan asli dari Bu Nining.
     const aturan = {
       diperbarui: "2026-10-01T08:00:00+07:00",
+      // sama dengan aturan di admin/pages/aturan-kos.php repo kelompok
       kelompok: [
-        { judul: "Umum", isi: [
-          "Dilarang membuat kegaduhan di atas pukul 22.00 WIB.",
-          "Wajib menjaga kebersihan kamar dan area bersama."
-        ] },
-        { judul: "Tamu", isi: [
-          "Bertamu maksimal hingga pukul 22.00 WIB di area ruang tamu bersama.",
-          "Pintu pagar utama wajib dikunci kembali setelah pukul 23.00 WIB."
-        ] },
-        { judul: "Pembayaran", isi: [
-          `Pembayaran sewa dilakukan paling lambat tanggal ${TGL_JT} setiap bulannya.`,
-          "Pembayaran melalui transfer ke rekening pemilik kos, lalu unggah bukti di SIPENKOS."
-        ] },
-        { judul: "Fasilitas", isi: [
-          "Penggunaan fasilitas umum (dapur/mesin cuci) harap dirapikan kembali setelah digunakan.",
-          "Kerusakan fasilitas kamar dilaporkan melalui menu Laporan Kerusakan."
-        ] }
+        { judul: "Jam Bertamu", isi: ["Bertamu maksimal hingga pukul 22.00 WIB di area ruang tamu bersama."] },
+        { judul: "Keamanan & Kunci", isi: ["Pintu pagar utama wajib dikunci kembali setelah pukul 23.00 WIB."] },
+        { judul: "Pembayaran Sewa", isi: [`Pembayaran sewa dilakukan paling lambat tanggal ${TGL_JT} setiap bulannya.`] },
+        { judul: "Kebersihan & Ketertiban", isi: ["Dilarang membuat kegaduhan di atas pukul 22.00 WIB dan wajib menjaga kebersihan area bersama."] },
+        { judul: "Penggunaan Fasilitas", isi: ["Penggunaan fasilitas umum (dapur/mesin cuci) harap dirapikan kembali setelah digunakan."] }
       ]
     };
 

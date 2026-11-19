@@ -13,7 +13,7 @@
 
   S.config = {
     ROOT,
-    VERSI_DATA: 3, // naikkan bila bentuk data demo berubah (data lama akan direset)
+    VERSI_DATA: 4, // naikkan bila bentuk data demo berubah (data lama akan direset)
     AWALAN_KUNCI: "sipenkos:", // awalan kunci localStorage
 
     kos: {
@@ -116,6 +116,31 @@
         { kunci: "keuangan", label: "Laporan Keuangan", ikon: "monitoring", href: "pages/pemilik/keuangan.html" },
         { kunci: "aturan", label: "Kebijakan & Aturan Kos", ikon: "gavel", href: "pages/pemilik/aturan.html" },
         { kunci: "notifikasi", label: "Notifikasi", ikon: "notifications", href: "pages/akun/notifikasi.html", hitung: "notifikasi" }
+      ]
+    },
+
+    // ---------- menu versi tampilan repo kelompok (PBL-Sipenkos) ----------
+    // penghuni: ikon simbol teks seperti sidebar penghuni kelompok
+    // pemilik : ikon Lucide (assets/icons/lucide) seperti sidebar admin kelompok
+    menuKelompok: {
+      penghuni: [
+        { kunci: "dashboard", label: "Dashboard", simbol: "▦", href: "pages/penghuni/dashboard.html" },
+        { kunci: "tagihan", label: "Tagihan", simbol: "▤", href: "pages/penghuni/tagihan.html" },
+        { kunci: "riwayat", label: "Riwayat Pembayaran", simbol: "◴", href: "pages/penghuni/riwayat.html" },
+        { kunci: "perpanjangan", label: "Perpanjangan Sewa", simbol: "▣", href: "pages/penghuni/perpanjangan.html" },
+        { kunci: "laporan", label: "Laporan Kerusakan", simbol: "⚒", href: "pages/penghuni/laporan.html" },
+        { kunci: "aturan", label: "Kebijakan & Aturan Kos", simbol: "⚑", href: "pages/akun/aturan.html" }
+      ],
+      pemilik: [
+        { kunci: "dashboard", label: "Dashboard", lucide: "layout-grid", href: "pages/pemilik/dashboard.html" },
+        { kunci: "reservasi", label: "Data Reservasi", lucide: "calendar-check", href: "pages/pemilik/reservasi.html" },
+        { kunci: "penghuni", label: "Data Penghuni", lucide: "users", href: "pages/pemilik/penghuni.html" },
+        { kunci: "kamar", label: "Monitor Kamar", lucide: "bed-double", href: "pages/pemilik/kamar.html" },
+        { kunci: "pembayaran", label: "Verifikasi Pembayaran", lucide: "credit-card", href: "pages/pemilik/pembayaran.html" },
+        { kunci: "perpanjangan", label: "Perpanjangan Sewa", lucide: "calendar", href: "pages/pemilik/perpanjangan.html" },
+        { kunci: "laporan", label: "Laporan Kerusakan", lucide: "wrench", href: "pages/pemilik/laporan.html" },
+        { kunci: "keuangan", label: "Laporan Keuangan", lucide: "chart-column", href: "pages/pemilik/keuangan.html" },
+        { kunci: "aturan", label: "Kebijakan & Aturan Kos", lucide: "file-text", href: "pages/pemilik/aturan.html" }
       ]
     },
 

@@ -7,7 +7,7 @@
   <title>Perpanjangan Sewa · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/pages/penghuni.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/perpanjangan-sewa.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -23,48 +23,70 @@
 </head>
 <body data-layout="akun" data-akses="penghuni" data-menu="perpanjangan" data-judul="Perpanjangan Sewa">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Perpanjangan Sewa</h1>
-        <p class="sub">Pilih durasi untuk memperpanjang masa sewa kamu</p>
-      </div>
+    <div class="perpanjangan-heading">
+      <h1>Perpanjangan Sewa</h1>
+      <p>Pilih durasi untuk memperpanjang masa sewa kamu</p>
     </div>
 
-    <form class="kartu form form-sempit" id="formPerpanjangan" novalidate>
+    <div class="card-box empty-state" id="emptyState" hidden>
+      <h2>Data sewa belum tersedia</h2>
+      <p>Perpanjangan hanya bisa diajukan oleh penghuni yang reservasinya sudah diterima.</p>
+      <a href="dashboard.html" class="btn-outline">Kembali ke Dashboard</a>
+    </div>
+
+    <div class="info-pengajuan" id="infoPengajuan" role="status" hidden>
+      <p id="infoPengajuanPesan">-</p>
+      <a href="status-perpanjangan.html" class="btn-outline">Lihat Status Pengajuan</a>
+    </div>
+
+    <form class="card-box form-perpanjangan" id="formPerpanjangan" hidden novalidate>
       <div class="info-sewa">
         <p class="label-kecil">Informasi Kamar &amp; Sewa Saat Ini</p>
-        <h2 class="kartu-judul" id="infoKamar">-</h2>
-        <p class="muted kecil" id="infoPeriode">-</p>
+        <h2 id="infoKamar">-</h2>
+        <p class="info-periode" id="infoPeriode">Masa sewa saat ini -</p>
       </div>
 
-      <fieldset class="fieldset">
+      <fieldset class="grup-pilihan">
         <legend>Pilih Tipe Kamar</legend>
-        <div class="opsi-grid opsi-4" id="pilihanTipe"></div>
-        <p class="bantuan mt-2" id="catatanPindah" hidden>Pindah tipe kamar: nomor kamar baru ditentukan pemilik kos saat verifikasi.</p>
+        <div class="pilihan pilihan-4" id="pilihanTipe"></div>
       </fieldset>
 
-      <fieldset class="fieldset">
+      <fieldset class="grup-pilihan">
         <legend>Pilih Durasi Perpanjangan</legend>
-        <div class="opsi-grid" id="pilihanDurasi"></div>
+        <div class="pilihan pilihan-3">
+          <label class="opsi"><input type="radio" name="durasi" value="1"><span>1 Bulan</span></label>
+          <label class="opsi"><input type="radio" name="durasi" value="6" checked><span>6 Bulan</span></label>
+          <label class="opsi"><input type="radio" name="durasi" value="12"><span>12 Bulan</span></label>
+        </div>
       </fieldset>
 
-      <fieldset class="fieldset">
+      <fieldset class="grup-pilihan">
         <legend>Pilih Skema Pembayaran</legend>
-        <div class="opsi-grid">
+        <div class="pilihan pilihan-2">
           <label class="opsi"><input type="radio" name="skema" value="dp" checked><span>DP (Down Payment)</span></label>
           <label class="opsi"><input type="radio" name="skema" value="lunas"><span>Lunas</span></label>
         </div>
       </fieldset>
 
-      <fieldset class="fieldset">
+      <fieldset class="grup-pilihan">
         <legend>Pilih Metode Pembayaran</legend>
-        <div class="opsi-grid" id="pilihanMetode"></div>
+        <div class="pilihan pilihan-2">
+          <label class="opsi"><input type="radio" name="metode" value="transfer" checked><span>Transfer</span></label>
+          <label class="opsi"><input type="radio" name="metode" value="cash"><span>Cash</span></label>
+        </div>
       </fieldset>
 
-      <ul class="ringkasan" id="ringkasan" aria-live="polite"></ul>
+      <ul class="ringkasan" aria-live="polite">
+        <li><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Tipe Kamar: <b id="ringTipe">-</b></span></li>
+        <li><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Masa sewa baru: <b id="ringMasa">-</b></span></li>
+        <li><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Tipe Pembayaran: <b id="ringSkema">-</b></span></li>
+        <li><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Metode Pembayaran: <b id="ringMetode">-</b></span></li>
+        <li><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg><span>Tagihan <b id="ringTotal">-</b></span></li>
+        <li id="ringDpBaris"><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg><span>Dibayar setelah disetujui (DP 50%): <b id="ringDp">-</b></span></li>
+      </ul>
 
-      <div class="kaki-form">
-        <button type="submit" class="tombol tombol--utama">Ajukan Perpanjangan</button>
+      <div class="aksi-form">
+        <button type="submit" class="btn-utama">Ajukan Perpanjangan</button>
       </div>
     </form>
   </main>

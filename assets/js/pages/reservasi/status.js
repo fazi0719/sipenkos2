@@ -1,77 +1,97 @@
 // =========================================================
-// Status Reservasi & Pembayaran (langkah 3 dari 3)
-// Tampilan berubah sesuai status: draf · menunggu · diterima · ditolak
+// Status Reservasi & Pembayaran (langkah 3 dari 3) — tampilan mengikuti
+// calon-penghuni/status-reservasi.php kelompok.
+// Keputusan terima/tolak dibuat pemilik kos di pages/pemilik/reservasi.html.
 // =========================================================
 SIPENKOS.halaman(async () => {
   const { store, ui, config, format: F } = SIPENKOS;
   const $ = (id) => document.getElementById(id);
   const r = await store.reservasi.milikSaya();
-
-  if (!r) {
-    $("kosong").hidden = false;
-    $("kosong").innerHTML = `<div class="kartu">${ui.kosong({
-      ikon: "assignment",
-      judul: "Belum ada reservasi",
-      pesan: "Pilih kamar yang kamu inginkan, lalu tekan Reservasi Sekarang.",
-      aksi: `<a class="tombol tombol--utama" href="${SIPENKOS.url("pages/publik/kamar.html")}">Lihat Kamar</a>`
-    })}</div>`;
-    return;
-  }
+  if (!r) { $("kosong").hidden = false; return; }
+  if (r.status === "draf") return ui.ke("pages/reservasi/pembayaran.html");
   $("isi").hidden = false;
 
   const t = r.tagihanPertama;
-  const wa = `<a class="tombol tombol--wa" href="${ui.waLink(`Halo Bu Nining, saya ${r.pengguna.nama} ingin bertanya tentang reservasi saya.`)}" target="_blank" rel="noopener">${SIPENKOS.ikon("chat")}Hubungi Pemilik (WhatsApp)</a>`;
-  const lihatBukti = t?.bukti ? `<button type="button" class="tombol tombol--sekunder" id="lihatBukti">Lihat Bukti Pembayaran</button>` : "";
-
-  // ---------- kotak status & penunjuk langkah ----------
-  const TAMPILAN = {
-    draf: {
-      kelas: "info", langkah: ui.langkahReservasi(2),
-      pesan: "Reservasi kamu belum dibayar. Selesaikan pembayaran sewa bulan pertama agar bisa diverifikasi.",
-      aksi: `<a class="tombol tombol--utama" href="pembayaran.html">Lanjutkan Pembayaran</a>`
-    },
+  const judulKamar = `${r.kamar ? `Kamar ${r.kamar.nomor} · ` : ""}${r.tipe.nama} ${r.tipe.ringkas}`;
+  const KONDISI = {
     menunggu: {
-      kelas: "peringatan", langkah: ui.langkahReservasi(3),
+      banner: "menunggu", ikon: "◷", pill: "Menunggu Verifikasi",
       pesan: "Pemilik kos sedang memeriksa data dan bukti pembayaran kamu. Hasilnya dikirim lewat notifikasi.",
-      aksi: lihatBukti + wa
+      aksi: { teks: "Lihat Bukti Pembayaran", kelas: "btn btn-outline", bukti: true },
+      langkah: ["active", "3", "Menunggu Verifikasi"], label: "Dibayar",
+      timeline: [
+        ["selesai", "✓", "Reservasi dikirim", F.waktu(r.dibuatPada)],
+        ["selesai", "✓", "Bukti pembayaran diunggah", F.waktu(t.dikirimPada)],
+        ["aktif", "◷", "Verifikasi pemilik kos", "Sedang diproses"],
+        ["menunggu", "●", "Reservasi diterima", "Menunggu langkah sebelumnya"]
+      ]
     },
     diterima: {
-      kelas: "sukses", langkah: ui.langkahReservasi(3, { semuaSelesai: true }),
-      pesan: `Reservasi dan pembayaran kamu sudah dikonfirmasi. Kamu menempati Kamar ${r.kamar?.nomor} · ${r.tipe.nama} mulai ${F.tanggal(r.tglMulai)}.`,
-      aksi: `<a class="tombol tombol--utama" href="${SIPENKOS.url(config.beranda.penghuni)}">Masuk ke Dashboard Penghuni${SIPENKOS.ikon("arrow_forward")}</a>`
+      banner: "diterima", ikon: "✓", pill: "Diterima",
+      pesan: `Reservasi dan pembayaran kamu sudah dikonfirmasi. Kamu menempati ${judulKamar} mulai ${F.tanggalPanjang(r.tglMulai)}.`,
+      aksi: { teks: "Masuk ke Dashboard Penghuni →", kelas: "btn btn-primary", href: SIPENKOS.url(config.beranda.penghuni) },
+      langkah: ["completed", "✓", "Verifikasi Selesai"], label: "Dibayar",
+      timeline: [
+        ["selesai", "✓", "Reservasi dikirim", F.waktu(r.dibuatPada)],
+        ["selesai", "✓", "Bukti pembayaran diunggah", F.waktu(t.dikirimPada)],
+        ["selesai", "✓", "Verifikasi pemilik kos", F.waktu(r.diputuskanPada)],
+        ["selesai", "✓", "Reservasi diterima", F.waktu(r.diputuskanPada), "Kamar siap ditempati sesuai tanggal mulai sewa."]
+      ]
     },
     ditolak: {
-      kelas: "bahaya", langkah: ui.langkahReservasi(3, { gagal: 3 }),
-      pesan: `Alasan: ${r.alasanTolak}. Silakan unggah ulang bukti atau hubungi pemilik kos.`,
-      aksi: `<a class="tombol tombol--utama" href="pembayaran.html">${SIPENKOS.ikon("upload")}Unggah Ulang Bukti</a>${wa}`
+      banner: "ditolak", ikon: "✕", pill: "Ditolak",
+      pesan: `Alasan: ${r.alasanTolak}`,
+      aksi: { teks: "⇧ Unggah Ulang Bukti", kelas: "btn btn-primary", href: "pembayaran.html" },
+      langkah: ["ditolak", "✕", "Verifikasi Ditolak"], label: "Jumlah transfer",
+      timeline: [
+        ["selesai", "✓", "Reservasi dikirim", F.waktu(r.dibuatPada)],
+        ["selesai", "✓", "Bukti pembayaran diunggah", F.waktu(t.dikirimPada)],
+        ["selesai", "✓", "Verifikasi pemilik kos", F.waktu(r.diputuskanPada)],
+        ["ditolak", "✕", "Reservasi ditolak", F.waktu(r.diputuskanPada)]
+      ]
     }
   };
-  const v = TAMPILAN[r.status];
-  $("langkah").innerHTML = v.langkah;
-  $("kotakStatus").classList.add(`kotak-status--${v.kelas}`);
-  $("badgeStatus").outerHTML = ui.badge("reservasi", r.status);
-  $("pesanStatus").textContent = v.pesan;
-  $("aksiStatus").innerHTML = v.aksi;
-  $("lihatBukti")?.addEventListener("click", () => ui.lihatGambar(t.bukti, "Bukti Pembayaran"));
+  const k = KONDISI[r.status];
 
-  // ---------- ringkasan ----------
+  $("statusBanner").className = `status-banner status-banner--${k.banner}`;
+  $("statusIkon").textContent = k.ikon;
+  $("statusPill").textContent = k.pill;
+  $("statusPesan").textContent = k.pesan;
+  const aksi = $("statusAksi");
+  aksi.className = k.aksi.kelas;
+  aksi.textContent = k.aksi.teks;
+  if (k.aksi.bukti) {
+    aksi.setAttribute("role", "button");
+    aksi.addEventListener("click", (e) => { e.preventDefault(); if (t.bukti) ui.lihatGambar(t.bukti, "Bukti Pembayaran"); });
+  } else {
+    aksi.href = k.aksi.href;
+  }
+  if (r.status !== "menunggu") $("kembali").hidden = true;
+
+  $("langkahVerifikasi").className = `alur-sewa ${k.langkah[0]}`;
+  $("langkahNomor").textContent = k.langkah[1];
+  $("langkahLabel").textContent = k.langkah[2];
+
   $("fotoKamar").src = ui.gambar(r.tipe.foto);
   $("fotoKamar").alt = `Foto ${r.tipe.nama}`;
-  $("ringkasan").innerHTML = ui.rincian([
-    ["Kamar", F.esc((r.kamar ? `Kamar ${r.kamar.nomor} · ` : "") + ui.judulTipe(r.tipe))],
+  const rincian = [
+    ["Kamar", judulKamar],
     ["Durasi", `${r.durasi} Bulan`],
-    ["Mulai", F.tanggal(r.tglMulai)],
-    [r.status === "ditolak" ? "Jumlah transfer" : "Dibayar", `<span class="harga">${F.rupiah(t.jumlah)}</span> <span class="muted kecil">(sewa bulan pertama)</span>`]
-  ]);
+    ["Metode", "Sewa bulan pertama (Transfer)"]
+  ];
+  if (r.status === "menunggu") rincian.push(["Total Harus Dibayar", F.rupiah(t.jumlah)]);
+  rincian.push(["Mulai", F.tanggalPanjang(r.tglMulai)]);
+  $("ringkasanList").innerHTML = rincian.map(([l, v]) => `<div class="rincian-item"><span>${F.esc(l)}</span><span>${F.esc(v)}</span></div>`).join("");
+  $("nominalLabel").textContent = k.label;
+  $("nominalDibayar").textContent = F.rupiah(t.jumlah);
 
-  // ---------- timeline ----------
-  const keputusan = r.status === "diterima" || r.status === "ditolak";
-  $("timeline").innerHTML = ui.timeline([
-    { judul: "Reservasi dikirim", ket: F.waktu(r.dibuatPada), keadaan: "selesai" },
-    { judul: "Bukti pembayaran diunggah", ket: t.dikirimPada ? F.waktu(t.dikirimPada) : "Menunggu bukti transfer", keadaan: t.dikirimPada ? "selesai" : "berjalan", ikon: "upload" },
-    { judul: "Verifikasi pemilik kos", ket: keputusan ? F.waktu(r.diputuskanPada) : "", keadaan: keputusan ? "selesai" : r.status === "menunggu" ? "berjalan" : "belum" },
-    r.status === "ditolak"
-      ? { judul: "Reservasi ditolak", ket: F.waktu(r.diputuskanPada), keadaan: "gagal" }
-      : { judul: "Reservasi diterima", ket: r.status === "diterima" ? "Kamar siap ditempati sesuai tanggal mulai sewa." : "", keadaan: r.status === "diterima" ? "selesai" : "belum" }
-  ]);
+  $("timelineList").innerHTML = k.timeline.map(([status, ikon, judul, ket, catatan]) => `
+    <li class="timeline-item ${status}">
+      <span class="timeline-marker">${ikon}</span>
+      <div class="timeline-konten">
+        <strong>${F.esc(judul)}</strong>
+        <p>${F.esc(ket || "-")}</p>
+        ${catatan ? `<p class="timeline-catatan">${F.esc(catatan)}</p>` : ""}
+      </div>
+    </li>`).join("");
 });

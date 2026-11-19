@@ -7,6 +7,8 @@
   <title>Kamar · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,43 +20,51 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
   <script src="../../assets/js/pages/pemilik/kamar.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="kamar" data-judul="Kamar">
   <main>
-    <div class="kepala-halaman">
+    <div class="page-header">
       <div>
-        <h1>Kamar</h1>
-        <p class="sub">Atur harga tipe kamar dan status setiap kamar</p>
+        <h1 class="page-title">Monitor Kamar</h1>
+        <p class="page-subtitle">Pantau ketersediaan dan tingkat okupansi kamar kos</p>
       </div>
     </div>
-
-    <section class="kartu kartu--rapat mb-6" aria-labelledby="judulTipe">
-      <div class="kartu-kepala kepala-tabel"><h2 class="kartu-judul" id="judulTipe">Tipe Kamar</h2></div>
-      <div class="tabel-gulir">
-        <table class="tabel tabel--responsif">
-          <caption class="sr-only">Tipe kamar</caption>
-          <thead><tr><th scope="col">Tipe</th><th scope="col" class="angka">Harga / bulan</th><th scope="col" class="angka">Terisi</th><th scope="col">Ketersediaan</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
+    <section class="stats stats-3" aria-label="Ringkasan kamar" id="statistik"></section>
+    <div class="card">
+      <div class="card-head card-head-bar">
+        <h2 class="card-title">Ketersediaan per Tipe Kamar</h2>
+        <a href="#daftarKamar" class="btn btn-primary btn-sm">Kelola Ketersediaan</a>
+      </div>
+      <div class="table-wrap">
+        <table class="table table-kamar">
+          <thead>
+            <tr>
+              <th>Tipe Kamar</th>
+              <th>Harga / Bulan</th>
+              <th>Total</th>
+              <th>Terisi</th>
+              <th>Kosong</th>
+              <th class="ta-center">Status</th>
+            </tr>
+          </thead>
           <tbody id="tabelTipe"></tbody>
         </table>
       </div>
-    </section>
-
-    <section aria-labelledby="judulUnit">
-      <div class="kartu-kepala">
-        <h2 class="kartu-judul" id="judulUnit">Daftar Kamar</h2>
-      </div>
-      <div id="filter" role="group" aria-label="Saring status kamar"></div>
-      <section class="kartu kartu--rapat">
-        <div class="tabel-gulir">
-          <table class="tabel tabel--responsif">
-            <caption class="sr-only">Daftar kamar</caption>
-            <thead><tr><th scope="col">Kamar</th><th scope="col">Tipe</th><th scope="col">Status</th><th scope="col">Penghuni</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
+    </div>
+    <div class="list-section" id="daftarKamar">
+      <div class="toolbar"><div id="filter"></div></div>
+      <div class="card">
+        <div class="card-head card-head-bar"><h2 class="card-title">Daftar Kamar</h2><button type="button" class="btn btn-secondary btn-sm" id="ubahHarga">Ubah Harga Tipe</button></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Kamar</th><th>Tipe Kamar</th><th>Status</th><th>Penghuni</th><th class="ta-right"><span class="sr-only">Aksi</span></th></tr></thead>
             <tbody id="tabelUnit"></tbody>
           </table>
         </div>
-      </section>
-    </section>
+      </div>
+    </div>
   </main>
 </body>
 </html>

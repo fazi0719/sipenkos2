@@ -135,6 +135,126 @@
       </aside>`;
   };
 
+  // =========================================================
+  // KERANGKA VERSI KELOMPOK — meniru tampilan repo PBL-Sipenkos.
+  //   kelompok : halaman publik, auth, calon, penghuni (gaya calon-penghuni & penghuni)
+  //   admin    : halaman pemilik (gaya admin/ zaaGallagher)
+  // Kelas diberi awalan k- / a- agar tidak bentrok dengan CSS sipenkos2.
+  // =========================================================
+  const rumahSvg = `<svg class="a-logo-rumah" viewBox="0 0 18 16" aria-hidden="true"><path d="M2 7.2 9 1.6l7 5.6V14.4H2Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M7 14.4V9.6h4v4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`;
+  const lucide = (nama) => `<i class="a-ikon" style="--ikon:url('${S.url(`assets/icons/lucide/${nama}.svg`)}')" aria-hidden="true"></i>`;
+
+  const logoK = (href = "index.html", putih = false) => `
+    <a class="k-logo${putih ? " k-logo--putih" : ""}" href="${S.url(href)}" aria-label="SIPENKOS Kos Bu Nining">
+      <span class="k-logo-judul">SIPENKOS</span>
+      ${putih ? "" : `<span class="k-logo-divider" aria-hidden="true">|</span><span class="k-logo-pendukung">${esc(config.kos.nama)}</span>`}
+    </a>`;
+
+  const headerTamuK = (p, menuAktif, tanpaMenu = false) => `
+    <header class="k-navbar">
+      <div class="k-container k-navbar-container">
+        ${logoK()}
+        ${tanpaMenu ? "" : `<nav class="k-menu" aria-label="Menu utama">
+          ${config.menuTamu.map((m) =>
+            `<a class="k-nav${m.kunci === menuAktif ? " active" : ""}" href="${S.url(m.href)}"${m.kunci === menuAktif ? ' aria-current="page"' : ""}>${m.label}</a>`).join("")}
+        </nav>`}
+        <div class="k-nav-actions-wrapper">
+          ${p
+            ? `<div class="k-user-profile">
+                 <a class="k-btn-icon-notif" href="${S.url("pages/akun/notifikasi.html")}" title="Notifikasi" aria-label="Notifikasi">🔔<span class="k-badge-dot"></span></a>
+                 <a class="k-user-info" href="${S.url(berandaAkun(p))}">
+                   <span class="k-user-avatar">${esc(F.inisial(p.nama).charAt(0))}</span>
+                   <span class="k-user-name">${esc(F.namaDepan(p.nama))}</span>
+                 </a>
+                 <button type="button" class="k-btn k-btn-outline k-btn-sm" data-keluar>Keluar</button>
+               </div>`
+            : `<div class="k-nav-actions">
+                 <a class="k-btn k-btn-outline" href="${S.url("pages/auth/daftar.html")}">Daftar</a>
+                 <a class="k-btn k-btn-primary" href="${S.url("pages/auth/masuk.html")}">Masuk</a>
+               </div>`}
+        </div>
+      </div>
+    </header>`;
+
+  const footerK = () => {
+    const k = config.kos;
+    return `
+      <footer class="k-footer">
+        <div>
+          <div class="k-footer-logo">SIPENKOS</div>
+          <p class="k-footer-tagline">🛡️ Hunian terpercaya &amp; dikelola langsung oleh pemilik</p>
+          <p class="k-footer-location">${esc(k.nama)} · ${esc(k.kota)}</p>
+          <div class="k-kontak">
+            <span>📍 ${esc(k.alamat)}</span>
+            <a href="${ui.waLink()}" target="_blank" rel="noopener">💬 WhatsApp ${esc(k.whatsapp)}</a>
+            <span>⏰ Jam bertamu ${esc(k.jamBertamu)}</span>
+          </div>
+          <p class="k-copyright">© 2026 SIPENKOS - ${esc(k.nama)} Malang</p>
+        </div>
+      </footer>`;
+  };
+
+  // kerangka penghuni (sidebar + navbar seperti penghuni/dashboard.php kelompok)
+  const kerangkaPenghuniK = (p, menuAktif, adaNotif) => `
+    <aside class="k-sidebar" id="sidebar" aria-label="Menu penghuni">
+      <nav class="k-sidebar-nav" aria-label="Navigasi utama">
+        ${config.menuKelompok.penghuni.map((m) =>
+          `<a class="k-nav-link${m.kunci === menuAktif ? " active" : ""}" href="${S.url(m.href)}"${m.kunci === menuAktif ? ' aria-current="page"' : ""}><span class="k-nav-icon" aria-hidden="true">${m.simbol}</span>${esc(m.label)}</a>`).join("")}
+      </nav>
+      <div class="k-sidebar-bottom">
+        <button class="k-logout-button" type="button" data-keluar><span class="k-nav-icon" aria-hidden="true">⇥</span>Keluar</button>
+      </div>
+    </aside>
+    <div class="k-main-area">
+      <header class="k-header">
+        <div class="k-header-container">
+          ${logoK(berandaAkun(p))}
+          <div class="k-header-profile">
+            <a class="k-header-notif" href="${S.url("pages/akun/notifikasi.html")}" title="Notifikasi" aria-label="Notifikasi">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span class="k-header-dot"${adaNotif ? "" : " hidden"}></span>
+            </a>
+            <span class="k-header-divider" aria-hidden="true"></span>
+            <span class="k-header-account">
+              <span class="k-header-avatar">${esc(F.inisial(p.nama).charAt(0))}</span>
+              <span class="k-header-name">${esc(F.namaDepan(p.nama))}</span>
+            </span>
+          </div>
+        </div>
+      </header>
+    </div>`;
+
+  // kerangka admin (sidebar.php + navbar.php admin kelompok)
+  const kerangkaAdmin = (p, menuAktif, adaNotif) => `
+    <aside class="a-sidebar" id="sidebar" aria-label="Navigasi admin">
+      <nav class="a-sidebar-nav">
+        ${config.menuKelompok.pemilik.map((m) =>
+          `<a href="${S.url(m.href)}" class="a-nav-link${m.kunci === menuAktif ? " is-active" : ""}"${m.kunci === menuAktif ? ' aria-current="page"' : ""}>${lucide(m.lucide)}<span>${esc(m.label)}</span></a>`).join("")}
+      </nav>
+      <div class="a-sidebar-footer">
+        <button type="button" class="a-nav-link a-nav-link-danger" data-keluar>${lucide("log-out")}<span>Keluar</span></button>
+      </div>
+    </aside>
+    <div class="a-sidebar-backdrop" data-tutup-sidebar></div>
+    <div class="a-app-body">
+      <header class="a-topbar">
+        <div class="a-topbar-left">
+          <button type="button" class="a-icon-btn a-sidebar-toggle" data-buka-sidebar aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar">${lucide("menu")}</button>
+          <a href="${S.url(berandaAkun(p))}" class="a-logo" aria-label="SIPENKOS - Dashboard"><span>SIPENK</span>${rumahSvg}<span>S</span></a>
+          <span class="a-topbar-divider a-topbar-divider-sm"></span>
+          <span class="a-topbar-kos">${esc(config.kos.nama)}</span>
+        </div>
+        <div class="a-topbar-right">
+          <a href="${S.url("pages/akun/notifikasi.html")}" class="a-icon-btn a-notif-btn" aria-label="Notifikasi">${lucide("bell")}${adaNotif ? '<span class="a-notif-dot"></span>' : ""}</a>
+          <span class="a-topbar-divider"></span>
+          <div class="a-profile-btn">
+            <span class="a-profile-avatar">${esc(F.inisial(p.nama).charAt(0))}</span>
+            <span class="a-profile-name">${esc(p.nama)}</span>
+          </div>
+        </div>
+      </header>
+    </div>`;
+
   // ---------- perilaku interaktif kerangka ----------
   const pasangPerilaku = () => {
     // keluar
@@ -165,8 +285,9 @@
       let tirai;
       const atur = (buka) => {
         sb.classList.toggle("terbuka", buka);
+        document.body.classList.toggle("sidebar-open", buka);
         tombolSidebar.setAttribute("aria-expanded", String(buka));
-        if (buka) {
+        if (buka && !document.querySelector("[data-tutup-sidebar]")) {
           tirai = document.createElement("div");
           tirai.className = "tirai";
           tirai.addEventListener("click", () => atur(false));
@@ -177,6 +298,7 @@
         }
       };
       tombolSidebar.addEventListener("click", () => atur(!sb.classList.contains("terbuka")));
+      document.querySelector("[data-tutup-sidebar]")?.addEventListener("click", () => atur(false));
       document.addEventListener("keydown", (e) => { if (e.key === "Escape" && sb.classList.contains("terbuka")) { atur(false); tombolSidebar.focus(); } });
     }
 
@@ -228,10 +350,46 @@
     document.title = judul ? `${judul} · SIPENKOS` : "SIPENKOS · Kos Bu Nining Malang";
     const lewati = `<a class="lewati" href="#konten">Lewati ke konten utama</a>`;
 
-    if (layout === "tamu") {
+    // tema tampilan: pemilik = gaya admin kelompok, selain itu gaya penghuni/calon kelompok
+    const tema = sesi && sesi.jenis === "pemilik" ? "admin" : "kelompok";
+    body.classList.add(`tema-${tema}`, `layout-${layout}`);
+    const hitunganK = sesi && (layout === "akun" || layout === "alur") ? await store.hitungan.menu() : {};
+    const adaNotifK = (hitunganK.notifikasi || 0) > 0;
+    // halaman akun calon penghuni & alur reservasi memakai navbar + footer seperti status-reservasi.php
+    const pakaiNavbar = layout === "tamu" || layout === "alur" || (layout === "akun" && (!sesi || sesi.jenis === "calon"));
+    body.classList.add(layout === "akun" && !pakaiNavbar ? "kerangka-sidebar" : "kerangka-navbar");
+
+    if (pakaiNavbar) {
+      // data-lebar="penuh" : halaman mengatur .container sendiri (mis. Beranda dengan gambar selebar layar)
+      main.classList.add(...(body.dataset.lebar === "penuh" ? ["halaman--penuh"] : ["k-container", "k-halaman"]));
+      // halaman alur reservasi & akun calon: navbar tanpa menu (seperti status-reservasi.php)
+      main.insertAdjacentHTML("beforebegin", lewati + headerTamuK(sesi, menu, layout !== "tamu" && !!sesi));
+      main.insertAdjacentHTML("afterend", footerK());
+    } else if (layout === "akun" && tema === "kelompok") {
+      const kerangka = document.createElement("div");
+      kerangka.className = "k-dashboard-layout";
+      kerangka.innerHTML = kerangkaPenghuniK(sesi, menu, adaNotifK);
+      main.replaceWith(kerangka);
+      const wadah = document.createElement("div");
+      wadah.className = "k-container k-konten";
+      wadah.append(main);
+      kerangka.querySelector(".k-main-area").append(wadah);
+      kerangka.insertAdjacentHTML("beforebegin", lewati);
+    } else if (layout === "akun" && tema === "admin") {
+      const kerangka = document.createElement("div");
+      kerangka.className = "a-app";
+      kerangka.innerHTML = kerangkaAdmin(sesi, menu, adaNotifK);
+      main.replaceWith(kerangka);
+      main.classList.add("a-main");
+      kerangka.querySelector(".a-app-body").append(main);
+      kerangka.insertAdjacentHTML("beforebegin", lewati);
+    } else if (layout === "tamu") {
       main.classList.add("wadah");
       main.insertAdjacentHTML("beforebegin", lewati + headerTamu(sesi, menu));
       main.insertAdjacentHTML("afterend", footer());
+    } else if (layout === "auth" && tema === "kelompok") {
+      // halaman Masuk/Daftar versi kelompok: kartu & tautan kembali sudah ada di HTML halaman
+      main.classList.add("halaman--penuh");
     } else if (layout === "auth") {
       const wadah = document.createElement("div");
       wadah.className = "kerangka-auth";

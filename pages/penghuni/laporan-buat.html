@@ -7,6 +7,7 @@
   <title>Buat Laporan Kerusakan · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/laporan-kerusakan.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,42 +19,83 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/laporan-ikon.js" defer></script>
   <script src="../../assets/js/pages/penghuni/laporan-buat.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="penghuni" data-menu="laporan" data-judul="Buat Laporan Kerusakan">
   <main>
-    <a class="tautan-kembali" href="laporan.html"><i data-ikon="arrow_back"></i>Kembali ke Laporan Kerusakan</a>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Buat Laporan Baru</h1>
-        <p class="sub">Jelaskan kerusakan agar pemilik kos bisa segera menindaklanjuti</p>
-      </div>
+    <a href="laporan.html" class="link-kembali link-kembali--biru">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Kembali ke Laporan Kerusakan
+    </a>
+
+    <div class="laporan-heading">
+      <h1>Buat Laporan Baru</h1>
+      <p>Jelaskan kerusakan agar pemilik kos bisa segera menindaklanjuti</p>
     </div>
 
-    <form class="kartu form form-sempit" id="formLaporan" novalidate>
+    <form class="card-box form-laporan" id="formLaporan" novalidate>
       <div class="field">
-        <label class="label" for="lokasi">Lokasi</label>
-        <div class="input-ikon"><input type="text" class="input" id="lokasi" readonly><i data-ikon="lock"></i></div>
+        <label for="lokasi">Lokasi</label>
+        <div class="input-kunci">
+          <input type="text" id="lokasi" value="Kamar kamu" readonly>
+          <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg>
+        </div>
       </div>
+
       <div class="field">
-        <label class="label" for="kategori">Kategori</label>
-        <div class="input-ikon"><select class="select" id="kategori" name="kategori"></select><i data-ikon="expand_more"></i></div>
+        <label for="kategori">Kategori</label>
+        <div class="input-select">
+          <select id="kategori" name="kategori" required aria-describedby="kategoriError">
+            <option value="" selected disabled>Pilih Kategori</option>
+            <option value="Air/Kamar Mandi">Air/Kamar Mandi</option>
+            <option value="Listrik">Listrik</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+          <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="pesan-error" id="kategoriError" hidden>Pilih kategori kerusakan.</p>
       </div>
+
       <div class="field">
-        <label class="label" for="judul">Judul Kerusakan</label>
-        <input type="text" class="input" id="judul" name="judul" maxlength="80" placeholder="Contoh: Keran air wastafel patah">
+        <label for="judul">Judul Kerusakan</label>
+        <input type="text" id="judul" name="judul" maxlength="80" placeholder="Contoh: Keran air wastafel patah" required aria-describedby="judulError">
+        <p class="pesan-error" id="judulError" hidden>Tulis judul kerusakan.</p>
       </div>
+
       <div class="field">
-        <label class="label" for="deskripsi">Deskripsi</label>
-        <textarea class="textarea" id="deskripsi" name="deskripsi" maxlength="1000" placeholder="Jelaskan detail kerusakan, waktu kejadian, atau kendala yang dialami..."></textarea>
+        <label for="deskripsi">Deskripsi</label>
+        <textarea id="deskripsi" name="deskripsi" rows="5" maxlength="1000" placeholder="Jelaskan detail kerusakan, waktu kejadian, atau kendala yang dialami..." required aria-describedby="deskripsiError"></textarea>
+        <p class="pesan-error" id="deskripsiError" hidden>Jelaskan detail kerusakannya.</p>
       </div>
+
       <div class="field">
-        <span class="label" id="labelFoto">Foto Kerusakan <span class="opsional">(Opsional)</span></span>
-        <div id="unggahFoto" role="group" aria-labelledby="labelFoto"></div>
+        <span class="label" id="labelFoto">Foto Kerusakan (Opsional)</span>
+        <label class="unggah" id="areaUnggah" for="foto">
+          <input type="file" id="foto" accept="image/jpeg,image/png" aria-labelledby="labelFoto" aria-describedby="fotoError">
+          <span class="unggah-ikon" aria-hidden="true">
+            <svg class="ikon" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5"/><path d="M5 20h14"/></svg>
+          </span>
+          <span class="unggah-teks">Klik untuk unggah foto atau seret berkas ke sini</span>
+          <span class="unggah-format">Format JPG, PNG (Maksimal 5 MB)</span>
+        </label>
+
+        <div class="pratinjau" id="pratinjau" hidden>
+          <img id="pratinjauGambar" alt="Pratinjau foto kerusakan">
+          <div class="pratinjau-info">
+            <span id="pratinjauNama">foto.jpg</span>
+            <button type="button" class="tombol-teks" id="hapusFoto">Hapus foto</button>
+          </div>
+        </div>
+        <p class="pesan-error" id="fotoError" hidden></p>
       </div>
-      <div class="kaki-form">
-        <a class="tombol tombol--batal" href="laporan.html">Batal</a>
-        <button type="submit" class="tombol tombol--utama"><i data-ikon="send"></i>Kirim Laporan</button>
+
+      <div class="aksi-form">
+        <a href="laporan.html" class="tombol-batal">Batal</a>
+        <button type="submit" class="btn-utama">
+          <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Kirim Laporan
+        </button>
       </div>
     </form>
   </main>

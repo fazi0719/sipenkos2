@@ -7,6 +7,9 @@
   <title>Kebijakan &amp; Aturan Kos · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/aturan.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/aturan.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -20,20 +23,24 @@
   <!-- skrip khusus halaman ini -->
   <script src="../../assets/js/pages/akun/aturan.js" defer></script>
 </head>
-<body data-layout="akun" data-akses="calon penghuni" data-menu="aturan" data-judul="Kebijakan &amp; Aturan Kos">
+<body data-layout="akun" data-akses="publik" data-menu="aturan" data-judul="Kebijakan &amp; Aturan Kos">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Kebijakan &amp; Aturan Kos</h1>
-        <p class="sub">Aturan yang berlaku untuk seluruh penghuni Kos Bu Nining</p>
-        <p class="kecil muted mt-2" id="diperbarui"></p>
-      </div>
+    <a href="../../index.html" class="back-link" id="tautanKembali" hidden>← Kembali ke Beranda</a>
+
+    <div class="section-header">
+      <h1 class="judul-section">Aturan Kos Bu Nining</h1>
+      <p class="deskripsi">Hunian kos yang tenang, aman, dan nyaman di Malang. Dikelola langsung dengan sepenuh hati oleh Bu Nining untuk mendukung kelancaran studi dan aktivitasmu.</p>
     </div>
 
-    <section class="kartu" aria-labelledby="judulDaftarAturan">
-      <h2 class="sr-only" id="judulDaftarAturan">Daftar aturan</h2>
-      <div id="isiAturan"></div>
-    </section>
+    <div class="card-box">
+      <div class="aturan-card-header">
+        <h2 class="judul-box">Tata Tertib Kos Bu Nining</h2>
+        <span class="catatan" id="jumlahAturan">0 aturan</span>
+      </div>
+      <div class="aturan-list" id="aturanList">
+        <p class="pesan-memuat">Memuat aturan kos...</p>
+      </div>
+    </div>
   </main>
 </body>
 </html>

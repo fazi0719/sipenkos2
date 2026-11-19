@@ -1,0 +1,75 @@
+/* Disalin dari repo kelompok, setiap selector diberi awalan body.tema-kelompok.kerangka-navbar */
+body.tema-kelompok.kerangka-navbar .kamar-pilihan-box .badge {
+  margin-bottom: 16px;
+}
+body.tema-kelompok.kerangka-navbar .card-kamar {
+  border-radius: 12px;
+  overflow: hidden;
+}
+body.tema-kelompok.kerangka-navbar .kamar-pilihan-box .card-kamar img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+body.tema-kelompok.kerangka-navbar .kamar-pilihan-box .tipe-kamar {
+  font-size: 1.15rem;
+  margin: 16px 0 6px;
+}
+body.tema-kelompok.kerangka-navbar .kamar-pilihan-box .harga {
+  margin-bottom: 14px;
+}
+body.tema-kelompok.kerangka-navbar .readonly-input {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+  cursor: not-allowed;
+}
+body.tema-kelompok.kerangka-navbar .sewa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+body.tema-kelompok.kerangka-navbar .rincian-biaya-box {
+  margin-top: 24px;
+}
+body.tema-kelompok.kerangka-navbar .bold-item {
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  font-weight: 700;
+}
+body.tema-kelompok.kerangka-navbar .action-bar-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: #fff;
+}
+body.tema-kelompok.kerangka-navbar .info-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+body.tema-kelompok.kerangka-navbar .buttons-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+body.tema-kelompok.kerangka-navbar .rejection-notice {
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  background: var(--badge-red-bg);
+  border: 1px solid #fecdd3;
+  border-radius: 12px;
+  color: var(--badge-red-text);
+  font-size: 0.85rem;
+}
+body.tema-kelompok.kerangka-navbar .rejection-notice ul {
+  margin: 6px 0 0 18px;
+}

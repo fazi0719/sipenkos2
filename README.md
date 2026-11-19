@@ -45,7 +45,10 @@ sipenkos2/
 │  │  ├─ base.css             reset & tipografi
 │  │  ├─ layout.css           header, sidebar, footer, kerangka halaman
 │  │  ├─ components.css       tombol, kartu, badge, form, tabel, timeline, dialog …
-│  │  └─ pages/               CSS khusus beberapa halaman (publik, penghuni)
+│  │  ├─ tema-kelompok.css    ★ tampilan disamakan dengan repo kelompok (lihat bagian di bawah)
+│  │  ├─ kelompok/            salinan CSS repo kelompok (calon-penghuni, penghuni, admin),
+│  │  │                       tiap selector diberi awalan body.tema-… agar tidak bentrok
+│  │  └─ pages/               CSS lama sipenkos2 (sebagian halaman sudah tidak memakainya)
 │  ├─ js/
 │  │  ├─ core/                dipakai SEMUA halaman (urutan muat penting)
 │  │  │  ├─ config.js         konstanta: info kos, menu, label status, aturan bisnis
@@ -56,12 +59,27 @@ sipenkos2/
 │  │  │  ├─ ui.js             potongan tampilan: badge, dialog, toast, unggah foto …
 │  │  │  └─ shell.js          pasang header/sidebar/footer + cek hak akses
 │  │  └─ pages/               satu file JS per halaman (folder sama dengan pages/)
-│  ├─ fonts/                  Plus Jakarta Sans (lokal, tetap tampil tanpa internet)
+│  ├─ fonts/                  Poppins (dipakai) + Plus Jakarta Sans (lama), disimpan lokal
+│  ├─ icons/lucide/           ikon Lucide dari admin repo kelompok (sidebar & halaman pemilik)
 │  └─ images/
 └─ docs/
    ├─ data-model.md           bentuk data = calon tabel database (untuk tim backend)
    └─ DESIGN.md               sistem desain dari Figma
 ```
+
+## Tampilan versi kelompok
+
+Sejak 19 Nov 2026 tampilan sipenkos2 disamakan dengan repo kelompok
+(github.com/citraanyndya/PBL-Sipenkos), sedangkan struktur kode (store, shell, satu JS per halaman) tetap.
+
+- `shell.js` memberi kelas pada `<body>`:
+  - `tema-kelompok` — publik, masuk/daftar, calon penghuni, penghuni (gaya `calon-penghuni/` & `penghuni/`)
+  - `tema-admin` — pemilik (gaya `admin/`)
+  - `kerangka-navbar` (navbar + footer) atau `kerangka-sidebar` (sidebar penghuni)
+- Kerangka (navbar, sidebar, footer) memakai kelas berawalan `k-` (kelompok) dan `a-` (admin) di `tema-kelompok.css`.
+- Isi halaman memakai nama kelas yang sama dengan repo kelompok; CSS-nya diambil dari `assets/css/kelompok/`.
+- Halaman pemilik memakai potongan HTML bersama di `assets/js/pages/pemilik/admin-ui.js` (badge, chip, modal).
+- `<body data-lebar="penuh">` = halaman mengatur `.container` sendiri (mis. Beranda dengan gambar selebar layar).
 
 ## Cara kerja satu halaman
 

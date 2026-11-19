@@ -7,7 +7,8 @@
   <title>Tentang Kos · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/pages/publik.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/tentang.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -21,52 +22,97 @@
   <!-- skrip khusus halaman ini -->
   <script src="../../assets/js/pages/publik/tentang.js" defer></script>
 </head>
-<body data-layout="tamu" data-akses="publik" data-menu="tentang" data-judul="Tentang Kos">
+<body data-lebar="penuh" data-layout="tamu" data-akses="publik" data-menu="tentang" data-judul="Tentang Kos">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Tentang Kos Bu Nining</h1>
-        <p class="sub">Hunian kos yang tenang, aman, dan nyaman di Malang.</p>
+    <section class="section-halaman">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="judul-section">Tentang Kos Bu Nining</h1>
+          <p class="deskripsi">
+            Hunian kos yang tenang, aman, dan nyaman di Malang. Dikelola
+            langsung dengan sepenuh hati oleh Bu Nining untuk mendukung
+            kelancaran studi dan aktivitasmu.
+          </p>
+        </div>
+
+        <div class="galeri">
+          <div class="card-galeri">
+            <img
+              src="../../assets/images/tampak-depan.jpg"
+              alt="Tampak Depan & Pagar Utama"
+            />
+            <span class="badge-galeri">🏠 Tampak Depan & Pagar Utama</span>
+          </div>
+          <div class="card-galeri">
+            <img src="../../assets/images/ruang-tamu.jpg" alt="Ruang Tamu" />
+            <span class="badge-galeri">🛋️ Ruang Tamu</span>
+          </div>
+          <div class="card-galeri">
+            <img
+              src="../../assets/images/parkiran.jpg"
+              alt="Parkir Motor Berkanopi & CCTV"
+            />
+            <span class="badge-galeri">🛵 Parkir Motor Berkanopi & CCTV</span>
+          </div>
+        </div>
+
+        <div class="tentang-grid">
+          <div class="card-box">
+            <h2 class="judul-box">Fasilitas & Keunggulan</h2>
+            <ul class="keunggulan">
+              <li class="list-keunggulan">
+                <span class="icon">📍</span>
+                <span
+                  >Lokasi strategis dekat kampus, minimarket, dan tempat
+                  makan</span
+                >
+              </li>
+              <li class="list-keunggulan">
+                <span class="icon">🛡️</span>
+                <span>Keamanan dengan pagar terkunci dan CCTV</span>
+              </li>
+              <li class="list-keunggulan">
+                <span class="icon">📶</span>
+                <span>Wi-Fi, dapur bersama, dan area jemuran</span>
+              </li>
+              <li class="list-keunggulan">
+                <span class="icon">🧹</span>
+                <span>Area bersama dibersihkan rutin</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-box">
+            <h2 class="judul-box">Lokasi & Kontak</h2>
+            <ul class="keunggulan">
+              <li class="list-keunggulan">
+                <span class="icon">📍</span>
+                <span>Jl. Pisang Agung III No. 29, Malang, Jawa Timur</span>
+              </li>
+              <li class="list-keunggulan">
+                <span class="icon">⏰</span>
+                <span>Jam bertamu 07.00–22.00 WIB</span>
+              </li>
+            </ul>
+
+            <div class="map-preview">
+              <div class="map-pin">
+                <span class="icon">📍</span>
+                <span>Jl. Pisang Agung III Malang</span>
+              </div>
+            </div>
+
+            <a
+              href="https://maps.google.com/?q=Jl.+Pisang+Agung+III+No.+29+Malang"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline btn-full btn-maps" id="tombolPeta"
+            >
+              ↗️ Buka di Google Maps
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="foto-tiga">
-      <figure><img src="../../assets/images/tampak-depan.jpg" alt="Tampak depan dan pagar utama kos" loading="lazy"><figcaption class="label-foto">Tampak Depan</figcaption></figure>
-      <figure><img src="../../assets/images/ruang-tamu.jpg" alt="Ruang tamu bersama" loading="lazy"><figcaption class="label-foto">Ruang Tamu</figcaption></figure>
-      <figure><img src="../../assets/images/parkiran.jpg" alt="Parkir motor berkanopi" loading="lazy"><figcaption class="label-foto">Parkiran</figcaption></figure>
-    </div>
-
-    <div class="grid-2 mb-6">
-      <section class="kartu">
-        <h2 class="kartu-judul">Fasilitas &amp; Keunggulan</h2>
-        <ul class="daftar-ikon">
-          <li><i data-ikon="location_on"></i>Lokasi strategis dekat kampus, minimarket, dan tempat makan</li>
-          <li><i data-ikon="shield"></i>Keamanan dengan pagar terkunci dan CCTV</li>
-          <li><i data-ikon="wifi"></i>Wi-Fi, dapur bersama, dan area jemuran</li>
-          <li><i data-ikon="cleaning_services"></i>Area bersama dibersihkan rutin</li>
-        </ul>
-      </section>
-
-      <section class="kartu">
-        <h2 class="kartu-judul">Lokasi &amp; Kontak</h2>
-        <ul class="daftar-ikon">
-          <li><i data-ikon="location_on"></i><span id="alamat"></span></li>
-          <li><i data-ikon="schedule"></i><span id="jam"></span></li>
-        </ul>
-        <div class="peta">
-          <iframe title="Peta lokasi Kos Bu Nining" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://maps.google.com/maps?q=Jl.%20Pisang%20Agung%20III%20No.%2029%20Malang&z=16&output=embed"></iframe>
-        </div>
-        <div class="baris-tombol">
-          <a class="tombol tombol--sekunder" id="tombolPeta" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Pisang+Agung+III+No.+29+Malang" target="_blank" rel="noopener"><i data-ikon="open_in_new"></i>Buka di Google Maps</a>
-          <a class="tombol tombol--wa" id="tombolWa" href="https://wa.me/6285444211076" target="_blank" rel="noopener"><i data-ikon="chat"></i>Chat WhatsApp</a>
-        </div>
-      </section>
-    </div>
-
-    <section class="kartu" id="aturan" aria-labelledby="judulAturan">
-      <h2 class="kartu-judul" id="judulAturan">Aturan Kos Bu Nining</h2>
-      <div id="isiAturan"></div>
     </section>
   </main>
 </body>

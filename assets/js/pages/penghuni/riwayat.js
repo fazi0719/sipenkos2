@@ -1,40 +1,58 @@
 // =========================================================
-// Riwayat Pembayaran — pembayaran lunas per tahun
+// Riwayat Pembayaran — tampilan mengikuti penghuni/riwayat-pembayaran.php kelompok
 // =========================================================
 SIPENKOS.halaman(async () => {
   const { store, ui, format: F } = SIPENKOS;
   const $ = (id) => document.getElementById(id);
-  const lunas = (await store.tagihan.milikSaya())
-    .filter((t) => t.status === "lunas")
-    .sort((a, b) => b.dibayarPada.localeCompare(a.dibayarPada));
+  const sewa = await store.sewa.saya();
+  const daftar = (await store.tagihan.milikSaya())
+    .filter((t) => ["lunas", "menunggu", "ditolak"].includes(t.status) && (t.dibayarPada || t.dikirimPada))
+    .sort((a, b) => (b.dibayarPada || b.dikirimPada).localeCompare(a.dibayarPada || a.dikirimPada));
+  const tgl = (t) => t.dibayarPada || t.dikirimPada;
 
-  const daftarTahun = [...new Set(lunas.map((t) => t.dibayarPada.slice(0, 4)))];
-  if (!daftarTahun.length) daftarTahun.push(String(new Date().getFullYear()));
-  $("tahun").innerHTML = daftarTahun.map((th) => `<option>${th}</option>`).join("");
-
-  const tampilkan = () => {
-    const th = $("tahun").value;
-    const isi = lunas.filter((t) => t.dibayarPada.startsWith(th));
-    $("isiTabel").innerHTML = isi.map((t) => `
-      <tr>
-        <td data-label="Tanggal Bayar">${F.tanggal(t.dibayarPada)}</td>
-        <td data-label="Periode"><span class="tabel-utama">${F.periode(t.periode)}</span></td>
-        <td data-label="Jenis">${F.esc(t.jenis)}</td>
-        <td data-label="Jumlah" class="angka">${F.rupiah(t.jumlah)}</td>
-        <td data-label="Metode">${F.esc(t.metode || "-")}</td>
-        <td data-label="Status">${ui.badge("tagihan", t.status)}</td>
-        <td class="aksi">${t.bukti ? `<button type="button" class="tombol tombol--teks kecil" data-bukti="${F.esc(t.id)}">Lihat</button>` : "-"}</td>
-      </tr>`).join("");
-    $("kosong").hidden = isi.length > 0;
-    $("kosong").innerHTML = ui.kosong({ ikon: "history", judul: "Belum ada pembayaran", pesan: `Belum ada pembayaran lunas di tahun ${th}.` });
-    const total = isi.reduce((s, t) => s + t.jumlah, 0);
-    $("ringkasTahun").textContent = isi.length ? `${isi.length} pembayaran · total ${F.rupiah(total)} di tahun ${th}` : "";
+  const status = {
+    lunas: ["status-diterima", "Terverifikasi", "Tagihan lunas"],
+    menunggu: ["status-menunggu", "Menunggu verifikasi", "Menunggu dicek pemilik kos"],
+    ditolak: ["status-ditolak", "Ditolak", ""]
   };
 
-  $("tahun").addEventListener("change", tampilkan);
+  if (!daftar.length) {
+    $("isiTabel").innerHTML = '<tr><td colspan="7" class="riwayat-kosong">Belum ada pembayaran.</td></tr>';
+    return;
+  }
+
+  // opsi filter: hanya bulan yang ada transaksinya
+  const bulan = [...new Set(daftar.map((t) => tgl(t).slice(0, 7)))];
+  $("filterBulan").insertAdjacentHTML("beforeend", bulan.map((b) => `<option value="${b}">${F.periode(b)}</option>`).join(""));
+
+  const tampilkan = () => {
+    const k = $("filterBulan").value;
+    const isi = k ? daftar.filter((t) => tgl(t).startsWith(k)) : daftar;
+    $("resetFilter").hidden = !k;
+    $("infoFilter").textContent = k ? `${isi.length} transaksi` : "";
+    $("isiTabel").innerHTML = isi.length ? isi.map((t) => {
+      const [kelas, label, ket] = status[t.status];
+      const keterangan = t.status === "ditolak" && t.alasanTolak
+        ? `<span class="alasan-tolak">Alasan: ${F.esc(t.alasanTolak)}</span>`
+        : ket ? `<span class="keterangan-bayar">${ket}</span>` : "";
+      return `
+        <tr>
+          <td>${F.waktu ? F.waktu(tgl(t)) : F.tanggal(tgl(t))}</td>
+          <td>Kamar ${F.esc(sewa.kamar.nomor)}</td>
+          <td>${F.esc(t.jenis)}</td>
+          <td class="jumlah-pembayaran">${F.rupiah(t.jumlah)}</td>
+          <td>${F.esc(t.metode || "Transfer")}</td>
+          <td><span class="status-badge ${kelas}">${label}</span>${keterangan}</td>
+          <td>${t.bukti ? `<button type="button" class="btn-lihat-bukti" data-bukti="${F.esc(t.id)}">Lihat</button>` : "-"}</td>
+        </tr>`;
+    }).join("") : '<tr><td colspan="7" class="riwayat-kosong">Tidak ada pembayaran di bulan ini.</td></tr>';
+  };
+
+  $("filterBulan").addEventListener("change", tampilkan);
+  $("resetFilter").addEventListener("click", () => { $("filterBulan").value = ""; tampilkan(); });
   $("isiTabel").addEventListener("click", (e) => {
     const b = e.target.closest("[data-bukti]");
-    if (b) ui.dialogTagihan(lunas.find((t) => t.id === b.dataset.bukti));
+    if (b) ui.dialogTagihan(daftar.find((t) => t.id === b.dataset.bukti));
   });
   tampilkan();
 });

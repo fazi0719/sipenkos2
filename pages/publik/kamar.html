@@ -7,7 +7,8 @@
   <title>Daftar Kamar · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/pages/publik.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/kamar.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -21,24 +22,17 @@
   <!-- skrip khusus halaman ini -->
   <script src="../../assets/js/pages/publik/kamar.js" defer></script>
 </head>
-<body data-layout="tamu" data-akses="publik" data-menu="kamar" data-judul="Daftar Kamar">
+<body data-lebar="penuh" data-layout="tamu" data-akses="publik" data-menu="kamar" data-judul="Daftar Kamar">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Daftar Kamar Kos</h1>
-        <p class="sub">Pilih tipe kamar yang sesuai kebutuhan kamu</p>
+    <section class="section-halaman">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="judul-section">Daftar Kamar Kos</h1>
+          <p class="deskripsi">Pilih tipe kamar yang sesuai kebutuhan kamu</p>
+        </div>
+        <div class="kamar-grid" id="daftarTipe"></div>
       </div>
-    </div>
-
-    <div id="filter" role="group" aria-label="Saring tipe kamar"></div>
-    <div class="grid-4" id="daftarTipe"></div>
-    <div id="kosong" hidden></div>
-
-    <div class="kotak-info kotak-info--aksi mt-8">
-      <i data-ikon="info"></i>
-      <p class="isi-lentur">Semua tipe kamar sudah termasuk: Wi-Fi, dapur bersama, parkir motor, CCTV, dan area jemuran.</p>
-      <a class="tombol tombol--wa" id="tanyaWa" href="https://wa.me/6285444211076" target="_blank" rel="noopener"><i data-ikon="chat"></i>Tanya via WhatsApp</a>
-    </div>
+    </section>
   </main>
 </body>
 </html>

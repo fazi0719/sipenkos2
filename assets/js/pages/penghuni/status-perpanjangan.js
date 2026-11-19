@@ -1,59 +1,72 @@
 // =========================================================
 // Status Perpanjangan Sewa (Figma frame 19, 19B + ditolak)
+// Tampilan mengikuti penghuni/status-perpanjangan-sewa.php kelompok.
+// Keputusan setuju/tolak dibuat pemilik kos di pages/pemilik/perpanjangan.html.
 // =========================================================
 SIPENKOS.halaman(async () => {
-  const { store, ui, config, format: F } = SIPENKOS;
+  const { store, config, format: F, ui } = SIPENKOS;
   const $ = (id) => document.getElementById(id);
   const x = await store.perpanjangan.terakhirSaya();
 
-  if (!x) {
-    $("kosong").hidden = false;
-    $("kosong").innerHTML = `<div class="kartu">${ui.kosong({
-      ikon: "event_repeat", judul: "Belum ada pengajuan perpanjangan",
-      aksi: '<a class="tombol tombol--utama" href="perpanjangan.html">Ajukan Perpanjangan</a>'
-    })}</div>`;
-    return;
-  }
-  $("isi").hidden = false;
+  if (!x) { $("emptyState").hidden = false; return; }
 
   const belumBayar = x.tagihan.find((t) => ["belum", "ditolak"].includes(t.status));
-  const PESAN = {
-    menunggu: ["peringatan", "Pengajuan perpanjangan sedang diperiksa pemilik kos."],
-    disetujui: ["sukses", belumBayar
-      ? `Pengajuan disetujui! Silakan bayar ${belumBayar.jenis.includes("DP") ? `DP ${config.aturanBisnis.persenDp}%` : belumBayar.jenis.includes("Pelunasan") ? "pelunasan" : "biaya perpanjangan"} sebesar ${F.rupiah(belumBayar.jumlah)}.`
-      : "Pengajuan disetujui dan masa sewa kamu sudah diperbarui."],
-    ditolak: ["bahaya", `Pengajuan ditolak. Alasan: ${x.alasanTolak}`]
+  const TAMPILAN = {
+    menunggu: { banner: "menunggu", pill: "Menunggu Verifikasi", pesan: "Pengajuan perpanjangan sedang diperiksa pemilik kos." },
+    disetujui: { banner: "disetujui", pill: "Pengajuan Disetujui!", pesan: "Pengajuan perpanjangan sewa kamu telah disetujui pemilik kos." },
+    ditolak: { banner: "ditolak", pill: "Pengajuan Ditolak", pesan: `Pengajuan perpanjangan sewa kamu ditolak pemilik kos.${x.alasanTolak ? " Alasan: " + x.alasanTolak : ""}` }
   };
-  const [kelas, pesan] = PESAN[x.status];
-  $("kotakStatus").classList.add(`kotak-status--${kelas}`);
-  $("badgeStatus").outerHTML = ui.badge("perpanjangan", x.status);
-  $("pesanStatus").textContent = pesan;
+  const t = TAMPILAN[x.status];
+  $("statusBanner").className = `status-banner status-banner--${t.banner}`;
+  $("statusPill").textContent = t.pill;
+  $("statusPesan").textContent = t.pesan;
 
-  $("rincian").innerHTML = ui.rincian([
-    ["Kamar", F.esc(`Kamar ${(x.kamar || x.kamarLama).nomor} · ${ui.judulTipe(x.tipe)}`)],
-    ["Durasi", `${x.durasi} Bulan`],
-    ["Skema", x.skema === "dp" ? `DP ${config.aturanBisnis.persenDp}%` : "Lunas"],
-    ["Metode", F.esc(x.metode)],
-    ["Masa sewa baru", F.rentang(x.mulaiBaru, x.akhirBaru)],
-    ["Total biaya", `<span class="harga">${F.rupiah(x.total)}</span>`],
-    x.skema === "dp" ? ["Dibayar di awal (DP)", F.rupiah(x.dibayar)] : null,
-    x.skema === "dp" ? ["Sisa pelunasan", F.rupiah(x.sisa)] : null
-  ]);
-  $("nomor").textContent = x.id;
+  $("detailKamar").textContent = `Kamar ${(x.kamar || x.kamarLama).nomor} · ${x.tipe.nama}`;
+  $("detailDurasi").textContent = `${x.durasi} Bulan`;
+  $("detailSkema").textContent = x.skema === "dp" ? `DP (Down Payment) ${config.aturanBisnis.persenDp}%` : "Lunas";
+  $("detailMetode").textContent = x.metode;
+  $("detailMasa").textContent = F.rentang(x.mulaiBaru, x.akhirBaru);
+  $("detailTotal").textContent = F.rupiah(x.total);
+  $("detailDibayar").textContent = F.rupiah(x.dibayar);
+  $("detailSisa").textContent = F.rupiah(x.sisa);
+  $("detailNomor").textContent = x.id;
 
+  const tombol = $("tombolAksi");
   if (x.status === "disetujui" && belumBayar) {
-    $("aksi").innerHTML = `<a class="tombol tombol--utama" href="bayar-tagihan.html?id=${encodeURIComponent(belumBayar.id)}">${x.skema === "dp" && belumBayar.jenis.includes("DP") ? "Bayar DP Sekarang" : "Bayar Sekarang"}</a>`;
+    $("aksiDetail").hidden = false;
+    tombol.textContent = belumBayar.jenis.includes("DP") ? "Bayar DP Sekarang" : "Bayar Sekarang";
+    tombol.href = `bayar-tagihan.html?id=${encodeURIComponent(belumBayar.id)}`;
   } else if (x.status === "ditolak") {
-    $("aksi").innerHTML = '<a class="tombol tombol--utama" href="perpanjangan.html">Ajukan Ulang</a>';
+    $("aksiDetail").hidden = false;
+    tombol.textContent = "Ajukan Ulang";
+    tombol.href = "perpanjangan.html";
   }
 
-  const diputuskan = x.status !== "menunggu";
-  $("timeline").innerHTML = ui.timeline([
-    { judul: "Pengajuan dikirim", ket: F.waktu(x.dibuatPada), keadaan: "selesai" },
-    x.status === "ditolak"
-      ? { judul: "Pengajuan ditolak pemilik kos", ket: F.waktu(x.diputuskanPada), keadaan: "gagal" }
-      : { judul: diputuskan ? "Pengajuan disetujui pemilik kos" : "Verifikasi pemilik kos", ket: diputuskan ? F.waktu(x.diputuskanPada) : "Sedang diperiksa", keadaan: diputuskan ? "selesai" : "berjalan" },
-    { judul: "Pembayaran", ket: x.status === "disetujui" ? (belumBayar ? "Menunggu pembayaran" : "Sudah dibayar") : "", keadaan: x.status === "disetujui" ? (belumBayar ? "berjalan" : "selesai") : "belum", ikon: "payments" },
-    { judul: "Masa sewa diperbarui", ket: x.status === "disetujui" ? `Berlaku ${F.rentang(x.mulaiBaru, x.akhirBaru)}` : "", keadaan: x.status === "disetujui" && !belumBayar ? "selesai" : "belum" }
-  ]);
+  const IKON = {
+    selesai: '<svg class="ikon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>',
+    berjalan: '<svg class="ikon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    menunggu: '<svg class="ikon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>',
+    gagal: '<svg class="ikon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>'
+  };
+  const langkah = [{ keadaan: "selesai", judul: `Pengajuan dikirim · ${F.waktu(x.dibuatPada)}`, ket: "Formulir dan berkas berhasil diterima sistem SIPENKOS" }];
+  if (x.status === "menunggu") {
+    langkah.push(
+      { keadaan: "berjalan", judul: "Verifikasi pemilik kos", ket: "Bu Nining sedang meninjau ketersediaan dan ketentuan masa tinggal" },
+      { keadaan: "menunggu", judul: "Masa sewa diperbarui", ket: "Masa sewa dan tagihan baru diperbarui setelah disetujui pemilik kos." });
+  } else if (x.status === "disetujui") {
+    langkah.push(
+      { keadaan: "selesai", judul: "Verifikasi pemilik kos", ket: `Pengajuan disetujui pemilik kos · ${F.waktu(x.diputuskanPada)}` },
+      { keadaan: belumBayar ? "berjalan" : "selesai aktif", judul: "Masa sewa diperbarui", ket: belumBayar ? "Masa sewa diperbarui setelah pembayaran dikonfirmasi." : "Masa sewa dan tagihan baru sudah diperbarui." });
+  } else {
+    langkah.push(
+      { keadaan: "gagal", judul: "Pengajuan ditolak pemilik kos", ket: "Hubungi pemilik kos untuk informasi lebih lanjut, atau ajukan ulang." },
+      { keadaan: "menunggu", judul: "Masa sewa diperbarui", ket: "Masa sewa tidak berubah." });
+  }
+  $("timeline").innerHTML = langkah.map((l) => `
+    <li class="timeline-item ${l.keadaan}">
+      <span class="timeline-dot" aria-hidden="true">${IKON[l.keadaan.split(" ")[0]]}</span>
+      <div><p class="timeline-judul">${F.esc(l.judul)}</p><p class="timeline-ket">${F.esc(l.ket)}</p></div>
+    </li>`).join("");
+
+  $("kontenStatus").hidden = false;
 });

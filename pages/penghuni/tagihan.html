@@ -7,6 +7,7 @@
   <title>Tagihan · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/tagihan.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -22,24 +23,28 @@
 </head>
 <body data-layout="akun" data-akses="penghuni" data-menu="tagihan" data-judul="Tagihan">
   <main>
-    <div class="kepala-halaman">
-      <div>
-        <h1>Tagihan</h1>
-        <p class="sub">Daftar tagihan sewa kamar kamu</p>
-      </div>
+    <div class="tagihan-heading">
+      <h1>Tagihan</h1>
+      <p>Daftar tagihan sewa kamar kamu</p>
     </div>
 
-    <div id="filter" role="group" aria-label="Saring status tagihan"></div>
-    <section class="kartu kartu--rapat">
-      <div class="tabel-gulir">
-        <table class="tabel tabel--responsif">
-          <caption class="sr-only">Daftar tagihan</caption>
-          <thead><tr><th scope="col">Periode</th><th scope="col">Jenis</th><th scope="col" class="angka">Jumlah</th><th scope="col">Jatuh Tempo</th><th scope="col">Status</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
-          <tbody id="isiTabel"></tbody>
-        </table>
-      </div>
-      <div id="kosong" hidden></div>
-    </section>
+    <div class="tagihan-table-wrapper">
+      <table class="tagihan-table">
+        <thead>
+          <tr>
+            <th>Periode</th>
+            <th>Total</th>
+            <th>Terbayar</th>
+            <th>Sisa</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="isiTabel">
+          <tr><td colspan="6" class="tagihan-loading">Memuat tagihan...</td></tr>
+        </tbody>
+      </table>
+    </div>
   </main>
 </body>
 </html>

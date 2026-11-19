@@ -7,6 +7,7 @@
   <title>Detail Laporan Kerusakan · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/penghuni/laporan-kerusakan.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,12 +19,77 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/penghuni/laporan-ikon.js" defer></script>
   <script src="../../assets/js/pages/penghuni/laporan-detail.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="penghuni" data-menu="laporan" data-judul="Detail Laporan Kerusakan">
   <main>
-    <a class="tautan-kembali" href="laporan.html"><i data-ikon="arrow_back"></i>Kembali ke Laporan Kerusakan</a>
-    <div id="isiLaporan"></div>
+    <a href="laporan.html" class="link-kembali">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Kembali ke Laporan Kerusakan
+    </a>
+
+    <!-- Bila id laporan tidak ditemukan -->
+    <div class="card-box kosong" id="tidakDitemukan" hidden>
+      <h2>Laporan tidak ditemukan</h2>
+      <p>Laporan yang kamu cari tidak ada atau sudah dihapus.</p>
+      <a href="laporan.html" class="btn-outline">Lihat Semua Laporan</a>
+    </div>
+
+    <div id="kontenDetail" hidden>
+      <div class="judul-detail">
+        <div class="judul-detail-kiri">
+          <h1 id="detailJudul">-</h1>
+          <span class="badge-status" id="detailStatus">-</span>
+        </div>
+        <p class="id-tiket">ID Tiket: <span id="detailId">-</span></p>
+      </div>
+
+      <div class="detail-grid">
+        <article class="card-box">
+          <dl class="info-laporan">
+            <div>
+              <dt>Kategori</dt>
+              <dd id="detailKategori">-</dd>
+            </div>
+            <div>
+              <dt>Lokasi</dt>
+              <dd id="detailLokasi">-</dd>
+            </div>
+            <div>
+              <dt>Tanggal Lapor</dt>
+              <dd id="detailTanggal">-</dd>
+            </div>
+          </dl>
+
+          <h2 class="sub-judul">Deskripsi</h2>
+          <p class="deskripsi-laporan" id="detailDeskripsi">-</p>
+
+          <div id="blokFoto" hidden>
+            <h2 class="sub-judul">Foto Kerusakan</h2>
+            <img class="foto-laporan" id="detailFoto" alt="Foto kerusakan">
+          </div>
+
+          <p class="catatan-pelapor">
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span id="detailPelapor">Pengajuan dibuat oleh penghuni</span>
+          </p>
+        </article>
+
+        <article class="card-box">
+          <h2 class="judul-card">Riwayat Penanganan</h2>
+          <ol class="timeline" id="timeline"></ol>
+
+          <div class="catatan-pengelola" id="catatanPengelola" hidden>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            <div>
+              <p class="label-kecil">Catatan Pengelola</p>
+              <p id="catatanIsi">-</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
   </main>
 </body>
 </html>

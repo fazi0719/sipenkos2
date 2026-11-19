@@ -361,7 +361,7 @@
     });
   };
 
-  // perkecil foto (maks 1000px, JPEG 75%) supaya muat di localStorage (± 5 MB)
+  // perkecil foto (maks 1000px, JPEG 75%) supaya muat di localStorage (± 5 MB) — juga dipakai halaman lain lewat UI.perkecil
   const perkecil = (file) => new Promise((ok, gagal) => {
     const baca = new FileReader();
     baca.onerror = gagal;
@@ -383,6 +383,8 @@
 
   // ---------- komponen unggah foto ----------
   // UI.unggah(wadahEl, { nama, teks, onUbah }) -> { nilai(), kosongkan(), tandaiError(pesan) }
+  UI.perkecil = perkecil;
+
   // nilai() = { nama, ukuran, data } (data = data URL JPEG yang sudah diperkecil)
   UI.unggah = (wadah, { nama = "foto", teks = "Klik atau seret file ke sini", onUbah } = {}) => {
     const maksMB = S.config.aturanBisnis.maksUkuranFotoMB;

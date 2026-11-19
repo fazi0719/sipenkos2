@@ -1,0 +1,243 @@
+/* Disalin dari repo kelompok, setiap selector diberi awalan body.tema-kelompok.kerangka-navbar */
+body.tema-kelompok.kerangka-navbar .rincian-pembayaran-box .rincian-list {
+  margin-bottom: 18px;
+  background: var(--bg-light);
+  border-radius: 12px;
+  padding: 9px;
+  border: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-navbar .pilihan-pembayaran, body.tema-kelompok.kerangka-navbar .metode-pembayaran {
+  margin-bottom: 20px;
+}
+body.tema-kelompok.kerangka-navbar .pilihan-pembayaran .subjudul-box, body.tema-kelompok.kerangka-navbar .metode-pembayaran .subjudul-box {
+  margin-bottom: 10px;
+}
+body.tema-kelompok.kerangka-navbar .opsi-pembayaran {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+body.tema-kelompok.kerangka-navbar .opsi-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 13px 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+body.tema-kelompok.kerangka-navbar .opsi-item:hover {
+  border-color: #8db7ff;
+  background: #f8fbff;
+}
+body.tema-kelompok.kerangka-navbar .opsi-item:has(input:checked) {
+  border-color: var(--primary-blue);
+  background: #f1f7ff;
+}
+body.tema-kelompok.kerangka-navbar .opsi-item input {
+  margin-top: 3px;
+  accent-color: var(--primary-blue);
+}
+body.tema-kelompok.kerangka-navbar .opsi-konten {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+body.tema-kelompok.kerangka-navbar .opsi-konten strong {
+  font-size: 0.8rem;
+  color: var(--text-dark);
+}
+body.tema-kelompok.kerangka-navbar .opsi-konten small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+body.tema-kelompok.kerangka-navbar .rekening-box {
+  padding: 15px;
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+}
+body.tema-kelompok.kerangka-navbar .rekening-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+body.tema-kelompok.kerangka-navbar .rekening-header strong {
+  font-size: 0.98rem;
+  color: var(--text-dark);
+}
+body.tema-kelompok.kerangka-navbar .rekening-header span {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+}
+body.tema-kelompok.kerangka-navbar .rekening-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+body.tema-kelompok.kerangka-navbar .rekening-logo {
+  padding: 6px 9px;
+  background: #09265b;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 3px;
+}
+body.tema-kelompok.kerangka-navbar .rekening-nomor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+body.tema-kelompok.kerangka-navbar .rekening-nomor strong {
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+body.tema-kelompok.kerangka-navbar .rekening-nomor small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+body.tema-kelompok.kerangka-navbar .rekening-box .catatan {
+  margin-top: 10px;
+}
+body.tema-kelompok.kerangka-navbar .upload-pembayaran-box {
+  display: flex;
+  flex-direction: column;
+}
+body.tema-kelompok.kerangka-navbar .upload-pembayaran-box form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+body.tema-kelompok.kerangka-navbar .upload-pembayaran-box .form-group {
+  margin-bottom: 15px;
+}
+body.tema-kelompok.kerangka-navbar .upload-area {
+  min-height: 175px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: 1px dashed #bfcbdc;
+  border-radius: 7px;
+  transition: 0.2s;
+}
+body.tema-kelompok.kerangka-navbar .upload-kosong {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 135px;
+  text-align: center;
+  cursor: pointer;
+}
+body.tema-kelompok.kerangka-navbar .upload-kosong[hidden] {
+  display: none;
+}
+body.tema-kelompok.kerangka-navbar .upload-area:hover, body.tema-kelompok.kerangka-navbar .upload-area.dragover {
+  background: #f1f7ff;
+  border-color: var(--primary-blue);
+}
+body.tema-kelompok.kerangka-navbar .upload-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 24px;
+}
+body.tema-kelompok.kerangka-navbar .upload-area strong {
+  font-size: 0.75rem;
+  color: var(--text-dark);
+}
+body.tema-kelompok.kerangka-navbar .upload-area small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+body.tema-kelompok.kerangka-navbar .preview-gambar {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--bg-light);
+}
+body.tema-kelompok.kerangka-navbar .preview-gambar[hidden] {
+  display: none;
+}
+body.tema-kelompok.kerangka-navbar .preview-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+body.tema-kelompok.kerangka-navbar .file-icon {
+  font-size: 22px;
+}
+body.tema-kelompok.kerangka-navbar .file-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+body.tema-kelompok.kerangka-navbar .file-info strong {
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  overflow-wrap: anywhere;
+}
+body.tema-kelompok.kerangka-navbar .file-info small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+body.tema-kelompok.kerangka-navbar .btn-hapus-file {
+  border: none;
+  background: transparent;
+  color: #dc4545;
+  cursor: pointer;
+  font-size: 14px;
+}
+body.tema-kelompok.kerangka-navbar .upload-pembayaran-box .informasi {
+  margin-bottom: 18px; 
+}
+body.tema-kelompok.kerangka-navbar .nominal-pembayaran {
+  padding: 15px;
+  margin-top: auto;
+  background: var(--bg-light);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+body.tema-kelompok.kerangka-navbar .nominal-item {
+  margin-bottom: 12px;
+}
+body.tema-kelompok.kerangka-navbar .nominal-item:last-child {
+  margin-bottom: 0;
+}
+body.tema-kelompok.kerangka-navbar .nominal-item span {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+body.tema-kelompok.kerangka-navbar .nominal-item strong {
+  font-size: 19px;
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+body.tema-kelompok.kerangka-navbar .nominal-item:last-child strong {
+  font-size: 19px;
+  color: var(--text-dark);
+}

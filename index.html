@@ -7,7 +7,9 @@
   <title>Beranda · SIPENKOS</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/pages/publik.css">
+  <link rel="stylesheet" href="assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="assets/css/kelompok/calon-penghuni/beranda.css">
+  <link rel="stylesheet" href="assets/css/kelompok/calon-penghuni/kamar.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="assets/js/core/config.js" defer></script>
@@ -21,30 +23,52 @@
   <!-- skrip khusus halaman ini -->
   <script src="assets/js/pages/publik/beranda.js" defer></script>
 </head>
-<body data-layout="tamu" data-akses="publik" data-menu="beranda" data-judul="Beranda">
+<body data-lebar="penuh" data-layout="tamu" data-akses="publik" data-menu="beranda" data-judul="Beranda">
   <main>
-    <section class="hero" id="hero" aria-labelledby="judulHero">
-      <div class="hero-isi">
-        <span class="hero-chip"><i data-ikon="location_on" class="kecil"></i>Kos Bu Nining Malang</span>
-        <h1 id="judulHero">Lagi nyari kos? <span>SIPENKOS</span> aja</h1>
-        <p>Kos Bu Nining, dekat kampus di Malang. Cek kamar kosong dan reservasi langsung dari sini.</p>
-        <div class="baris-tombol">
-          <a class="tombol tombol--utama" href="pages/publik/kamar.html">Lihat Kamar</a>
-          <a class="tombol tombol--sekunder" href="pages/publik/tentang.html">Tentang Kos</a>
+    <section class="container banner-status" id="bannerStatus" hidden aria-live="polite">
+      <div class="banner-status-icon" id="bannerStatusIcon">⏳</div>
+      <div class="banner-status-content">
+        <strong id="bannerStatusTitle">Reservasimu sedang diverifikasi</strong>
+        <p id="bannerStatusDescription">Bukti pembayaran sedang diperiksa oleh pemilik kos.</p>
+      </div>
+      <a href="pages/reservasi/status.html" class="btn btn-outline" id="bannerStatusButton">Lihat Status Reservasi</a>
+    </section>
+
+    <section class="section-image">
+      <div class="container-image">
+        <div class="image-header">
+          <img src="assets/images/header.jpg" alt="Interior Kamar SIPENKOS" class="header-image">
+          <div class="content-overlay">
+            <h1 class="judul-section">Lagi nyari kos? <span class="text-blue">SIPENKOS</span> aja</h1>
+            <p class="deskripsi">Kos Bu Nining, dekat kampus di Malang. Cek kamar kosong dan reservasi langsung dari sini.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="kartu fasilitas-ringkas" aria-label="Fasilitas kos">
-      <div class="chip-grid" id="fasilitas"></div>
+    <section class="section-fasilitas">
+      <div class="container">
+        <div class="fasilitas-wrapper">
+          <ul class="fasilitas fasilitas-grid">
+            <li class="item-fasilitas"><span class="icon">📶</span> Wi-Fi</li>
+            <li class="item-fasilitas"><span class="icon">🍳</span> Dapur</li>
+            <li class="item-fasilitas"><span class="icon">⚡</span> Listrik</li>
+            <li class="item-fasilitas"><span class="icon">🛵</span> Parkir</li>
+            <li class="item-fasilitas"><span class="icon">🧺</span> Laundry</li>
+            <li class="item-fasilitas"><span class="icon">📹</span> CCTV</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section aria-labelledby="judulTipe">
-      <div class="bagian-kepala">
-        <h2 class="judul-bagian" id="judulTipe">Pilihan Tipe Kamar</h2>
-        <p>Pilih kamar yang paling pas dengan kebutuhan dan kenyamanan kamu.</p>
+    <section class="section-halaman">
+      <div class="container">
+        <div class="section-header">
+          <h3 class="judul-section">Pilihan Tipe Kamar</h3>
+          <p class="deskripsi">Pilih kamar yang paling pas dengan kebutuhan dan kenyamanan kamu.</p>
+        </div>
+        <div class="kamar-grid" id="daftarTipe"></div>
       </div>
-      <div class="grid-4" id="daftarTipe"></div>
     </section>
   </main>
 </body>

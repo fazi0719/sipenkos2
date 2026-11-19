@@ -7,6 +7,9 @@
   <title>Masuk · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/auth.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/login-tab.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -23,34 +26,81 @@
 </head>
 <body data-layout="auth" data-akses="tamu" data-judul="Masuk">
   <main>
-    <div class="kartu tumpuk">
-      <div class="teks-tengah"><a class="logo" href="../../index.html"><span class="logo-nama">SIPENK<i data-ikon="home"></i>S</span><span class="logo-pemisah"></span><span class="logo-kos">Kos Bu Nining</span></a></div>
-
-      <div class="kotak-info kotak-info--biru" id="infoReservasi" hidden><i data-ikon="info"></i><p></p></div>
-
-      <h1 class="judul-auth">Masuk ke SIPENKOS</h1>
-
-      <form class="form" id="formMasuk" novalidate>
-        <div class="field">
-          <label class="label" for="email">Email</label>
-          <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="nama@email.com">
+    <div class="auth-container">
+      <div class="card-box auth-card">
+        <div class="auth-logo">
+          <a href="../../index.html" class="logo">
+            <span class="logo-judul">SIPENKOS</span>
+            <span class="logo-divider">|</span>
+            <span class="logo-pendukung">Kos Bu Nining</span>
+          </a>
         </div>
-        <div class="field">
-          <label class="label" for="sandi">Kata Sandi</label>
-          <div class="input-ikon">
-            <input class="input" id="sandi" name="sandi" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi">
-            <button type="button" class="tombol tombol--ikon" data-lihat-sandi="sandi" aria-label="Tampilkan kata sandi"><i data-ikon="visibility"></i></button>
+
+        <div class="login-tabs" role="tablist" aria-label="Jenis akun">
+          <button type="button" role="tab" id="tab-penghuni" class="login-tab is-active" aria-selected="true" aria-controls="panel-penghuni">Penghuni</button>
+          <button type="button" role="tab" id="tab-pengelola" class="login-tab" aria-selected="false" aria-controls="panel-pengelola" tabindex="-1">Pengelola</button>
+        </div>
+
+        <!-- ===== Panel Penghuni ===== -->
+        <section id="panel-penghuni" role="tabpanel" aria-labelledby="tab-penghuni" class="login-panel">
+          <div class="auth-header">
+            <h1 class="judul-box">Masuk ke SIPENKOS</h1>
+            <p class="deskripsi">Masukkan email dan kata sandi kamu untuk melanjutkan.</p>
           </div>
-        </div>
-        <div class="baris-tombol baris-tombol--antara">
-          <label class="cek"><input type="checkbox" name="ingat" checked>Ingat saya</label>
-          <button type="button" class="tombol tombol--teks kecil" id="lupaSandi">Lupa kata sandi?</button>
-        </div>
-        <p class="pesan-error" id="pesanMasuk" role="alert" hidden></p>
-        <button type="submit" class="tombol tombol--utama tombol--penuh">Masuk</button>
-      </form>
+          <div class="informasi" id="infoReservasi" hidden><span class="icon">ℹ️</span><p></p></div>
+          <form class="auth-form" id="formMasuk" novalidate>
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="nama@email.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="sandi" class="form-label">Kata Sandi</label>
+              <div class="input-password-wrapper">
+                <input type="password" id="sandi" name="sandi" class="form-input" placeholder="Masukkan kata sandi kamu" autocomplete="current-password">
+              </div>
+            </div>
+            <div class="auth-options">
+              <div class="form-checkbox">
+                <input type="checkbox" id="ingat_saya" name="ingat">
+                <label for="ingat_saya">Ingat saya</label>
+              </div>
+              <a href="#" class="link-auth-sm" id="lupaSandi">Lupa kata sandi?</a>
+            </div>
+            <p class="login-galat" id="pesanMasuk" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primary btn-full">Masuk</button>
+          </form>
+          <div class="auth-footer-card">
+            Belum punya akun? <a href="daftar.html" class="link-auth" id="keDaftar">Daftar sekarang</a>
+          </div>
+        </section>
 
-      <p class="kecil muted teks-tengah">Belum punya akun? <a id="keDaftar" href="daftar.html">Daftar sekarang</a></p>
+        <!-- ===== Panel Pengelola ===== -->
+        <section id="panel-pengelola" role="tabpanel" aria-labelledby="tab-pengelola" class="login-panel" hidden>
+          <div class="auth-header">
+            <h1 class="judul-box">Masuk Pengelola</h1>
+            <p class="deskripsi">Khusus pengelola kos untuk mengelola reservasi, pembayaran, dan laporan.</p>
+          </div>
+          <form class="auth-form-pengelola" id="formPengelola" novalidate>
+            <div class="form-group">
+              <label for="pengelola-username" class="form-label">Username</label>
+              <input type="text" id="pengelola-username" name="email" class="form-input" placeholder="Masukkan username" autocomplete="username">
+            </div>
+            <div class="form-group">
+              <label for="pengelola-sandi" class="form-label">Kata Sandi</label>
+              <div class="input-password-wrapper">
+                <input type="password" id="pengelola-sandi" name="sandi" class="form-input" placeholder="Masukkan kata sandi" autocomplete="current-password">
+              </div>
+            </div>
+            <p class="login-galat" id="pengelola-galat" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primary btn-full">Masuk</button>
+          </form>
+          <div class="informasi">
+            <span class="icon">ℹ️</span>
+            <span>Contoh · username <strong>nining@sipenkos.id</strong>, kata sandi <strong>pemilik123</strong></span>
+          </div>
+        </section>
+      </div>
+      <a href="../publik/kamar.html" class="back-link back-link-center" id="tautanKembali">← Kembali ke Daftar Kamar</a>
     </div>
   </main>
 </body>

@@ -4,27 +4,42 @@
 // Belum dibayar → bisa dicatat lunas bila dibayar tunai (Cash)
 // =========================================================
 SIPENKOS.halaman(async () => {
-  const { store, ui, format: F } = SIPENKOS;
-  const semua = await store.tagihan.semua();
-  let saring = "menunggu";
+  const { store, ui, format: F, adminUI: A } = SIPENKOS; // tampilan mengikuti admin/pages/verifikasi-pembayaran.php
+  const semua = (await store.tagihan.semua()).sort((a, b) => (b.dikirimPada || b.jatuhTempo).localeCompare(a.dikirimPada || a.jatuhTempo));
+  let saring = "all";
+  const LABEL = { menunggu: ["Menunggu", "warning"], lunas: ["Terverifikasi", "success"], ditolak: ["Ditolak", "danger"], belum: ["Belum Dibayar", "neutral"] };
 
+  const cocok = (t, f) => f === "all" ? ["menunggu", "lunas", "ditolak"].includes(t.status)
+    : f === "terverifikasi" ? t.status === "lunas" : t.status === f;
   const tampilkan = () => {
-    const isi = saring === "semua" ? semua
-      : saring === "belum" ? semua.filter((t) => ["belum", "ditolak"].includes(t.status))
-      : semua.filter((t) => t.status === saring);
-    document.getElementById("isiTabel").innerHTML = isi.map((t) => `
+    const q = document.getElementById("cari").value.trim().toLowerCase();
+    const hitung = Object.fromEntries(["all", "menunggu", "terverifikasi", "ditolak", "belum"].map((f) => [f, semua.filter((t) => cocok(t, f)).length]));
+    chip.gambar(hitung);
+    const isi = semua.filter((t) => cocok(t, saring) && (!q || `${t.pengguna?.nama} ${t.kamar?.nomor}`.toLowerCase().includes(q)));
+    document.getElementById("isiTabel").innerHTML = isi.map((t) => {
+      const [label, nada] = LABEL[t.status] || LABEL.belum;
+      return `
       <tr>
-        <td data-label="Penghuni"><span class="tabel-utama">${F.esc(t.pengguna?.nama || "-")}</span><span class="tabel-sub">${t.kamar ? "Kamar " + F.esc(t.kamar.nomor) : ""}</span></td>
-        <td data-label="Tagihan">${F.periode(t.periode)}<span class="tabel-sub">${F.esc(t.jenis)}</span></td>
-        <td data-label="Jumlah" class="angka">${F.rupiah(t.jumlah)}</td>
-        <td data-label="Jatuh Tempo">${F.tanggal(t.jatuhTempo)}</td>
-        <td data-label="Status">${ui.badge("tagihan", t.status)}</td>
-        <td class="aksi"><button type="button" class="tombol ${t.status === "menunggu" ? "tombol--utama" : "tombol--sekunder"} tombol--kecil" data-id="${F.esc(t.id)}">${t.status === "menunggu" ? "Periksa" : "Detail"}</button></td>
-      </tr>`).join("");
-    const kosong = document.getElementById("kosong");
-    kosong.hidden = isi.length > 0;
-    kosong.innerHTML = ui.kosong({ ikon: "payments", judul: saring === "menunggu" ? "Tidak ada bukti yang perlu diperiksa" : "Tidak ada tagihan" });
+        <td class="nowrap">${t.dikirimPada ? F.tanggal(t.dikirimPada) : "-"}</td>
+        <td>
+          <div class="person">
+            <span class="avatar">${F.esc(A.inisial(t.pengguna?.nama || "-"))}</span>
+            <div><p class="person-name">${F.esc(t.pengguna?.nama || "-")}</p><p class="person-sub">${t.kamar ? "Kamar " + F.esc(t.kamar.nomor) : "-"}</p></div>
+          </div>
+        </td>
+        <td class="nowrap">${F.periode(t.periode)} · ${F.rupiah(t.jumlah)}</td>
+        <td>${A.badge(label, nada)}</td>
+        <td><div class="row-actions">${t.status === "menunggu"
+          ? `<button type="button" class="btn btn-primary btn-sm" data-id="${F.esc(t.id)}">Verifikasi</button>`
+          : `<button type="button" class="btn btn-secondary btn-sm" data-id="${F.esc(t.id)}">${t.status === "belum" ? "Catat Cash" : "Detail"}</button>`}</div></td>
+      </tr>`;
+    }).join("");
+    document.getElementById("kosong").hidden = isi.length > 0;
   };
+  const chip = A.chip(document.getElementById("filter"),
+    [["all", "Semua"], ["menunggu", "Menunggu"], ["terverifikasi", "Terverifikasi"], ["ditolak", "Ditolak"], ["belum", "Belum Dibayar"]],
+    (v) => { saring = v; tampilkan(); }, "all");
+  document.getElementById("cari").addEventListener("input", () => tampilkan());
 
   const periksa = async (t) => {
     const bolehCash = ["belum", "ditolak"].includes(t.status);
@@ -67,13 +82,6 @@ SIPENKOS.halaman(async () => {
       ui.gagal(e);
     }
   };
-
-  ui.filterPil(document.getElementById("filter"), [
-    { nilai: "menunggu", label: `Menunggu (${semua.filter((t) => t.status === "menunggu").length})` },
-    { nilai: "belum", label: "Belum Dibayar" },
-    { nilai: "lunas", label: "Lunas" },
-    { nilai: "semua", label: "Semua" }
-  ], (v) => { saring = v; tampilkan(); }, "menunggu");
 
   document.getElementById("isiTabel").addEventListener("click", (e) => {
     const b = e.target.closest("[data-id]");

@@ -7,6 +7,8 @@
   <title>Dashboard Pemilik · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,44 +20,38 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
   <script src="../../assets/js/pages/pemilik/dashboard.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="dashboard" data-judul="Dashboard Pemilik">
   <main>
-    <div class="kepala-halaman">
+    <div class="page-header">
       <div>
-        <h1 id="sapaan">Selamat datang</h1>
-        <p class="sub">Ringkasan Kos Bu Nining hari ini</p>
+        <h1 class="page-title" id="sapaan">Selamat datang</h1>
+        <p class="page-subtitle" id="subjudul">Ringkasan aktivitas Kos Bu Nining</p>
       </div>
     </div>
-
-    <div class="grid-4 mb-6" id="statistik"></div>
-
-    <div class="grid-2 grid-atas">
-      <section class="kartu" aria-labelledby="judulTindakan">
-        <h2 class="kartu-judul" id="judulTindakan">Perlu Tindakan</h2>
-        <div class="daftar-item" id="tindakan"></div>
-      </section>
-      <section class="kartu" aria-labelledby="judulPendapatan">
-        <div class="kartu-kepala">
-          <h2 class="kartu-judul" id="judulPendapatan">Pendapatan 6 Bulan Terakhir</h2>
-          <a class="tautan-lihat" href="keuangan.html">Laporan Keuangan<i data-ikon="arrow_forward"></i></a>
+    <div class="banner banner-warning" id="dashboard-banner" hidden>
+      <div class="banner-body">
+        <i class="icon icon-triangle-alert" aria-hidden="true"></i><span id="bannerTeks"></span>
+      </div>
+      <a href="pembayaran.html" class="btn btn-primary btn-md" id="bannerAksi">Verifikasi Sekarang</a>
+    </div>
+    <section class="stats stats-4" aria-label="Statistik kamar" id="statistik"></section>
+    <section class="grid-2">
+      <div class="card dashboard-card-pad">
+        <div class="card-head">
+          <h2 class="card-title">Perlu Ditindaklanjuti</h2>
+          <span id="jumlahTugas"></span>
         </div>
-        <div class="grafik" id="grafik" role="img"></div>
-      </section>
-    </div>
-
-    <section class="kartu kartu--rapat mt-6" aria-labelledby="judulKetersediaan">
-      <div class="kartu-kepala kepala-tabel">
-        <h2 class="kartu-judul" id="judulKetersediaan">Ketersediaan Kamar</h2>
-        <a class="tautan-lihat" href="kamar.html">Kelola Kamar<i data-ikon="arrow_forward"></i></a>
+        <div class="task-list" id="tugas"></div>
       </div>
-      <div class="tabel-gulir">
-        <table class="tabel tabel--responsif">
-          <caption class="sr-only">Ketersediaan kamar per tipe</caption>
-          <thead><tr><th scope="col">Tipe</th><th scope="col" class="angka">Harga / bulan</th><th scope="col" class="angka">Total</th><th scope="col" class="angka">Terisi</th><th scope="col" class="angka">Kosong</th><th scope="col">Status</th></tr></thead>
-          <tbody id="tabelTipe"></tbody>
-        </table>
+      <div class="card dashboard-card-pad occupancy-card">
+        <div class="card-head">
+          <h2 class="card-title">Okupansi per Tipe Kamar</h2>
+          <a href="kamar.html" class="btn btn-ghost btn-sm">Lihat Semua</a>
+        </div>
+        <div class="occupancy" id="okupansi"></div>
       </div>
     </section>
   </main>

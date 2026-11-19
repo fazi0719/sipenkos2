@@ -2,46 +2,55 @@
 // Kamar (pemilik) — ubah harga tipe & status tiap kamar
 // =========================================================
 SIPENKOS.halaman(async () => {
-  const { store, ui, ikon, format: F } = SIPENKOS;
+  const { store, ui, format: F, adminUI: A } = SIPENKOS; // tampilan mengikuti admin/pages/monitor-kamar.php
   const $ = (id) => document.getElementById(id);
   let tipe = await store.kamar.daftarTipe();
   let unit = await store.kamar.daftarUnit();
   let saring = "semua";
 
   const gambarTipe = () => {
+    const total = tipe.reduce((x, t) => x + t.total, 0);
+    const kosong = tipe.reduce((x, t) => x + t.sisa, 0);
+    const stat = (ikon, nada, label, nilai) => `
+      <div class="card stat stat-row">
+        ${A.kotakIkon(ikon, nada, "lg")}
+        <div><p class="stat-label">${label}</p><p class="stat-value">${nilai}</p></div>
+      </div>`;
+    $("statistik").innerHTML = stat("bed-double", "blue", "Total Kamar", total) + stat("users", "green", "Kamar Terisi", total - kosong) + stat("door-open", "amber", "Kamar Kosong", kosong);
     $("tabelTipe").innerHTML = tipe.map((t) => `
       <tr>
-        <td data-label="Tipe"><span class="tabel-utama">${F.esc(t.nama)}</span><span class="tabel-sub">${F.esc(t.ringkas)}</span></td>
-        <td data-label="Harga" class="angka">${F.rupiah(t.harga)}</td>
-        <td data-label="Terisi" class="angka">${t.total - t.sisa} / ${t.total}</td>
-        <td data-label="Ketersediaan">${ui.badgeKetersediaan(t)}</td>
-        <td class="aksi"><button type="button" class="tombol tombol--sekunder tombol--kecil" data-ubah-tipe="${t.id}">${ikon("edit")}Ubah</button></td>
+        <td class="nowrap">${F.esc(t.nama)} ${F.esc(t.ringkas)}</td>
+        <td class="nowrap">${F.rupiah(t.harga)}</td>
+        <td>${t.total}</td>
+        <td>${t.total - t.sisa}</td>
+        <td>${t.sisa}</td>
+        <td class="ta-center">${t.tersedia ? A.badge(`Tersedia · sisa ${t.sisa}`, "success") : A.badge("Penuh", "danger")}</td>
       </tr>`).join("");
   };
 
   const gambarUnit = () => {
     const isi = saring === "semua" ? unit : unit.filter((k) => k.status === saring);
+    chip.gambar({ semua: unit.length, kosong: unit.filter((k) => k.status === "kosong").length, terisi: unit.filter((k) => k.status === "terisi").length, perbaikan: unit.filter((k) => k.status === "perbaikan").length });
     $("tabelUnit").innerHTML = isi.map((k) => `
       <tr>
-        <td data-label="Kamar"><span class="tabel-utama">Kamar ${F.esc(k.nomor)}</span></td>
-        <td data-label="Tipe">${F.esc(k.tipe.nama)}</td>
-        <td data-label="Status">${ui.badge("kamar", k.status)}</td>
-        <td data-label="Penghuni">${k.penghuni ? F.esc(k.penghuni.nama) : '<span class="muted">-</span>'}</td>
-        <td class="aksi">${k.status === "terisi" ? "" : `<button type="button" class="tombol tombol--sekunder tombol--kecil" data-unit="${k.id}">${k.status === "kosong" ? "Tandai Perbaikan" : "Tandai Kosong"}</button>`}</td>
+        <td class="nowrap">Kamar ${F.esc(k.nomor)}</td>
+        <td class="nowrap">${F.esc(k.tipe.nama)} ${F.esc(k.tipe.ringkas)}</td>
+        <td>${A.status("kamar", k.status)}</td>
+        <td>${k.penghuni ? F.esc(k.penghuni.nama) : "-"}</td>
+        <td class="ta-right">${k.status === "terisi" ? "" : `<button type="button" class="btn btn-secondary btn-sm" data-unit="${k.id}">${k.status === "kosong" ? "Tandai Perbaikan" : "Tandai Kosong"}</button>`}</td>
       </tr>`).join("");
   };
 
-  ui.filterPil($("filter"), [
-    { nilai: "semua", label: `Semua (${unit.length})` },
-    { nilai: "kosong", label: "Kosong" },
-    { nilai: "terisi", label: "Terisi" },
-    { nilai: "perbaikan", label: "Perbaikan" }
-  ], (v) => { saring = v; gambarUnit(); });
+  const chip = A.chip($("filter"), [["semua", "Semua"], ["kosong", "Kosong"], ["terisi", "Terisi"], ["perbaikan", "Perbaikan"]], (v) => { saring = v; gambarUnit(); });
 
-  $("tabelTipe").addEventListener("click", async (e) => {
-    const b = e.target.closest("[data-ubah-tipe]");
-    if (!b) return;
-    const t = tipe.find((x) => x.id === Number(b.dataset.ubahTipe));
+  $("ubahHarga").addEventListener("click", async () => {
+    const pilih = await ui.dialog({
+      judul: "Pilih tipe kamar",
+      isi: `<div class="field"><label class="label" for="tipeId">Tipe kamar</label><select class="select" id="tipeId" name="tipeId">${tipe.map((t) => `<option value="${t.id}">${F.esc(t.nama)} ${F.esc(t.ringkas)}</option>`).join("")}</select></div>`,
+      tombol: [{ label: "Batal", kelas: "tombol--batal", nilai: "batal" }, { label: "Lanjut", kelas: "tombol--utama", nilai: "kirim" }]
+    });
+    if (!(pilih instanceof FormData)) return;
+    const t = tipe.find((x) => x.id === Number(pilih.get("tipeId")));
     const data = await ui.dialog({
       judul: `Ubah ${t.nama}`,
       isi: `

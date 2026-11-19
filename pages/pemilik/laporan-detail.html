@@ -7,6 +7,8 @@
   <title>Detail Laporan Kerusakan · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,12 +20,43 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
-  <script src="../../assets/js/pages/pemilik/laporan-detail.js" defer></script>
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
+  <script src="../../assets/js/pages/pemilik/laporan.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="laporan" data-judul="Detail Laporan Kerusakan">
   <main>
-    <a class="tautan-kembali" href="laporan.html"><i data-ikon="arrow_back"></i>Kembali ke Laporan Kerusakan</a>
-    <div id="isiLaporan"></div>
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Laporan Kerusakan</h1>
+        <p class="page-subtitle">Daftar laporan fasilitas rusak dari penghuni yang perlu ditindaklanjuti</p>
+      </div>
+    </div>
+    <div class="banner banner-danger banner-tight" id="bannerBaru" hidden>
+      <div class="banner-body"><i class="icon icon-triangle-alert" aria-hidden="true"></i><span id="jumlahBaru"></span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="lihatBaru">Lihat Laporan</button>
+    </div>
+    <div class="list-section">
+      <div class="toolbar">
+        <div id="filter"></div>
+        <label class="search search-xs"><i class="icon icon-search" aria-hidden="true"></i><span class="sr-only">Cari laporan...</span><input type="search" placeholder="Cari laporan..." id="cari" autocomplete="off"></label>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table table-kerusakan">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Pelapor</th>
+                <th>Rincian Laporan</th>
+                <th>Status</th>
+                <th class="ta-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="isiTabel"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </main>
 </body>
 </html>

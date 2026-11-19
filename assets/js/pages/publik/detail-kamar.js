@@ -1,81 +1,81 @@
 // =========================================================
-// Detail Kamar — galeri, harga, pilihan durasi, tombol reservasi
+// Detail Kamar — tampilan mengikuti calon-penghuni/detail-kamar.php kelompok
 // Alamat: detail-kamar.html?tipe=4
 // =========================================================
 SIPENKOS.halaman(async ({ pengguna }) => {
-  const { store, ui, config, ikon, format: F } = SIPENKOS;
+  const { store, ui, config, format: F } = SIPENKOS;
   const $ = (id) => document.getElementById(id);
+  const EMOJI = { bed: "🛏️", checkroom: "🚪", desk: "🪑", ac_unit: "❄️", shower: "🚿" };
 
   const tipe = await store.kamar.tipe(ui.param("tipe"));
+  const tombol = $("tombolReservasi");
   if (!tipe) {
-    $("tidakAda").hidden = false;
-    $("tidakAda").innerHTML = ui.kosong({
-      ikon: "meeting_room",
-      judul: "Kamar tidak ditemukan",
-      pesan: "Tipe kamar yang kamu cari tidak tersedia.",
-      aksi: `<a class="tombol tombol--utama" href="kamar.html">Lihat Daftar Kamar</a>`
-    });
+    $("judul").textContent = "Kamar tidak ditemukan";
+    $("deskripsi").textContent = "Tipe kamar yang kamu cari tidak tersedia. Silakan kembali ke daftar kamar.";
+    tombol.textContent = "Kembali ke Daftar Kamar";
+    tombol.href = "kamar.html";
     return;
   }
 
-  $("isi").hidden = false;
   document.title = `${tipe.nama} · SIPENKOS`;
-  $("judul").textContent = ui.judulTipe(tipe);
-  $("alamat").textContent = config.kos.alamatLengkap;
-  $("status").innerHTML = ui.badgeKetersediaan(tipe);
+  $("judul").textContent = `${tipe.nama} ${tipe.ringkas}`;
+  $("alamat").textContent = config.kos.alamat + ", Malang";
+  $("status").textContent = tipe.tersedia ? `Tersedia - sisa ${tipe.sisa}` : "Penuh";
+  $("status").className = tipe.tersedia ? "tersedia" : "penuh";
   $("harga").textContent = F.rupiah(tipe.harga);
   $("deskripsi").textContent = tipe.deskripsi;
+  $("fotoUtama").src = ui.gambar(tipe.foto);
+  $("fotoUtama").alt = `Foto utama ${tipe.nama}`;
+  $("galeriTambahan").innerHTML = tipe.galeri.filter((g) => g.src !== tipe.foto).slice(0, 2).map((g) => `
+    <figure class="foto-pendukung">
+      <img src="${F.esc(ui.gambar(g.src))}" alt="${F.esc(g.label)}" loading="lazy">
+      <figcaption>${F.esc(g.label)}</figcaption>
+    </figure>`).join("");
+  $("fasilitasKamar").innerHTML = tipe.fasilitas.map((f) => `
+    <li class="item-fasilitas"><span class="icon">${EMOJI[f.ikon] || "✔️"}</span> <span>${F.esc(f.label)}</span></li>`).join("");
 
-  const chip = (f) => `<span class="chip">${ikon(f.ikon)}${F.esc(f.label)}</span>`;
-  $("fasilitasKamar").innerHTML = tipe.fasilitas.map(chip).join("");
-  $("fasilitasBersama").innerHTML = config.kos.fasilitasBersama.map(chip).join("");
+  // ---------- durasi & tombol reservasi ----------
+  const tombolDurasi = [...document.querySelectorAll(".btn-durasi")];
+  const durasiAwal = Number(ui.param("durasi"));
+  let durasi = tipe.tersedia && [1, 6, 12].includes(durasiAwal) ? durasiAwal : null;
 
-  // ---------- galeri ----------
-  const fotoUtama = $("fotoUtama");
-  const pilihFoto = (i) => {
-    fotoUtama.src = ui.gambar(tipe.galeri[i].src);
-    fotoUtama.alt = `${tipe.nama} — ${tipe.galeri[i].label}`;
-    $("thumb").querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+  const atur = () => {
+    let teks = "Reservasi Sekarang";
+    let bisa = true;
+    if (!tipe.tersedia) { teks = "Kamar Penuh (Tidak Dapat Direservasi)"; bisa = false; }
+    else if (pengguna?.jenis === "pemilik") { bisa = false; }
+    else if (pengguna?.jenis === "penghuni") { teks = "Perpanjang Sewa"; }
+    else if (!durasi) { teks = "Pilih Durasi Sewa Dulu"; bisa = false; }
+    tombol.textContent = teks;
+    tombol.classList.toggle("btn-primary", bisa);
+    tombol.classList.toggle("btn-disabled", !bisa);
+    tombol.setAttribute("aria-disabled", String(!bisa));
+    $("boxTotal").hidden = !durasi;
+    if (durasi) {
+      $("durasiTerpilih").textContent = String(durasi);
+      $("totalHargaDurasi").textContent = F.rupiah(tipe.harga * durasi);
+    }
+    tombolDurasi.forEach((b) => {
+      const aktif = Number(b.dataset.durasi) === durasi;
+      b.classList.toggle("active", aktif);
+      b.setAttribute("aria-pressed", String(aktif));
+    });
   };
-  $("thumb").innerHTML = tipe.galeri.map((g, i) => `
-    <button type="button" aria-label="Tampilkan foto ${F.esc(g.label)}" aria-pressed="false" data-i="${i}">
-      <img src="${F.esc(ui.gambar(g.src))}" alt="" loading="lazy"><span class="label-foto">${F.esc(g.label)}</span>
-    </button>`).join("");
-  $("thumb").addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (b) pilihFoto(Number(b.dataset.i));
+
+  if (!tipe.tersedia) tombolDurasi.forEach((b) => { b.disabled = true; });
+  else tombolDurasi.forEach((b) => b.addEventListener("click", () => { durasi = Number(b.dataset.durasi); atur(); }));
+
+  if (pengguna?.jenis === "pemilik") $("catatanReservasi").textContent = "Kamu masuk sebagai pemilik kos.";
+  else if (pengguna?.jenis === "penghuni") $("catatanReservasi").textContent = "Kamu sudah menjadi penghuni. Pindah tipe kamar bisa diajukan saat perpanjangan sewa.";
+  else if (pengguna) $("catatanReservasi").textContent = `Masuk sebagai ${pengguna.nama}.`;
+
+  tombol.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (tombol.getAttribute("aria-disabled") === "true") return;
+    if (pengguna?.jenis === "penghuni") return ui.ke("pages/penghuni/perpanjangan.html");
+    const tujuan = `pages/reservasi/formulir.html?tipe=${tipe.id}&durasi=${durasi}`;
+    if (pengguna) ui.ke(tujuan);
+    else ui.ke(`pages/auth/masuk.html?tipe=${tipe.id}&kembali=${encodeURIComponent(tujuan)}`);
   });
-  pilihFoto(0);
-
-  // ---------- durasi ----------
-  const pilihanDurasi = [1, 6, 12];
-  $("durasi").innerHTML = pilihanDurasi.map((d) => `
-    <label class="opsi"><input type="radio" name="durasi" value="${d}"${d === 6 ? " checked" : ""}>${d} Bulan</label>`).join("");
-
-  // ---------- tombol reservasi (beda perilaku per jenis akun) ----------
-  const tombol = $("tombolReservasi");
-  const catatan = $("catatanReservasi");
-  const tujuanFormulir = () => {
-    const durasi = document.querySelector("input[name=durasi]:checked").value;
-    return `pages/reservasi/formulir.html?tipe=${tipe.id}&durasi=${durasi}`;
-  };
-
-  if (!tipe.tersedia) {
-    tombol.disabled = true;
-    tombol.textContent = "Penuh (Tidak Tersedia)";
-    catatan.textContent = "Tanyakan ketersediaan berikutnya lewat WhatsApp pemilik kos.";
-  } else if (pengguna?.jenis === "pemilik") {
-    tombol.disabled = true;
-    catatan.textContent = "Kamu masuk sebagai pemilik kos.";
-  } else if (pengguna?.jenis === "penghuni") {
-    tombol.textContent = "Perpanjang Sewa";
-    catatan.textContent = "Kamu sudah menjadi penghuni. Pindah tipe kamar bisa diajukan saat perpanjangan sewa.";
-    tombol.addEventListener("click", () => ui.ke("pages/penghuni/perpanjangan.html"));
-  } else if (pengguna) {
-    catatan.textContent = `Masuk sebagai ${pengguna.nama}.`;
-    tombol.addEventListener("click", () => ui.ke(tujuanFormulir()));
-  } else {
-    tombol.addEventListener("click", () =>
-      ui.ke(`pages/auth/masuk.html?tipe=${tipe.id}&kembali=${encodeURIComponent(tujuanFormulir())}`));
-  }
+  atur();
 });

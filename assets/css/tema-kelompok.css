@@ -1,0 +1,1081 @@
+/* =========================================================
+   TEMA KELOMPOK — tampilan disamakan dengan repo kelompok
+   (github.com/citraanyndya/PBL-Sipenkos), struktur kode tetap sipenkos2.
+
+   body.tema-kelompok : publik, auth, calon, penghuni
+                        (meniru assets/css/calon-penghuni/style.css & penghuni/style.css)
+   body.tema-admin    : pemilik (meniru admin/css/style.css & responsive.css)
+
+   Kelas k-* / a-* dipakai kerangka dari shell.js. Komponen sipenkos2
+   (tombol, kartu, badge, ...) diubah lewat variabel di bagian 1.
+   ========================================================= */
+
+/* 1. Font & token ========================================================= */
+@font-face { font-family: "Poppins"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/poppins-400.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 500; font-style: normal; font-display: swap; src: url("../fonts/poppins-500.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 600; font-style: normal; font-display: swap; src: url("../fonts/poppins-600.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/poppins-700.woff2") format("woff2"); }
+
+body.tema-kelompok {
+    --font: "Poppins", sans-serif;
+    --biru: #2563eb;
+    --biru-gelap: #1d4ed8;
+    --biru-muda: #eff6ff;
+    --biru-garis: #bfdbfe;
+    --navy: #1e3a8a;
+    --teks: #1e293b;
+    --teks-2: #334155;
+    --teks-muted: #64748b;
+    --teks-pudar: #94a3b8;
+    --garis: #e2e8f0;
+    --garis-kuat: #cbd5e1;
+    --panel: #f8fafc;
+    --panel-2: #f1f5f9;
+    --latar-halaman: #f8fafc;
+    --sukses: #15803d;
+    --sukses-muda: #dcfce7;
+    --bahaya: #be123c;
+    --bahaya-muda: #ffe4e6;
+    --peringatan: #92400e;
+    --peringatan-muda: #fef3c7;
+    --info: #2563eb;
+    --info-muda: #eff6ff;
+    --info-garis: #bfdbfe;
+    --r: 8px;
+    --r-besar: 16px;
+    --bayangan: none;
+    --fokus: 0 0 0 3px rgba(37, 99, 235, 0.28);
+    font-family: "Poppins", sans-serif;
+    color: #1e293b;
+    background: #f8fafc;
+    line-height: 1.5;
+}
+
+body.tema-admin {
+    --font: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --biru: #1a6fd8;
+    --biru-gelap: #155fbc;
+    --biru-muda: #e8f2fd;
+    --navy: #1e3a8a;
+    --teks: #121c2a;
+    --teks-2: #414753;
+    --teks-muted: #505a63;
+    --teks-pudar: #6b7280;
+    --garis: #e5e7eb;
+    --panel: #f8fafc;
+    --panel-2: #f3f4f6;
+    --bahaya: #b91c1c;
+    --r: 8px;
+    --r-besar: 12px;
+    --bayangan: 0 1px 2px rgba(31, 41, 56, .03), 0 1px 3px rgba(31, 41, 56, .05);
+    --fs-isi: 15px;
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: normal;
+    color: #121c2a;
+    background: linear-gradient(180deg, #ffffff 0%, #e8f2fd 100%) fixed, #ffffff;
+}
+
+/* 2. Navbar publik / calon (calon-penghuni/style.css) ===================== */
+.k-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.k-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.k-logo-judul {
+    font-weight: 700;
+    font-size: 25px;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+.k-logo-divider {
+    color: #cbd5e1;
+    font-weight: 300;
+}
+
+.k-logo-pendukung {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.k-navbar {
+    height: 72px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.k-navbar-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.k-menu {
+    display: flex;
+    gap: 24px;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.k-nav {
+    text-decoration: none;
+    color: #64748b;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.k-nav.active,
+.k-nav:hover {
+    color: #2563eb;
+}
+
+.k-nav.active {
+    font-weight: 600;
+}
+
+.k-nav-actions-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.k-nav-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.k-user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.k-btn-icon-notif {
+    position: relative;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.k-badge-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+}
+
+.k-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.k-user-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.k-user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1e293b;
+}
+
+.k-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.k-btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+}
+
+.k-btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.k-btn-outline {
+    background-color: transparent;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+}
+
+.k-btn-outline:hover {
+    background-color: #f8fafc;
+}
+
+.k-btn-sm {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+}
+
+/* isi halaman ber-navbar */
+.k-halaman.halaman {
+    padding: 0 20px;
+    margin-bottom: 35px;
+}
+
+@media (max-width: 768px) {
+    .k-halaman.halaman {
+        padding: 30px 20px 76px;
+        margin-bottom: 0;
+        min-height: 65vh;
+    }
+}
+
+/* 3. Footer (calon-penghuni/style.css) ==================================== */
+.k-footer {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    padding: 20px 0 24px 0;
+    text-align: center;
+}
+
+.k-footer-logo {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+}
+
+.k-footer-tagline,
+.k-footer-location {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+
+.k-kontak {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 24px 0;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.k-kontak a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.k-copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* 4. Kerangka penghuni (penghuni/style.css) =============================== */
+body.tema-kelompok.kerangka-sidebar {
+    font-size: 14px;
+}
+
+.k-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 208px;
+    padding: 0 9px;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+}
+
+.k-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 15px;
+}
+
+.k-nav-link,
+.k-logout-button {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 41px;
+    padding: 0 12px;
+    color: #1e293b;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.18s;
+}
+
+.k-nav-link:hover,
+.k-logout-button:hover {
+    background: #f8fafc;
+}
+
+.k-nav-link.active {
+    color: #2563eb;
+    font-weight: 600;
+    background: #e8f1ff;
+}
+
+.k-nav-icon {
+    width: 15px;
+    flex-shrink: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.k-sidebar-bottom {
+    margin-top: auto;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 11px;
+    min-height: 41px;
+    padding: 6px;
+    margin-right: 2px;
+    font-size: 13px;
+}
+
+.k-logout-button {
+    width: 100%;
+    color: #be123c;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.k-main-area {
+    min-height: 100vh;
+    margin-left: 208px;
+}
+
+.k-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 65px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.k-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 27px;
+}
+
+.k-header .k-logo {
+    gap: 10px;
+}
+
+.k-header .k-logo-judul {
+    color: #1e3a8a;
+    font-size: 20px;
+    letter-spacing: -0.8px;
+}
+
+.k-header .k-logo-divider {
+    color: #d5dae3;
+    font-weight: 400;
+}
+
+.k-header .k-logo-pendukung {
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.k-header-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.k-header-notif {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: #1e293b;
+}
+
+.k-header-notif svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.k-header-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 7px;
+    height: 7px;
+    background: #be123c;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+}
+
+.k-header-dot[hidden] {
+    display: none;
+}
+
+.k-header-divider {
+    width: 1px;
+    height: 28px;
+    background: #e2e8f0;
+}
+
+.k-header-account {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+.k-header-avatar {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    color: #ffffff;
+    font-weight: 600;
+    background: #2563eb;
+    border-radius: 50%;
+}
+
+.k-container.k-konten {
+    max-width: 1240px;
+    padding: 27px 27px 50px;
+}
+
+.k-konten > .halaman {
+    padding: 0;
+}
+
+@media (max-width: 680px) {
+    /* di repo kelompok sidebar tersembunyi dan TIDAK ada tombol pembukanya */
+    .k-sidebar {
+        width: 245px;
+        box-shadow: 10px 0 30px #17243a12;
+        transform: translateX(-100%);
+        transition: transform 0.22s ease;
+    }
+
+    .k-sidebar.terbuka {
+        transform: translateX(0);
+    }
+
+    .k-main-area {
+        margin-left: 0;
+    }
+
+    .k-header {
+        height: 58px;
+        padding: 0 15px;
+    }
+
+    .k-header-container {
+        padding: 0;
+    }
+
+    .k-header .k-logo {
+        gap: 7px;
+    }
+
+    .k-header .k-logo-judul {
+        font-size: 16px;
+    }
+
+    .k-header .k-logo-pendukung {
+        font-size: 10px;
+    }
+
+    .k-header-profile {
+        gap: 9px;
+    }
+
+    .k-header-name {
+        display: none;
+    }
+
+    .k-container.k-konten {
+        padding: 27px 20px 50px;
+    }
+}
+
+/* 5. Kerangka admin (admin/css/style.css + responsive.css) ================ */
+.a-ikon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: currentColor;
+    -webkit-mask: var(--ikon) center / contain no-repeat;
+    mask: var(--ikon) center / contain no-repeat;
+}
+
+.a-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 40;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 16px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .02);
+    overflow-y: auto;
+}
+
+.a-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.a-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    color: #414753;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    cursor: pointer;
+    transition: background-color .15s, color .15s;
+}
+
+.a-nav-link:hover {
+    background: #f8fafc;
+    color: #121c2a;
+}
+
+.a-nav-link.is-active {
+    background: #e8f2fd;
+    color: #1a6fd8;
+    font-weight: 600;
+}
+
+.a-sidebar-footer {
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.a-nav-link-danger,
+.a-nav-link-danger:hover {
+    color: #dc2626;
+}
+
+.a-nav-link-danger:hover {
+    background: #fef2f2;
+}
+
+.a-app-body {
+    padding-left: 260px;
+    padding-top: 64px;
+    min-height: 100vh;
+}
+
+.a-topbar {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    right: 0;
+    z-index: 30;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    filter: drop-shadow(0 1px 1.5px rgba(31, 41, 55, .03));
+}
+
+.a-topbar-left,
+.a-topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.a-topbar-left {
+    gap: 8px;
+}
+
+.a-topbar-right {
+    gap: 16px;
+}
+
+.a-logo {
+    display: inline-flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.55px;
+    line-height: 33px;
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+.a-logo-rumah {
+    width: 17.3px;
+    height: 15px;
+    margin: 0 1px;
+    color: #1e3a8a;
+}
+
+.a-topbar-divider {
+    width: 1px;
+    height: 24px;
+    background: #e5e7eb;
+}
+
+.a-topbar-divider-sm {
+    height: 16px;
+    margin: 0 4px;
+}
+
+.a-topbar-kos {
+    font-size: 14px;
+    line-height: 21px;
+    color: #6b7280;
+}
+
+.a-icon-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 9999px;
+    color: #121c2a;
+    background: none;
+    cursor: pointer;
+    transition: background-color .15s;
+}
+
+.a-icon-btn:hover {
+    background: #f3f4f6;
+}
+
+.a-notif-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ba1a1a;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.a-sidebar-toggle {
+    display: none;
+    margin-right: 4px;
+}
+
+.a-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px;
+}
+
+.a-profile-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1a6fd8;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.a-profile-name {
+    font-size: 15px;
+    color: #121c2a;
+}
+
+.a-sidebar-backdrop {
+    display: none;
+}
+
+.a-main.halaman {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 32px 48px;
+}
+
+@media (max-width: 1279px) {
+    .a-main.halaman { padding: 28px 24px 40px; }
+    .a-topbar { padding: 0 24px; }
+}
+
+@media (max-width: 1023px) {
+    .a-app-body { padding-left: 0; }
+    .a-topbar { left: 0; }
+
+    .a-sidebar {
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        box-shadow: 0 0 40px rgba(18, 28, 42, .18);
+    }
+
+    body.sidebar-open .a-sidebar { transform: none; }
+
+    body.sidebar-open .a-sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 35;
+        background: rgba(31, 41, 55, .48);
+    }
+
+    body.sidebar-open { overflow: hidden; }
+    .a-sidebar-toggle { display: inline-flex; }
+}
+
+@media (max-width: 767px) {
+    body.tema-admin { font-size: 14px; }
+    .a-topbar { padding: 0 12px; height: 60px; }
+    .a-app-body { padding-top: 60px; }
+    .a-topbar-divider-sm, .a-topbar-kos, .a-profile-name { display: none; }
+    .a-topbar-right { gap: 8px; }
+    .a-logo { font-size: 20px; }
+    .a-main.halaman { padding: 20px 16px 32px; gap: 18px; }
+}
+
+/* 6. Komponen umum: tombol, kartu, badge, form ============================ */
+body.tema-kelompok .tombol {
+    min-height: 0;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+body.tema-kelompok .tombol--utama {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+body.tema-kelompok .tombol--utama:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+body.tema-kelompok .tombol--sekunder {
+    color: #1e293b;
+    background: transparent;
+    border: 1px solid #e2e8f0;
+}
+
+body.tema-kelompok .tombol--sekunder:hover {
+    background: #f8fafc;
+}
+
+body.tema-kelompok .tombol--kecil {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+}
+
+body.tema-kelompok .tombol:disabled,
+body.tema-kelompok .tombol[aria-disabled="true"] {
+    color: #94a3b8;
+    background: #e2e8f0;
+    border-color: #e2e8f0;
+}
+
+body.tema-kelompok .kartu {
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: none;
+}
+
+body.tema-kelompok.kerangka-sidebar .kartu {
+    padding: 20px;
+    border-radius: 11px;
+    box-shadow: 0 1px 2px #15233b08;
+}
+
+body.tema-kelompok .kepala-halaman h1,
+body.tema-kelompok .halaman h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1e293b;
+}
+
+body.tema-kelompok.kerangka-sidebar .kepala-halaman h1,
+body.tema-kelompok.kerangka-sidebar .halaman h1 {
+    font-size: 24px;
+}
+
+body.tema-kelompok .badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+body.tema-kelompok .badge::before {
+    display: none;
+}
+
+body.tema-kelompok .input,
+body.tema-kelompok .select,
+body.tema-kelompok .textarea {
+    min-height: 42px;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+body.tema-kelompok .label {
+    font-weight: 600;
+}
+
+body.tema-admin .tombol {
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+body.tema-admin .kartu {
+    border-color: #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(31, 41, 56, .03), 0 1px 3px rgba(31, 41, 56, .05);
+}
+
+body.tema-admin .kepala-halaman h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #121c2a;
+}
+
+/* 7. Variabel & kelas umum repo kelompok (dipakai CSS halaman di assets/css/kelompok/) */
+:root {
+    --primary-blue: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-footer: #1e3a8a;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --bg-light: #f8fafc;
+    --bg-white: #ffffff;
+    --border-color: #e2e8f0;
+    --badge-green-bg: #dcfce7;
+    --badge-green-text: #15803d;
+    --badge-red-bg: #ffe4e6;
+    --badge-red-text: #be123c;
+    --badge-yellow-bg: #fef3c7;
+    --badge-yellow-text: #92400e;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* 8. Reset seperti repo kelompok (calon-penghuni & penghuni memakai `* { margin:0; padding:0 }`).
+      Seluruh awalan dibungkus :where() supaya bobotnya 0 — kelas mana pun tetap menang. */
+:where(body.tema-kelompok main.halaman) * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* judul mewarisi warna & tinggi baris dari induknya seperti di repo kelompok
+   (bobot sama dengan aturan h1–h4 di base.css, menang karena dimuat belakangan) */
+:where(body.tema-kelompok main.halaman) :is(h1, h2, h3, h4) {
+    color: inherit;
+    line-height: inherit;
+    overflow-wrap: normal;
+}
+
+:where(body.tema-kelompok.kerangka-sidebar main.halaman) a {
+    color: inherit;
+    text-decoration: none;
+}
+
+:where(body.tema-kelompok main.halaman) :is(button, input, select, textarea) {
+    font: inherit;
+}
+
+/* 9. .container milik repo kelompok (dipakai di halaman berlebar penuh, mis. Beranda) */
+body.tema-kelompok .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+body.tema-kelompok main.halaman.halaman--penuh {
+    padding: 0;
+    max-width: none;
+}
+
+/* 10. Logo di dalam halaman (kartu Masuk/Daftar) — calon-penghuni/style.css */
+body.tema-kelompok main .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+body.tema-kelompok main .logo-judul {
+    font-weight: 700;
+    font-size: 25px;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+body.tema-kelompok main .logo-divider {
+    color: #cbd5e1;
+    font-weight: 300;
+}
+
+body.tema-kelompok main .logo-pendukung {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* daftar Tentang memakai penanda bawaan browser seperti di repo kelompok
+   (base.css sipenkos2 menghapus penanda semua daftar) */
+body.tema-kelompok .keunggulan {
+    list-style: disc;
+}
+
+/* 11. Penyesuaian gaya admin */
+body.tema-admin .a-sidebar .a-nav-link {
+    color: #414753;
+}
+
+body.tema-admin .a-sidebar .a-nav-link.is-active {
+    color: #1a6fd8;
+}
+
+body.tema-admin .a-sidebar .a-nav-link-danger,
+body.tema-admin .a-sidebar .a-nav-link-danger:hover {
+    color: #dc2626;
+}
+
+body.tema-admin .badge::before {
+    display: none;
+}
+
+body.tema-admin .select-btn .select-polos {
+    padding: 0 4px;
+    color: inherit;
+    font: inherit;
+    background: none;
+    border: 0;
+    appearance: none;
+    cursor: pointer;
+}
+
+#wadahNotifikasi {
+    display: contents;
+}
+
+/* tombol & dialog sipenkos2 di halaman pemilik → gaya tombol admin
+   (reset tombol admin/css/style.css membuat .tombol kehilangan latar) */
+body.tema-admin .tombol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 42px;
+    padding: 10px 19px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+body.tema-admin .tombol--utama { background: #1a6fd8; color: #fff; }
+body.tema-admin .tombol--utama:hover { background: #155fbc; }
+body.tema-admin .tombol--sekunder,
+body.tema-admin .tombol--batal { background: #fff; border-color: #e5e7eb; color: #121c2a; }
+body.tema-admin .tombol--sekunder:hover,
+body.tema-admin .tombol--batal:hover { background: #f8fafc; border-color: #d1d5db; }
+body.tema-admin .tombol--bahaya { background: #dc2626; color: #fff; }
+body.tema-admin .tombol--ikon { min-height: 36px; width: 36px; padding: 0; border-radius: 9999px; }
+body.tema-admin .tombol:disabled { opacity: .55; cursor: not-allowed; }
+
+body.tema-admin .dialog {
+    border-radius: 16px;
+    box-shadow: 0 24px 48px -12px rgba(18, 28, 42, .25), 0 4px 12px rgba(18, 28, 42, .08);
+}
+
+body.tema-admin .dialog-kepala h2 {
+    font-size: 20px;
+    font-weight: 700;
+}

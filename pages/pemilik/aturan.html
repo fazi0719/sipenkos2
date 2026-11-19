@@ -7,6 +7,8 @@
   <title>Kebijakan &amp; Aturan Kos · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,26 +20,36 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
   <script src="../../assets/js/pages/pemilik/aturan.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="aturan" data-judul="Kebijakan &amp; Aturan Kos">
   <main>
-    <div class="kepala-halaman">
+    <div class="page-header">
       <div>
-        <h1>Kebijakan &amp; Aturan Kos</h1>
-        <p class="sub">Aturan ini tampil di halaman Tentang dan di akun penghuni</p>
-        <p class="kecil muted mt-2" id="diperbarui"></p>
+        <h1 class="page-title">Kebijakan &amp; Aturan Kos</h1>
+        <p class="page-subtitle">Atur pedoman dan tata tertib kos yang berlaku untuk seluruh penghuni</p>
       </div>
-      <button type="button" class="tombol tombol--sekunder" id="tambahKelompok"><i data-ikon="add"></i>Tambah Kelompok</button>
+      <div class="page-actions" id="aksiLihat">
+        <button type="button" class="btn btn-secondary btn-sm" id="ubah"><i class="icon icon-pencil" aria-hidden="true"></i>Edit Aturan</button>
+      </div>
+      <div class="page-actions" id="aksiUbah" hidden>
+        <button type="button" class="btn btn-secondary btn-sm" id="batal">Batal</button>
+        <button type="button" class="btn btn-primary btn-sm" id="simpan">Simpan Perubahan</button>
+      </div>
     </div>
-
-    <form class="tumpuk" id="formAturan" novalidate>
-      <div class="tumpuk" id="daftarKelompok"></div>
-      <div class="kaki-form">
-        <p class="bantuan">Tulis satu aturan per baris.</p>
-        <button type="submit" class="tombol tombol--utama">Simpan Aturan</button>
+    <div class="banner banner-info banner-tight"><div class="banner-body"><i class="icon icon-info" aria-hidden="true"></i><span id="diperbarui">Aturan ini tampil di halaman Kebijakan penghuni</span></div></div>
+    <div class="card rules-card" id="rules">
+      <div class="rules-head">
+        <h2 class="rules-head-title"><i class="icon icon-book-open" aria-hidden="true"></i>Tata Tertib Kos Bu Nining</h2>
+        <span class="rules-count" id="jumlah">0 aturan</span>
       </div>
-    </form>
+      <div class="rules-list" id="rulesLihat"></div>
+      <div class="rules-list" id="rulesUbah" hidden>
+        <div class="rules-rows" id="baris"></div>
+        <button type="button" class="rule-add" id="tambah">+ Tambah Aturan Baru</button>
+      </div>
+    </div>
   </main>
 </body>
 </html>

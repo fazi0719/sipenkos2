@@ -1,0 +1,243 @@
+/* Disalin dari repo kelompok, setiap selector diberi awalan body.tema-kelompok.kerangka-sidebar */
+body.tema-kelompok.kerangka-sidebar .welcome-heading {
+    margin-bottom: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .welcome-heading h1 {
+    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+}
+body.tema-kelompok.kerangka-sidebar .welcome-heading p {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .bill-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 64px;
+    margin-bottom: 19px;
+    padding: 12px 20px;
+    color: var(--badge-yellow-text);
+    background: var(--badge-yellow-bg);
+    border: 1px solid #fcd34d;
+    border-radius: 11px;
+}
+body.tema-kelompok.kerangka-sidebar .bill-alert-copy {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .alert-clock {
+    font-size: 19px;
+}
+body.tema-kelompok.kerangka-sidebar .primary-button {
+    display: inline-block;
+    padding: 11px 21px;
+    color: white;
+    background: var(--primary-blue);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+body.tema-kelompok.kerangka-sidebar .primary-button:hover {
+    background: var(--primary-hover);
+}
+body.tema-kelompok.kerangka-sidebar .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 19px;
+    margin-bottom: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .summary-card, body.tema-kelompok.kerangka-sidebar .room-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 11px;
+    box-shadow: 0 1px 2px #15233b08;
+}
+body.tema-kelompok.kerangka-sidebar .summary-card {
+    min-height: 118px;
+    padding: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .card-label {
+    margin-bottom: 9px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .summary-card h2 {
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+body.tema-kelompok.kerangka-sidebar .summary-card > a {
+    color: var(--primary-blue);
+    font-size: 12px;
+    font-weight: 500;
+}
+body.tema-kelompok.kerangka-sidebar .summary-card > a:hover {
+    color: var(--primary-hover);
+}
+body.tema-kelompok.kerangka-sidebar .summary-card > a span {
+    font-size: 14px;
+}
+body.tema-kelompok.kerangka-sidebar .last-payment-line {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+}
+body.tema-kelompok.kerangka-sidebar .last-payment-line h2 {
+    margin: 0;
+}
+body.tema-kelompok.kerangka-sidebar .status-pill {
+    padding: 5px 9px;
+    color: var(--badge-green-text);
+    background: var(--badge-green-bg);
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .status-pill.pending {
+    color: var(--badge-yellow-text);
+    background: var(--badge-yellow-bg);
+}
+body.tema-kelompok.kerangka-sidebar .status-pill.rejected {
+    color: var(--badge-red-text);
+    background: var(--badge-red-bg);
+}
+body.tema-kelompok.kerangka-sidebar .room-card {
+    padding: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .section-card-title {
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .room-detail {
+    display: grid;
+    grid-template-columns: minmax(210px, 263px) 1fr;
+    align-items: start;
+    gap: 20px;
+}
+body.tema-kelompok.kerangka-sidebar .room-detail > img {
+    width: 100%;
+    height: 164px;
+    object-fit: cover;
+    background: #eef1f5;
+    border-radius: 7px;
+}
+body.tema-kelompok.kerangka-sidebar .room-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 164px;
+}
+body.tema-kelompok.kerangka-sidebar .room-info h3 {
+    margin: 5px 0 7px;
+    font-size: 16px;
+    font-weight: 650;
+}
+body.tema-kelompok.kerangka-sidebar .room-price {
+    margin-bottom: 9px;
+    color: var(--primary-blue);
+    font-size: 14px;
+    font-weight: 600;
+}
+body.tema-kelompok.kerangka-sidebar .room-period {
+    color: var(--text-muted);
+    font-size: 11px;
+}
+body.tema-kelompok.kerangka-sidebar .secondary-button {
+    display: inline-block;
+    margin-top: auto;
+    padding: 10px 19px;
+
+    color: var(--text-dark);
+    font-size: 11px;
+    font-weight: 500;
+
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    transition: 0.2s;
+}
+body.tema-kelompok.kerangka-sidebar .secondary-button:hover {
+    background: var(--bg-light);
+}
+body.tema-kelompok.kerangka-sidebar .toast-message {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    z-index: 50;
+    padding: 11px 16px;
+    color: white;
+    font-size: 12px;
+    background: var(--text-dark);
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 15px);
+    transition: 0.2s;
+}
+body.tema-kelompok.kerangka-sidebar .toast-message.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+@media (max-width: 680px) {
+  body.tema-kelompok.kerangka-sidebar .main-area {
+        margin-left: 0;
+    }
+  body.tema-kelompok.kerangka-sidebar .welcome-heading h1 {
+        font-size: 21px;
+    }
+  body.tema-kelompok.kerangka-sidebar .bill-alert {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px;
+    }
+  body.tema-kelompok.kerangka-sidebar .bill-alert-copy {
+        line-height: 1.5;
+    }
+  body.tema-kelompok.kerangka-sidebar .primary-button {
+        align-self: flex-end;
+    }
+  body.tema-kelompok.kerangka-sidebar .summary-grid {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+  body.tema-kelompok.kerangka-sidebar .summary-card {
+        min-height: auto;
+        padding: 16px;
+    }
+  body.tema-kelompok.kerangka-sidebar .summary-card h2 {
+        margin-bottom: 8px;
+    }
+  body.tema-kelompok.kerangka-sidebar .last-payment-line {
+        margin-bottom: 8px;
+    }
+  body.tema-kelompok.kerangka-sidebar .room-card {
+        padding: 16px;
+    }
+  body.tema-kelompok.kerangka-sidebar .room-detail {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+  body.tema-kelompok.kerangka-sidebar .room-detail > img {
+        height: 205px;
+    }
+  body.tema-kelompok.kerangka-sidebar .room-info {
+        min-height: 150px;
+    }
+  body.tema-kelompok.kerangka-sidebar .room-info h3 {
+        font-size: 15px;
+    }
+  body.tema-kelompok.kerangka-sidebar .secondary-button {
+        margin-top: 20px;
+    }
+}

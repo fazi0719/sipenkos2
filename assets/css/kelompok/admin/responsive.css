@@ -1,0 +1,86 @@
+/* Disalin dari repo kelompok, setiap selector diberi awalan body.tema-admin */
+@media (max-width: 1279px) {
+  body.tema-admin .stats-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.tema-admin .search, body.tema-admin .search-sm, body.tema-admin .search-md, body.tema-admin .search-xs { width: 240px; }
+}
+@media (max-width: 1023px) {
+  body.tema-admin { --sidebar-w: 260px; }
+  body.tema-admin.sidebar-open .sidebar { transform: none; }
+  body.tema-admin.sidebar-open .sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 35;
+        background: var(--overlay);
+        animation: fade-in .2s ease-out;
+    }
+  body.tema-admin.sidebar-open { overflow: hidden; }
+  body.tema-admin .grid-2 { grid-template-columns: 1fr; }
+  body.tema-admin .stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  body.tema-admin .stat-money .stat-value { font-size: 20px; }
+  body.tema-admin .toolbar { align-items: stretch; }
+  body.tema-admin .toolbar-right { flex-wrap: wrap; }
+  body.tema-admin .page-header { flex-wrap: wrap; align-items: flex-start; }
+  body.tema-admin .doc-layout, body.tema-admin .report-layout { grid-template-columns: 1fr; }
+  body.tema-admin .doc-layout .media, body.tema-admin .report-layout .media { width: 100%; height: auto; aspect-ratio: 280 / 180; }
+  body.tema-admin .report-layout .media { aspect-ratio: 300 / 190; }
+  body.tema-admin .proof-layout { grid-template-columns: 180px 1fr; }
+  body.tema-admin .proof-layout .media { width: 180px; height: 342px; }
+}
+@media (max-width: 767px) {
+  body.tema-admin { font-size: 14px; }
+  body.tema-admin { --header-h: 60px; }
+  body.tema-admin .list-section { gap: 18px; }
+  body.tema-admin .page-title { font-size: 23px; }
+  body.tema-admin .page-subtitle { font-size: 14px; }
+  body.tema-admin .page-actions { width: 100%; flex-wrap: wrap; }
+  body.tema-admin .page-actions .btn, body.tema-admin .page-actions .dropdown { flex: 1 1 auto; }
+  body.tema-admin .page-actions .select-btn { width: 100%; justify-content: center; }
+  body.tema-admin .banner { flex-direction: column; align-items: flex-start; padding: 12px 14px; }
+  body.tema-admin .banner-body { font-size: 14px; align-items: flex-start; }
+  body.tema-admin .banner .btn { width: 100%; }
+  body.tema-admin .stats, body.tema-admin .stats-3, body.tema-admin .stats-4 { grid-template-columns: 1fr 1fr; gap: 12px; }
+  body.tema-admin .stats-3 .stat-money:last-child { grid-column: 1 / -1; }
+  body.tema-admin .stat { padding: 16px; gap: 10px; }
+  body.tema-admin .stat-row { flex-direction: column; align-items: flex-start; }
+  body.tema-admin .stat-value { font-size: 22px; }
+  body.tema-admin .stat-label { font-size: 14px; }
+  body.tema-admin .toolbar { flex-direction: column; gap: 12px; }
+  body.tema-admin .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+  body.tema-admin .chips::-webkit-scrollbar { display: none; }
+  body.tema-admin .toolbar-right { flex-direction: column; align-items: stretch; width: 100%; }
+  body.tema-admin .search, body.tema-admin .search-sm, body.tema-admin .search-md, body.tema-admin .search-xs { width: 100%; }
+  body.tema-admin .dropdown-select .select-btn { width: 100%; }
+  body.tema-admin .card-head-bar { padding: 16px; flex-wrap: wrap; }
+  body.tema-admin .card-pad, body.tema-admin .dashboard-card-pad, body.tema-admin .rules-card { padding: 16px; }
+  body.tema-admin .card-title { font-size: 16px; }
+  body.tema-admin .table th, body.tema-admin .table td { padding-left: 16px; padding-right: 16px; }
+  body.tema-admin .table td { height: 60px; font-size: 14px; }
+  body.tema-admin .table-wrap { overflow-x: auto; }
+  body.tema-admin .table { min-width: 720px; }
+  body.tema-admin .task-item { flex-wrap: wrap; }
+  body.tema-admin .task-item .btn { margin-left: 50px; }
+  body.tema-admin .modal { padding: 12px; align-items: flex-end; }
+  body.tema-admin .modal-dialog, body.tema-admin .modal-form { padding: 20px 18px; border-radius: 16px; }
+  body.tema-admin .modal-title { font-size: 18px; }
+  body.tema-admin .modal-actions { flex-direction: column-reverse; align-items: stretch; }
+  body.tema-admin .modal-actions .btn { width: 100%; }
+  body.tema-admin .modal-actions-split { flex-direction: row; }
+  body.tema-admin .form-grid-2 { grid-template-columns: 1fr; }
+  body.tema-admin .proof-layout { grid-template-columns: 1fr; }
+  body.tema-admin .proof-layout .media { width: 100%; max-width: 240px; height: auto; aspect-ratio: 200 / 380; margin: 0 auto; }
+  body.tema-admin .detail-row { font-size: 13px; }
+  body.tema-admin .modal-actions-form .btn-text { margin-right: 0; }
+  body.tema-admin .notif-item { flex-wrap: wrap; padding: 14px 16px; gap: 12px; }
+  body.tema-admin .notif-body { flex-basis: calc(100% - 80px); }
+  body.tema-admin .notif-item .badge { margin-left: 50px; }
+  body.tema-admin .notif-text { font-size: 14px; }
+  body.tema-admin .rule-edit { flex-wrap: wrap; }
+  body.tema-admin .rule-edit .rule-fields { flex-basis: calc(100% - 100px); }
+  body.tema-admin .toast-stack { left: 12px; right: 12px; bottom: 12px; }
+  body.tema-admin .toast { max-width: none; }
+}
+@media (max-width: 359px) {
+  body.tema-admin .stats, body.tema-admin .stats-3, body.tema-admin .stats-4 { grid-template-columns: 1fr; }
+  body.tema-admin .stats-3 .stat-money:last-child { grid-column: auto; }
+}

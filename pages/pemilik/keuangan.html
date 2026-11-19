@@ -7,6 +7,8 @@
   <title>Laporan Keuangan · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,52 +20,48 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
   <script src="../../assets/js/pages/pemilik/keuangan.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="keuangan" data-judul="Laporan Keuangan">
   <main>
-    <div class="kepala-halaman">
+    <div class="page-header">
       <div>
-        <h1>Laporan Keuangan</h1>
-        <p class="sub">Pendapatan sewa berdasarkan pembayaran yang sudah dikonfirmasi</p>
+        <h1 class="page-title">Laporan Keuangan</h1>
+        <p class="page-subtitle">Pantau pendapatan sewa, pembayaran yang menunggu, dan tunggakan kos</p>
       </div>
-      <div class="baris-tombol">
-        <div class="field">
-          <label class="sr-only" for="tahun">Tahun</label>
-          <div class="input-ikon"><select class="select" id="tahun"></select><i data-ikon="expand_more"></i></div>
-        </div>
-        <button type="button" class="tombol tombol--sekunder" id="cetak"><i data-ikon="print"></i>Cetak</button>
+      <div class="page-actions">
+        <label class="select-btn"><i class="icon icon-calendar" aria-hidden="true"></i><span class="sr-only">Periode</span><select id="periode" class="select-polos"></select><i class="icon icon-chevron-down" aria-hidden="true"></i></label>
+        <button type="button" class="btn btn-secondary btn-sm" id="cetak">Unduh Laporan</button>
       </div>
     </div>
-
-    <div class="grid-3 mb-6" id="statistik"></div>
-
-    <section class="kartu mb-6" aria-labelledby="judulGrafik">
-      <h2 class="kartu-judul" id="judulGrafik">Pendapatan per Bulan</h2>
-      <div class="grafik" id="grafik" role="img"></div>
-    </section>
-
-    <div class="grid-2 grid-atas">
-      <section class="kartu kartu--rapat" aria-labelledby="judulTransaksi">
-        <div class="kartu-kepala kepala-tabel"><h2 class="kartu-judul" id="judulTransaksi">Transaksi Masuk</h2></div>
-        <div class="tabel-gulir">
-          <table class="tabel tabel--responsif">
-            <caption class="sr-only">Transaksi masuk</caption>
-            <thead><tr><th scope="col">Tanggal</th><th scope="col">Penghuni</th><th scope="col" class="angka">Jumlah</th></tr></thead>
-            <tbody id="tabelTransaksi"></tbody>
-          </table>
-        </div>
-      </section>
-      <section class="kartu kartu--rapat" aria-labelledby="judulTunggakan">
-        <div class="kartu-kepala kepala-tabel"><h2 class="kartu-judul" id="judulTunggakan">Tunggakan</h2></div>
-        <div class="tabel-gulir">
-          <table class="tabel tabel--responsif">
-            <caption class="sr-only">Tagihan yang lewat jatuh tempo</caption>
-            <thead><tr><th scope="col">Penghuni</th><th scope="col">Periode</th><th scope="col" class="angka">Jumlah</th></tr></thead>
-            <tbody id="tabelTunggakan"></tbody>
-          </table>
-        </div>
-      </section>
+    <section class="stats stats-3" aria-label="Ringkasan keuangan" id="statistik"></section>
+    <div class="card">
+      <div class="card-head card-head-bar">
+        <h2 class="card-title">Pemasukan Sewa</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="table table-keuangan">
+          <thead>
+            <tr><th>Tanggal</th><th>Kategori</th><th>Keterangan</th><th class="ta-right">Nominal</th></tr>
+          </thead>
+          <tbody id="tabelTransaksi"></tbody>
+          <tfoot><tr><td>Total</td><td></td><td></td><td class="ta-right nowrap" id="totalTransaksi">-</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head card-head-bar">
+        <h2 class="card-title">Tunggakan</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="table table-keuangan">
+          <thead>
+            <tr><th>Jatuh Tempo</th><th>Penghuni</th><th>Keterangan</th><th class="ta-right">Nominal</th></tr>
+          </thead>
+          <tbody id="tabelTunggakan"></tbody>
+        </table>
+      </div>
     </div>
   </main>
 </body>

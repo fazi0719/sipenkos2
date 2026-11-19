@@ -7,7 +7,8 @@
   <title>Detail Kamar · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/pages/publik.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/detail-kamar.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -21,57 +22,78 @@
   <!-- skrip khusus halaman ini -->
   <script src="../../assets/js/pages/publik/detail-kamar.js" defer></script>
 </head>
-<body data-layout="tamu" data-akses="publik" data-menu="kamar" data-judul="Detail Kamar">
+<body data-lebar="penuh" data-layout="tamu" data-akses="publik" data-menu="kamar" data-judul="Detail Kamar">
   <main>
-    <a class="tautan-kembali" href="kamar.html"><i data-ikon="arrow_back"></i>Kembali ke Daftar Kamar</a>
+    <section class="section-halaman">
+      <div class="container">
+        <a href="kamar.html" class="back-link">← Kembali ke Daftar Kamar</a>
 
-    <div id="tidakAda" hidden></div>
-
-    <div id="isi" hidden>
-      <div class="kepala-halaman">
-        <h1 id="judul">-</h1>
-        <span class="chip-alamat"><i data-ikon="location_on" class="kecil"></i><span id="alamat"></span></span>
-      </div>
-
-      <div class="detail-atas">
-        <div>
-          <div class="galeri-utama"><img id="fotoUtama" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></div>
-          <div class="galeri-thumb" id="thumb" role="group" aria-label="Foto lainnya"></div>
+        <div class="detail-header">
+          <h1 class="tipe-kamar" id="judul">Memuat Detail Kamar...</h1>
+          <div class="lokasi-tag">
+            <span class="icon">📍</span> <span id="alamat">Jl. Pisang Agung III No. 29, Malang</span>
+          </div>
         </div>
 
-        <aside class="kartu tumpuk" aria-label="Reservasi">
-          <div>
-            <p class="label-blok">Status Ketersediaan</p>
-            <div id="status"></div>
+        <div class="detail-grid">
+          <div class="galeri-detail">
+            <div class="card-galeri">
+              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Foto Utama Kamar" class="foto-utama" id="fotoUtama">
+            </div>
+            <div class="galeri-tambahan" id="galeriTambahan" aria-label="Foto tambahan kamar"></div>
           </div>
-          <div class="blok-harga">
-            <p class="label-blok">Biaya Sewa</p>
-            <strong id="harga">-</strong> <small>/ bulan</small>
-          </div>
-          <fieldset class="fieldset">
-            <legend class="label-blok">Pilihan Durasi Sewa</legend>
-            <div class="opsi-grid" id="durasi"></div>
-          </fieldset>
-          <div>
-            <button type="button" class="tombol tombol--utama tombol--penuh" id="tombolReservasi">Reservasi Sekarang</button>
-            <p class="bantuan teks-tengah mt-2" id="catatanReservasi">Kamu perlu masuk atau daftar akun untuk reservasi</p>
-          </div>
-        </aside>
-      </div>
 
-      <section class="kartu">
-        <h2 class="kartu-judul">Deskripsi Kamar</h2>
-        <p class="muted" id="deskripsi"></p>
-        <h3 class="sub-bagian">Fasilitas Kamar</h3>
-        <div class="chip-grid" id="fasilitasKamar"></div>
-        <h3 class="sub-bagian">Fasilitas Bersama &amp; Umum</h3>
-        <div class="chip-grid" id="fasilitasBersama"></div>
-        <div class="kotak-info mt-6">
-          <i data-ikon="info"></i>
-          <p>Ingin tahu jam bertamu dan tata tertib hunian? <a href="tentang.html#aturan">Baca aturan kos selengkapnya</a></p>
+          <div class="card-box reservasi-box">
+            <div class="status-group">
+              <span class="label">Status Ketersediaan</span>
+              <span class="tersedia" id="status">Tersedia</span>
+            </div>
+
+            <div class="harga-container">
+              <span class="label">Biaya Sewa</span>
+              <div class="harga"><span class="nominal" id="harga">Rp -</span> / bulan</div>
+              <div class="total-durasi-box" id="boxTotal" aria-live="polite" hidden>
+                <span class="total-durasi-caption">Total biaya untuk <strong id="durasiTerpilih"></strong> bulan</span>
+                <strong class="total-durasi-nominal" id="totalHargaDurasi">Rp -</strong>
+              </div>
+            </div>
+
+            <div class="durasi-container">
+              <span class="label">Pilihan Durasi Sewa</span>
+              <div class="durasi-group">
+                <button type="button" class="btn btn-outline btn-durasi" data-durasi="1" aria-pressed="false">1 Bulan</button>
+                <button type="button" class="btn btn-outline btn-durasi" data-durasi="6" aria-pressed="false">6 Bulan</button>
+                <button type="button" class="btn btn-outline btn-durasi" data-durasi="12" aria-pressed="false">12 Bulan</button>
+              </div>
+            </div>
+
+            <a href="#" class="btn btn-primary btn-full btn-reservasi" id="tombolReservasi">Reservasi Sekarang</a>
+            <p class="catatan-reservasi" id="catatanReservasi">Kamu perlu masuk atau daftar akun untuk reservasi</p>
+          </div>
         </div>
-      </section>
-    </div>
+
+        <div class="card-box deskripsi-box">
+          <h2 class="judul-box">Deskripsi Kamar</h2>
+          <p class="deskripsi-kamar" id="deskripsi">Memuat deskripsi...</p>
+
+          <div class="fasilitas-wrapper">
+            <h3 class="subjudul-box">Fasilitas Kamar</h3>
+            <ul class="fasilitas" id="fasilitasKamar"></ul>
+          </div>
+
+          <div class="fasilitas-wrapper">
+            <h3 class="subjudul-box">Fasilitas Bersama &amp; Umum</h3>
+            <ul class="fasilitas">
+              <li class="item-fasilitas"><span class="icon">📶</span> <span>Wi-Fi</span></li>
+              <li class="item-fasilitas"><span class="icon">🍳</span> <span>Dapur Bersama</span></li>
+              <li class="item-fasilitas"><span class="icon">⚡</span> <span>Listrik Token</span></li>
+              <li class="item-fasilitas"><span class="icon">🛵</span> <span>Parkir Motor</span></li>
+              <li class="item-fasilitas"><span class="icon">📹</span> <span>CCTV 24 Jam</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </body>
 </html>

@@ -7,6 +7,9 @@
   <title>Pembayaran Sewa · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/pembayaran.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/calon-penghuni/reservasi.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -22,41 +25,143 @@
 </head>
 <body data-layout="alur" data-akses="calon" data-judul="Pembayaran Sewa">
   <main>
-    <a class="tautan-kembali" id="kembali" href="formulir.html"><i data-ikon="arrow_back"></i>Kembali ke Formulir Reservasi</a>
-    <div id="langkah"></div>
+    <div class="rejection-notice" id="infoDitolak" role="alert" hidden></div>
+  <a href="formulir.html" id="kembali" class="back-link">
+    ← Kembali ke Formulir Reservasi
+  </a>
 
-    <div class="kepala-halaman">
-      <div>
-        <h1>Pembayaran Sewa Kamar</h1>
-        <p class="sub">Selesaikan pembayaran sewa bulan pertama untuk memproses reservasi kamu</p>
-      </div>
+  <div class="section-header">
+    <h1 class="judul-section">Pembayaran Sewa Kamar</h1>
+    <p class="deskripsi">Selesaikan pembayaran untuk melanjutkan proses reservasi kamar.
+    </p>
+  </div>
+
+  <div class="alur-card">
+    <div class="alur-sewa completed">
+      <span class="nomor">✓</span>
+      <span class="alur-label">Formulir Reservasi</span>
     </div>
-
-    <div class="kotak-status kotak-status--bahaya mb-6" id="infoDitolak" hidden>
-      <div class="kotak-status-teks">
-        <span class="badge badge--bahaya">Bukti Ditolak</span>
-        <p id="alasanDitolak"></p>
-      </div>
+    <span class="step-arrow">→</span>
+    <div class="alur-sewa active">
+      <span class="nomor">2</span>
+      <span class="alur-label">Pembayaran</span>
     </div>
+    <span class="step-arrow">→</span>
+    <div class="alur-sewa">
+      <span class="nomor">3</span>
+      <span class="alur-label">Menunggu Verifikasi</span>
+    </div>
+  </div>
 
-    <div class="grid-2 grid-atas">
-      <section class="kartu" aria-labelledby="judulRincian">
-        <h2 class="kartu-judul" id="judulRincian">Rincian Pembayaran</h2>
-        <div id="rincian"></div>
-        <div class="rincian-total">
-          <span>Total dibayar</span>
-          <strong id="total">-</strong>
+  <section class="grid-shell"
+    aria-label="Rincian dan formulir pembayaran">
+    <div class="grid-dua-kolom grid-dua-kolom--kanan-sempit">
+
+      <div class="card-box rincian-pembayaran-box">
+        <h2 class="judul-box">Rincian Pembayaran</h2>
+        <div class="rincian-list" id="paymentSummary">
+          <p class="pesan-memuat">Memuat rincian reservasi...</p>
         </div>
-        <div class="rekening mt-6" id="rekening"></div>
-      </section>
 
-      <section class="kartu tumpuk" aria-labelledby="judulUnggah">
-        <h2 class="kartu-judul" id="judulUnggah">Unggah Bukti Transfer</h2>
-        <div id="unggahBukti"></div>
-        <button type="button" class="tombol tombol--utama tombol--penuh" id="kirim" disabled><i data-ikon="send"></i>Kirim Bukti Pembayaran</button>
-        <p class="bantuan teks-tengah" id="bantuanWa"></p>
-      </section>
+        
+        <div class="pilihan-pembayaran">
+          <h3 class="subjudul-box">Pilihan Pembayaran</h3>
+          <div class="opsi-pembayaran">
+            <label class="opsi-item">
+              <input type="radio" name="tipePembayaran" value="pertama" checked>
+              <span class="opsi-konten">
+                <strong>Sewa Bulan Pertama</strong>
+                <small>Bayar sewa bulan pertama sekarang, bulan berikutnya ditagih setiap bulan sesuai durasi sewa.</small>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="metode-pembayaran">
+          <h3 class="subjudul-box">Metode Pembayaran</h3>
+          <div class="opsi-pembayaran">
+            <label class="opsi-item">
+              <input type="radio" name="metodePembayaran" value="transfer" checked>
+              <span class="opsi-konten">
+                <strong>Transfer Bank</strong>
+                <small>Pembayaran melalui transfer bank.</small>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="nominal-pembayaran">
+          <div class="nominal-item">
+            <span>Yang Dibayar Sekarang</span>
+            <strong id="paymentAmount">Rp 0</strong>
+          </div>
+          <div class="nominal-item" id="remainingPayment">
+            <span>Sisa Pembayaran</span>
+            <strong id="remainingAmount">Rp 0</strong>
+          </div>
+        </div>
+
+        <div id="installmentPreview" class="informasi" hidden></div>
+      </div>
+      
+      <div class="card-box upload-pembayaran-box">
+        <h2 class="judul-box">Unggah Bukti Pembayaran</h2>
+        <div class="rekening-box" id="bankInfo">
+          <div class="rekening-header">
+            <strong>Rekening Pembayaran</strong>
+            <span>Kos Bu Nining</span>
+          </div>
+
+          <div class="rekening-detail">
+            <div class="rekening-logo">BCA</div>
+            <div class="rekening-nomor">
+              <strong>123 456 7890</strong>
+              <small>a.n. Nining</small>
+            </div>
+
+            <button type="button" class="btn btn-outline btn-sm" id="copyAccount"> Salin </button>
+          </div>
+          <p class="catatan">
+            Pastikan nama penerima <strong>Nining</strong> sebelum melakukan transfer.
+          </p>
+        </div>
+        
+        <form id="paymentForm">
+          <div class="form-group">
+            <label class="form-label" for="paymentProof">Bukti Pembayaran</label>
+
+            <div class="upload-area" id="uploadArea">
+              <label for="paymentProof" class="upload-kosong" id="uploadEmpty">
+                <input type="file" id="paymentProof" accept=".jpg,.jpeg,.png" hidden>
+                <span class="upload-icon">⇧</span>
+                <strong id="uploadTitle">Klik atau seret file ke sini</strong>
+                <small id="uploadDescription">Format JPG atau PNG (maks. 5 MB)</small>
+              </label>
+
+              <div class="preview-file" id="filePreview" hidden>
+                <img class="preview-gambar" id="previewGambar" alt="Pratinjau bukti pembayaran" hidden>
+                <div class="preview-info">
+                  <span class="file-icon" id="fileIcon"></span>
+                  <div class="file-info">
+                    <strong id="fileName"></strong>
+                    <small id="fileSize"></small>
+                  </div>
+                  <button type="button" class="btn-hapus-file" id="removeFile" aria-label="Hapus file">✕</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="informasi" id="paymentNotice">
+            <span>ⓘ</span>
+            <p>Bukti transfer akan diperiksa oleh Bu Nining. Hasilnya akan dikirim lewat notifikasi di akun kamu.</p>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full btn-lg"
+            id="submitPayment" disabled>
+            Kirim Bukti Pembayaran
+          </button>
+        </form>
+      </div>
     </div>
+  </section>
   </main>
 </body>
 </html>

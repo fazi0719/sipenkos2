@@ -7,6 +7,8 @@
   <title>Verifikasi Pembayaran · SIPENKOS</title>
   <link rel="icon" href="../../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/style.css">
+  <link rel="stylesheet" href="../../assets/css/kelompok/admin/responsive.css">
 
   <!-- inti aplikasi (urutan penting) -->
   <script src="../../assets/js/core/config.js" defer></script>
@@ -18,27 +20,40 @@
   <script src="../../assets/js/core/shell.js" defer></script>
 
   <!-- skrip khusus halaman ini -->
+  <script src="../../assets/js/pages/pemilik/admin-ui.js" defer></script>
   <script src="../../assets/js/pages/pemilik/pembayaran.js" defer></script>
 </head>
 <body data-layout="akun" data-akses="pemilik" data-menu="pembayaran" data-judul="Verifikasi Pembayaran">
   <main>
-    <div class="kepala-halaman">
+    <div class="page-header">
       <div>
-        <h1>Verifikasi Pembayaran</h1>
-        <p class="sub">Konfirmasi bukti transfer tagihan sewa dan perpanjangan dari penghuni</p>
+        <h1 class="page-title">Verifikasi Pembayaran</h1>
+        <p class="page-subtitle">Periksa dan verifikasi bukti transfer pembayaran dari penghuni</p>
       </div>
     </div>
-    <div id="filter" role="group" aria-label="Saring status pembayaran"></div>
-    <section class="kartu kartu--rapat">
-      <div class="tabel-gulir">
-        <table class="tabel tabel--responsif">
-          <caption class="sr-only">Daftar tagihan penghuni</caption>
-          <thead><tr><th scope="col">Penghuni</th><th scope="col">Tagihan</th><th scope="col" class="angka">Jumlah</th><th scope="col">Jatuh Tempo</th><th scope="col">Status</th><th scope="col" class="aksi"><span class="sr-only">Aksi</span></th></tr></thead>
-          <tbody id="isiTabel"></tbody>
-        </table>
+    <div class="list-section">
+      <div class="toolbar">
+        <div id="filter"></div>
+        <label class="search search-sm"><i class="icon icon-search" aria-hidden="true"></i><span class="sr-only">Cari nama penghuni...</span><input type="search" placeholder="Cari nama penghuni..." id="cari" autocomplete="off"></label>
       </div>
-      <div id="kosong" hidden></div>
-    </section>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table table-verifikasi">
+            <thead>
+              <tr>
+                <th>Tanggal Kirim</th>
+                <th>Penghuni</th>
+                <th>Tagihan</th>
+                <th>Status</th>
+                <th class="ta-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="isiTabel"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="kosong" hidden>Tidak ada pembayaran pada kategori ini.</div>
+      </div>
+    </div>
   </main>
 </body>
 </html>
