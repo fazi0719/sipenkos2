@@ -144,16 +144,18 @@
   const rumahSvg = `<svg class="a-logo-rumah" viewBox="0 0 18 16" aria-hidden="true"><path d="M2 7.2 9 1.6l7 5.6V14.4H2Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M7 14.4V9.6h4v4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`;
   const lucide = (nama) => `<i class="a-ikon" style="--ikon:url('${S.url(`assets/icons/lucide/${nama}.svg`)}')" aria-hidden="true"></i>`;
 
-  const logoK = (href = "index.html", putih = false) => `
-    <a class="k-logo${putih ? " k-logo--putih" : ""}" href="${S.url(href)}" aria-label="SIPENKOS Kos Bu Nining">
-      <span class="k-logo-judul">SIPENKOS</span>
-      ${putih ? "" : `<span class="k-logo-divider" aria-hidden="true">|</span><span class="k-logo-pendukung">${esc(config.kos.nama)}</span>`}
+  const logoK = (href = "index.html") => `
+    <a class="k-logo" href="${S.url(href)}" aria-label="SIPENKOS Kos Bu Nining, ke beranda">
+      <span class="k-logo-judul"><span>SIPENK</span>${rumahSvg}<span>S</span></span>
+      <span class="k-logo-divider" aria-hidden="true"></span><span class="k-logo-pendukung">${esc(config.kos.nama)}</span>
     </a>`;
 
   const headerTamuK = (p, menuAktif, tanpaMenu = false) => `
     <header class="k-navbar">
       <div class="k-container k-navbar-container">
         ${logoK()}
+        <button type="button" class="k-navbar-toggle" aria-label="Buka menu" aria-expanded="false" data-buka-menu-tamu>${lucide("menu")}</button>
+        <div class="k-navbar-panel">
         ${tanpaMenu ? "" : `<nav class="k-menu" aria-label="Menu utama">
           ${config.menuTamu.map((m) =>
             `<a class="k-nav${m.kunci === menuAktif ? " active" : ""}" href="${S.url(m.href)}"${m.kunci === menuAktif ? ' aria-current="page"' : ""}>${m.label}</a>`).join("")}
@@ -162,7 +164,7 @@
           ${p
             ? `<div class="k-user-profile">
                  <a class="k-btn-icon-notif" href="${S.url("pages/akun/notifikasi.html")}" title="Notifikasi" aria-label="Notifikasi">🔔<span class="k-badge-dot"></span></a>
-                 <a class="k-user-info" href="${S.url(berandaAkun(p))}">
+                 <a class="k-user-info" href="${S.url("pages/akun/profil.html")}" title="Profil">
                    <span class="k-user-avatar">${esc(F.inisial(p.nama).charAt(0))}</span>
                    <span class="k-user-name">${esc(F.namaDepan(p.nama))}</span>
                  </a>
@@ -173,6 +175,7 @@
                  <a class="k-btn k-btn-primary" href="${S.url("pages/auth/masuk.html")}">Masuk</a>
                </div>`}
         </div>
+        </div>
       </div>
     </header>`;
 
@@ -181,7 +184,7 @@
     return `
       <footer class="k-footer">
         <div>
-          <div class="k-footer-logo">SIPENKOS</div>
+          <div class="k-footer-logo"><span>SIPENK</span>${rumahSvg}<span>S</span></div>
           <p class="k-footer-tagline">🛡️ Hunian terpercaya &amp; dikelola langsung oleh pemilik</p>
           <p class="k-footer-location">${esc(k.nama)} · ${esc(k.kota)}</p>
           <div class="k-kontak">
@@ -194,41 +197,11 @@
       </footer>`;
   };
 
-  // kerangka penghuni (sidebar + navbar seperti penghuni/dashboard.php kelompok)
-  const kerangkaPenghuniK = (p, menuAktif, adaNotif) => `
-    <aside class="k-sidebar" id="sidebar" aria-label="Menu penghuni">
-      <nav class="k-sidebar-nav" aria-label="Navigasi utama">
-        ${config.menuKelompok.penghuni.map((m) =>
-          `<a class="k-nav-link${m.kunci === menuAktif ? " active" : ""}" href="${S.url(m.href)}"${m.kunci === menuAktif ? ' aria-current="page"' : ""}><span class="k-nav-icon" aria-hidden="true">${m.simbol}</span>${esc(m.label)}</a>`).join("")}
-      </nav>
-      <div class="k-sidebar-bottom">
-        <button class="k-logout-button" type="button" data-keluar><span class="k-nav-icon" aria-hidden="true">⇥</span>Keluar</button>
-      </div>
-    </aside>
-    <div class="k-main-area">
-      <header class="k-header">
-        <div class="k-header-container">
-          ${logoK(berandaAkun(p))}
-          <div class="k-header-profile">
-            <a class="k-header-notif" href="${S.url("pages/akun/notifikasi.html")}" title="Notifikasi" aria-label="Notifikasi">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-              <span class="k-header-dot"${adaNotif ? "" : " hidden"}></span>
-            </a>
-            <span class="k-header-divider" aria-hidden="true"></span>
-            <span class="k-header-account">
-              <span class="k-header-avatar">${esc(F.inisial(p.nama).charAt(0))}</span>
-              <span class="k-header-name">${esc(F.namaDepan(p.nama))}</span>
-            </span>
-          </div>
-        </div>
-      </header>
-    </div>`;
-
-  // kerangka admin (sidebar.php + navbar.php admin kelompok)
+  // kerangka akun penghuni & pemilik (sidebar.php + navbar.php admin kelompok)
   const kerangkaAdmin = (p, menuAktif, adaNotif) => `
-    <aside class="a-sidebar" id="sidebar" aria-label="Navigasi admin">
+    <aside class="a-sidebar" id="sidebar" aria-label="Menu ${p.jenis === "pemilik" ? "pemilik kos" : "penghuni"}">
       <nav class="a-sidebar-nav">
-        ${config.menuKelompok.pemilik.map((m) =>
+        ${(config.menuKelompok[p.jenis] || []).map((m) =>
           `<a href="${S.url(m.href)}" class="a-nav-link${m.kunci === menuAktif ? " is-active" : ""}"${m.kunci === menuAktif ? ' aria-current="page"' : ""}>${lucide(m.lucide)}<span>${esc(m.label)}</span></a>`).join("")}
       </nav>
       <div class="a-sidebar-footer">
@@ -247,10 +220,10 @@
         <div class="a-topbar-right">
           <a href="${S.url("pages/akun/notifikasi.html")}" class="a-icon-btn a-notif-btn" aria-label="Notifikasi">${lucide("bell")}${adaNotif ? '<span class="a-notif-dot"></span>' : ""}</a>
           <span class="a-topbar-divider"></span>
-          <div class="a-profile-btn">
+          <a class="a-profile-btn" href="${S.url("pages/akun/profil.html")}" title="Profil">
             <span class="a-profile-avatar">${esc(F.inisial(p.nama).charAt(0))}</span>
-            <span class="a-profile-name">${esc(p.nama)}</span>
-          </div>
+            <span class="a-profile-name">${esc(p.jenis === "pemilik" ? p.nama : F.namaDepan(p.nama))}</span>
+          </a>
         </div>
       </header>
     </div>`;
@@ -302,16 +275,18 @@
       document.addEventListener("keydown", (e) => { if (e.key === "Escape" && sb.classList.contains("terbuka")) { atur(false); tombolSidebar.focus(); } });
     }
 
-    // menu tamu versi HP
+    // menu navbar versi HP (publik, masuk, alur reservasi)
     const tombolTamu = document.querySelector("[data-buka-menu-tamu]");
     if (tombolTamu) {
-      tombolTamu.addEventListener("click", () => {
-        const header = tombolTamu.closest(".header");
-        const buka = !header.classList.contains("terbuka");
+      const header = tombolTamu.closest(".k-navbar, .header");
+      const atur = (buka) => {
         header.classList.toggle("terbuka", buka);
         tombolTamu.setAttribute("aria-expanded", String(buka));
-        tombolTamu.innerHTML = ikon(buka ? "close" : "menu");
-      });
+        tombolTamu.setAttribute("aria-label", buka ? "Tutup menu" : "Buka menu");
+        tombolTamu.innerHTML = lucide(buka ? "x" : "menu");
+      };
+      tombolTamu.addEventListener("click", () => atur(!header.classList.contains("terbuka")));
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && header.classList.contains("terbuka")) { atur(false); tombolTamu.focus(); } });
     }
   };
 
@@ -365,17 +340,8 @@
       // halaman alur reservasi & akun calon: navbar tanpa menu (seperti status-reservasi.php)
       main.insertAdjacentHTML("beforebegin", lewati + headerTamuK(sesi, menu, layout !== "tamu" && !!sesi));
       main.insertAdjacentHTML("afterend", footerK());
-    } else if (layout === "akun" && tema === "kelompok") {
-      const kerangka = document.createElement("div");
-      kerangka.className = "k-dashboard-layout";
-      kerangka.innerHTML = kerangkaPenghuniK(sesi, menu, adaNotifK);
-      main.replaceWith(kerangka);
-      const wadah = document.createElement("div");
-      wadah.className = "k-container k-konten";
-      wadah.append(main);
-      kerangka.querySelector(".k-main-area").append(wadah);
-      kerangka.insertAdjacentHTML("beforebegin", lewati);
-    } else if (layout === "akun" && tema === "admin") {
+    } else if (layout === "akun") {
+      // penghuni & pemilik: sidebar + header yang sama (gaya admin kelompok)
       const kerangka = document.createElement("div");
       kerangka.className = "a-app";
       kerangka.innerHTML = kerangkaAdmin(sesi, menu, adaNotifK);

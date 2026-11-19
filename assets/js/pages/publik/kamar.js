@@ -17,7 +17,9 @@ SIPENKOS.halaman(async () => {
           <span class="label">Biaya sewa</span>
           <div class="harga${t.tersedia ? "" : " text-muted-harga"}"><span class="nominal">${F.rupiah(t.harga)}</span> / bulan</div>
         </div>
-        <a href="detail-kamar.html?tipe=${t.id}" class="btn btn-outline btn-full">Lihat Detail</a>
+        ${t.tersedia
+          ? `<a href="detail-kamar.html?tipe=${t.id}" class="btn btn-outline btn-full">Lihat Detail</a>`
+          : '<button type="button" class="btn btn-disabled btn-full" disabled>Penuh (Tidak Tersedia)</button>'}
       </div>
     </article>`).join("");
 });

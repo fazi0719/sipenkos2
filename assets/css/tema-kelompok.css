@@ -18,9 +18,9 @@
 
 body.tema-kelompok {
     --font: "Poppins", sans-serif;
-    --biru: #2563eb;
-    --biru-gelap: #1d4ed8;
-    --biru-muda: #eff6ff;
+    --biru: #1a6fd8;
+    --biru-gelap: #155fbc;
+    --biru-muda: #e8f2fd;
     --biru-garis: #bfdbfe;
     --navy: #1e3a8a;
     --teks: #1e293b;
@@ -38,13 +38,13 @@ body.tema-kelompok {
     --bahaya-muda: #ffe4e6;
     --peringatan: #92400e;
     --peringatan-muda: #fef3c7;
-    --info: #2563eb;
-    --info-muda: #eff6ff;
+    --info: #1a6fd8;
+    --info-muda: #e8f2fd;
     --info-garis: #bfdbfe;
     --r: 8px;
     --r-besar: 16px;
     --bayangan: none;
-    --fokus: 0 0 0 3px rgba(37, 99, 235, 0.28);
+    --fokus: 0 0 0 3px rgba(26, 111, 216, 0.28);
     font-family: "Poppins", sans-serif;
     color: #1e293b;
     background: #f8fafc;
@@ -93,21 +93,26 @@ body.tema-admin {
 }
 
 .k-logo-judul {
+    display: inline-flex;
+    align-items: center;
     font-weight: 700;
-    font-size: 25px;
-    color: #2563eb;
-    letter-spacing: -0.5px;
+    font-size: 22px;
+    line-height: 33px;
+    color: #1e3a8a;
+    letter-spacing: -0.55px;
 }
 
 .k-logo-divider {
-    color: #cbd5e1;
-    font-weight: 300;
+    width: 1px;
+    height: 16px;
+    margin: 0 4px;
+    background: #e2e8f0;
 }
 
 .k-logo-pendukung {
-    font-size: 0.85rem;
+    font-size: 14px;
     color: #64748b;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .k-navbar {
@@ -143,7 +148,7 @@ body.tema-admin {
 
 .k-nav.active,
 .k-nav:hover {
-    color: #2563eb;
+    color: #1a6fd8;
 }
 
 .k-nav.active {
@@ -194,7 +199,7 @@ body.tema-admin {
 .k-user-avatar {
     width: 36px;
     height: 36px;
-    background-color: #2563eb;
+    background-color: #1a6fd8;
     color: #ffffff;
     border-radius: 50%;
     display: flex;
@@ -225,13 +230,13 @@ body.tema-admin {
 }
 
 .k-btn-primary {
-    background-color: #2563eb;
+    background-color: #1a6fd8;
     color: #ffffff;
     border: none;
 }
 
 .k-btn-primary:hover {
-    background-color: #1d4ed8;
+    background-color: #155fbc;
 }
 
 .k-btn-outline {
@@ -272,9 +277,15 @@ body.tema-admin {
 }
 
 .k-footer-logo {
+    display: inline-flex;
+    align-items: center;
     font-weight: 700;
     font-size: 20px;
     letter-spacing: -0.5px;
+}
+
+.k-footer-logo .a-logo-rumah {
+    color: #ffffff;
 }
 
 .k-footer-tagline,
@@ -306,253 +317,18 @@ body.tema-admin {
     opacity: 0.7;
 }
 
-/* 4. Kerangka penghuni (penghuni/style.css) =============================== */
+/* 4. Kerangka penghuni = kerangka admin (bagian 5) agar penghuni & pemilik seragam.
+      Latar halaman penghuni disamakan dengan admin. */
 body.tema-kelompok.kerangka-sidebar {
     font-size: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #e8f2fd 100%) fixed, #ffffff;
 }
 
-.k-sidebar {
-    position: fixed;
-    inset: 0 auto 0 0;
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    width: 208px;
-    padding: 0 9px;
-    background: #ffffff;
-    border-right: 1px solid #e2e8f0;
-}
-
-.k-sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-top: 15px;
-}
-
-.k-nav-link,
-.k-logout-button {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    min-height: 41px;
-    padding: 0 12px;
-    color: #1e293b;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: 0.18s;
-}
-
-.k-nav-link:hover,
-.k-logout-button:hover {
-    background: #f8fafc;
-}
-
-.k-nav-link.active {
-    color: #2563eb;
-    font-weight: 600;
-    background: #e8f1ff;
-}
-
-.k-nav-icon {
-    width: 15px;
-    flex-shrink: 0;
-    font-size: 16px;
-    text-align: center;
-}
-
-.k-sidebar-bottom {
-    margin-top: auto;
-    border-top: 1px solid #e2e8f0;
-    display: flex;
-    gap: 11px;
-    min-height: 41px;
-    padding: 6px;
-    margin-right: 2px;
-    font-size: 13px;
-}
-
-.k-logout-button {
-    width: 100%;
-    color: #be123c;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.k-main-area {
-    min-height: 100vh;
-    margin-left: 208px;
-}
-
-.k-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 65px;
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.k-header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* isi halaman penghuni memakai jarak dari CSS kelompok sendiri, bukan gap flex admin */
+body.tema-kelompok.kerangka-sidebar .a-main.halaman {
+    display: block;
     width: 100%;
     max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 27px;
-}
-
-.k-header .k-logo {
-    gap: 10px;
-}
-
-.k-header .k-logo-judul {
-    color: #1e3a8a;
-    font-size: 20px;
-    letter-spacing: -0.8px;
-}
-
-.k-header .k-logo-divider {
-    color: #d5dae3;
-    font-weight: 400;
-}
-
-.k-header .k-logo-pendukung {
-    font-size: 11px;
-    font-weight: 400;
-}
-
-.k-header-profile {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.k-header-notif {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    color: #1e293b;
-}
-
-.k-header-notif svg {
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.k-header-dot {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 7px;
-    height: 7px;
-    background: #be123c;
-    border: 1px solid #ffffff;
-    border-radius: 50%;
-}
-
-.k-header-dot[hidden] {
-    display: none;
-}
-
-.k-header-divider {
-    width: 1px;
-    height: 28px;
-    background: #e2e8f0;
-}
-
-.k-header-account {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 4px 6px;
-    font-size: 12px;
-}
-
-.k-header-avatar {
-    display: grid;
-    place-items: center;
-    width: 27px;
-    height: 27px;
-    color: #ffffff;
-    font-weight: 600;
-    background: #2563eb;
-    border-radius: 50%;
-}
-
-.k-container.k-konten {
-    max-width: 1240px;
-    padding: 27px 27px 50px;
-}
-
-.k-konten > .halaman {
-    padding: 0;
-}
-
-@media (max-width: 680px) {
-    /* di repo kelompok sidebar tersembunyi dan TIDAK ada tombol pembukanya */
-    .k-sidebar {
-        width: 245px;
-        box-shadow: 10px 0 30px #17243a12;
-        transform: translateX(-100%);
-        transition: transform 0.22s ease;
-    }
-
-    .k-sidebar.terbuka {
-        transform: translateX(0);
-    }
-
-    .k-main-area {
-        margin-left: 0;
-    }
-
-    .k-header {
-        height: 58px;
-        padding: 0 15px;
-    }
-
-    .k-header-container {
-        padding: 0;
-    }
-
-    .k-header .k-logo {
-        gap: 7px;
-    }
-
-    .k-header .k-logo-judul {
-        font-size: 16px;
-    }
-
-    .k-header .k-logo-pendukung {
-        font-size: 10px;
-    }
-
-    .k-header-profile {
-        gap: 9px;
-    }
-
-    .k-header-name {
-        display: none;
-    }
-
-    .k-container.k-konten {
-        padding: 27px 20px 50px;
-    }
 }
 
 /* 5. Kerangka admin (admin/css/style.css + responsive.css) ================ */
@@ -824,13 +600,13 @@ body.tema-kelompok .tombol {
 }
 
 body.tema-kelompok .tombol--utama {
-    background: #2563eb;
-    border-color: #2563eb;
+    background: #1a6fd8;
+    border-color: #1a6fd8;
 }
 
 body.tema-kelompok .tombol--utama:hover {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
+    background: #155fbc;
+    border-color: #155fbc;
 }
 
 body.tema-kelompok .tombol--sekunder {
@@ -869,16 +645,16 @@ body.tema-kelompok.kerangka-sidebar .kartu {
     box-shadow: 0 1px 2px #15233b08;
 }
 
-body.tema-kelompok .kepala-halaman h1,
-body.tema-kelompok .halaman h1 {
+/* judul komponen bawaan sipenkos2 (.kepala-halaman); judul halaman kelompok
+   memakai kelas CSS kelompok sendiri (.judul-section dll.) */
+body.tema-kelompok .kepala-halaman h1 {
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.2;
     color: #1e293b;
 }
 
-body.tema-kelompok.kerangka-sidebar .kepala-halaman h1,
-body.tema-kelompok.kerangka-sidebar .halaman h1 {
+body.tema-kelompok.kerangka-sidebar .kepala-halaman h1 {
     font-size: 24px;
 }
 
@@ -927,8 +703,8 @@ body.tema-admin .kepala-halaman h1 {
 
 /* 7. Variabel & kelas umum repo kelompok (dipakai CSS halaman di assets/css/kelompok/) */
 :root {
-    --primary-blue: #2563eb;
-    --primary-hover: #1d4ed8;
+    --primary-blue: #1a6fd8;
+    --primary-hover: #155fbc;
     --bg-footer: #1e3a8a;
     --text-dark: #1e293b;
     --text-muted: #64748b;
@@ -981,36 +757,24 @@ body.tema-kelompok main.halaman.halaman--penuh {
     max-width: none;
 }
 
-/* 10. Logo di dalam halaman (kartu Masuk/Daftar) — calon-penghuni/style.css */
-body.tema-kelompok main .logo {
+/* 10. Logo di dalam kartu Masuk/Daftar memakai .k-logo (bagian 2) */
+body.tema-kelompok .auth-logo .k-logo {
+    justify-content: center;
+}
+
+/* daftar Tentang: ikon emoji sebagai penanda, tanpa titik */
+body.tema-kelompok.kerangka-navbar main .keunggulan {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    list-style: none;
 }
 
-body.tema-kelompok main .logo-judul {
-    font-weight: 700;
-    font-size: 25px;
-    color: #2563eb;
-    letter-spacing: -0.5px;
-}
-
-body.tema-kelompok main .logo-divider {
-    color: #cbd5e1;
-    font-weight: 300;
-}
-
-body.tema-kelompok main .logo-pendukung {
-    font-size: 0.85rem;
-    color: #64748b;
-    font-weight: 500;
-}
-
-/* daftar Tentang memakai penanda bawaan browser seperti di repo kelompok
-   (base.css sipenkos2 menghapus penanda semua daftar) */
-body.tema-kelompok .keunggulan {
-    list-style: disc;
+body.tema-kelompok.kerangka-navbar main .list-keunggulan {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
 }
 
 /* 11. Penyesuaian gaya admin */
@@ -1078,4 +842,286 @@ body.tema-admin .dialog {
 body.tema-admin .dialog-kepala h2 {
     font-size: 20px;
     font-weight: 700;
+}
+
+
+/* 12. Navbar responsif (HP & tablet) */
+.k-navbar-panel {
+    display: contents;
+}
+
+.k-navbar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    color: #1e293b;
+    background: none;
+    border: 0;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+.k-navbar-toggle:hover {
+    background: #f1f5f9;
+}
+
+.k-navbar-toggle .a-ikon {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 860px) {
+    .k-navbar {
+        height: 64px;
+    }
+
+    .k-navbar-container {
+        position: relative;
+        gap: 12px;
+    }
+
+    .k-navbar-toggle {
+        display: inline-flex;
+    }
+
+    .k-navbar-panel {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 16px 20px 20px;
+        background: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, .08);
+    }
+
+    .k-navbar.terbuka .k-navbar-panel {
+        display: flex;
+    }
+
+    .k-menu {
+        flex-direction: column;
+        gap: 4px;
+        margin: 0;
+    }
+
+    .k-nav {
+        padding: 10px 4px;
+    }
+
+    .k-nav-actions-wrapper,
+    .k-nav-actions {
+        width: 100%;
+    }
+
+    .k-nav-actions .k-btn {
+        flex: 1;
+        padding: 10px 16px;
+    }
+
+    .k-user-profile {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .k-logo-divider,
+    .k-logo-pendukung {
+        display: none;
+    }
+}
+
+/* 13. Chip filter & pencarian admin tidak melebar di HP */
+body.tema-admin .toolbar {
+    flex-wrap: wrap;
+}
+
+body.tema-admin .chips {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+    body.tema-admin .toolbar .search {
+        width: 100%;
+    }
+
+    body.tema-admin .page-header {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+}
+
+/* 14. Banner status reservasi di Beranda */
+body.tema-kelompok.kerangka-navbar main .banner-status {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding: 16px 20px;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 12px;
+}
+
+body.tema-kelompok.kerangka-navbar main .banner-status-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+body.tema-kelompok.kerangka-navbar main .banner-status-content {
+    flex: 1;
+    min-width: 0;
+}
+
+body.tema-kelompok.kerangka-navbar main .banner-status-content strong {
+    display: block;
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+
+body.tema-kelompok.kerangka-navbar main .banner-status-content p {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+body.tema-kelompok.kerangka-navbar main .banner-status--diterima {
+    background: #f0fdf4;
+    border-color: #86efac;
+}
+
+body.tema-kelompok.kerangka-navbar main .banner-status--ditolak {
+    background: #fff1f2;
+    border-color: #fda4af;
+}
+
+@media (max-width: 640px) {
+    body.tema-kelompok.kerangka-navbar main .banner-status {
+        flex-wrap: wrap;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .banner-status .btn {
+        width: 100%;
+    }
+}
+
+/* 15. Halaman publik & alur reservasi di HP */
+@media (max-width: 640px) {
+    body.tema-kelompok.kerangka-navbar main .alur-card {
+        justify-content: space-between;
+        gap: 6px;
+        padding: 14px 12px;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .alur-card .step-arrow {
+        display: none;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .alur-sewa {
+        flex: 1;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 0;
+        font-size: 0.72rem;
+        line-height: 1.3;
+        text-align: center;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .action-bar-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .buttons-action {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+        width: 100%;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .buttons-action .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .form-row-2 {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .tentang-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    body.tema-kelompok.kerangka-navbar main .card-box {
+        min-width: 0;
+        padding: 20px;
+    }
+}
+
+/* chip filter admin turun baris di HP (repo kelompok menggeser ke samping & melebar) */
+@media (max-width: 767px) {
+    body.tema-admin main .toolbar > #filter,
+    body.tema-admin main .toolbar > .chips {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body.tema-admin main .chips {
+        flex-wrap: wrap;
+        overflow: visible;
+    }
+
+    body.tema-admin main .chip {
+        height: 34px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+}
+
+/* label sr-only (position:absolute) di dalam tabel geser tidak ikut melebarkan halaman */
+body.tema-admin .table-wrap,
+body.tema-kelompok .table-wrap {
+    position: relative;
+}
+
+/* pilihan durasi di Detail Kamar selalu muat satu baris di HP */
+@media (max-width: 640px) {
+    body.tema-kelompok.kerangka-navbar main .durasi-group {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    body.tema-kelompok.kerangka-navbar main .btn-durasi {
+        min-width: 0;
+        padding-left: 6px;
+        padding-right: 6px;
+        white-space: nowrap;
+    }
+}
+
+/* Detail Kamar: dua kolom jadi satu kolom di tablet & HP (repo kelompok tidak punya) */
+@media (max-width: 900px) {
+    body.tema-kelompok.kerangka-navbar main .detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
 }

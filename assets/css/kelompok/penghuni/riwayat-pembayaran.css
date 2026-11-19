@@ -40,7 +40,7 @@ body.tema-kelompok.kerangka-sidebar .filter-bulan {
 }
 body.tema-kelompok.kerangka-sidebar .filter-bulan:focus {
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px #2563eb15;
+    box-shadow: 0 0 0 3px #1a6fd815;
 }
 body.tema-kelompok.kerangka-sidebar .btn-reset-filter {
     padding: 8px 12px;
@@ -52,7 +52,7 @@ body.tema-kelompok.kerangka-sidebar .btn-reset-filter {
     cursor: pointer;
 }
 body.tema-kelompok.kerangka-sidebar .btn-reset-filter:hover {
-    background: #e8f1ff;
+    background: #e8f2fd;
 }
 body.tema-kelompok.kerangka-sidebar .filter-info {
     font-size: 12px;

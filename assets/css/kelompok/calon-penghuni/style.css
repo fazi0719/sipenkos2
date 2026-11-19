@@ -1,7 +1,7 @@
 /* Disalin dari repo kelompok, setiap selector diberi awalan body.tema-kelompok.kerangka-navbar */
 body.tema-kelompok.kerangka-navbar {
-  --primary-blue: #2563eb;
-  --primary-hover: #1d4ed8;
+  --primary-blue: #1a6fd8;
+  --primary-hover: #155fbc;
   --bg-footer: #1e3a8a;
   --text-dark: #1e293b;
   --text-muted: #64748b;
@@ -246,7 +246,7 @@ body.tema-kelompok.kerangka-navbar button, body.tema-kelompok.kerangka-navbar in
   font: inherit;
 }
 body.tema-kelompok.kerangka-navbar button:focus-visible, body.tema-kelompok.kerangka-navbar a:focus-visible, body.tema-kelompok.kerangka-navbar input:focus-visible, body.tema-kelompok.kerangka-navbar select:focus-visible, body.tema-kelompok.kerangka-navbar textarea:focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.28);
+  outline: 3px solid rgba(26, 111, 216, 0.28);
   outline-offset: 2px;
 }
 body.tema-kelompok.kerangka-navbar img {
@@ -257,7 +257,7 @@ body.tema-kelompok.kerangka-navbar .badge {
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background-color: #eff6ff;
+  background-color: #e8f2fd;
   color: var(--primary-blue);
   border-radius: 20px;
   font-size: 0.8rem;

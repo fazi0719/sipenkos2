@@ -133,7 +133,7 @@ SIPENKOS.halaman(async ({ pengguna }) => {
   tombolSemua.addEventListener("click", async () => {
     await store.notifikasi.tandaiSemua();
     semua = await store.notifikasi.milikSaya();
-    document.querySelectorAll(".k-header-dot, .k-badge-dot").forEach((el) => (el.hidden = true));
+    document.querySelectorAll(".a-notif-dot, .k-badge-dot").forEach((el) => (el.hidden = true));
     tampilkan();
   });
   tampilkan();

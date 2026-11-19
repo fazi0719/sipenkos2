@@ -101,7 +101,7 @@ body.tema-kelompok.kerangka-navbar .btn-durasi {
 body.tema-kelompok.kerangka-navbar .btn-durasi.active {
   border-color: var(--primary-blue);
   color: var(--primary-blue);
-  background: #eff6ff;
+  background: #e8f2fd;
 }
 body.tema-kelompok.kerangka-navbar .btn-reservasi {
   padding: 12px;

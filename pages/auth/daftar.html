@@ -28,10 +28,10 @@
     <div class="auth-container">
       <div class="card-box auth-card">
         <div class="auth-logo">
-          <a href="../../index.html" class="logo">
-            <span class="logo-judul">SIPENKOS</span>
-            <span class="logo-divider">|</span>
-            <span class="logo-pendukung">Kos Bu Nining</span>
+          <a href="../../index.html" class="k-logo" aria-label="SIPENKOS Kos Bu Nining, ke beranda">
+            <span class="k-logo-judul"><span>SIPENK</span><svg class="a-logo-rumah" viewBox="0 0 18 16" aria-hidden="true"><path d="M2 7.2 9 1.6l7 5.6V14.4H2Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M7 14.4V9.6h4v4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>S</span></span>
+            <span class="k-logo-divider" aria-hidden="true"></span>
+            <span class="k-logo-pendukung">Kos Bu Nining</span>
           </a>
         </div>
         <div class="informasi" id="infoReservasi">
@@ -46,6 +46,10 @@
           <div class="form-group">
             <label for="nama" class="form-label">Nama Lengkap</label>
             <input type="text" id="nama" name="nama" class="form-input" placeholder="Nama lengkap sesuai KTP" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="nik" class="form-label">NIK</label>
+            <input type="text" id="nik" name="nik" class="form-input" placeholder="16 digit angka sesuai KTP" inputmode="numeric" maxlength="16" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="hp" class="form-label">Nomor HP / WhatsApp</label>

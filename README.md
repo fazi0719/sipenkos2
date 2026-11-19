@@ -75,10 +75,15 @@ Sejak 19 Nov 2026 tampilan sipenkos2 disamakan dengan repo kelompok
 - `shell.js` memberi kelas pada `<body>`:
   - `tema-kelompok` — publik, masuk/daftar, calon penghuni, penghuni (gaya `calon-penghuni/` & `penghuni/`)
   - `tema-admin` — pemilik (gaya `admin/`)
-  - `kerangka-navbar` (navbar + footer) atau `kerangka-sidebar` (sidebar penghuni)
-- Kerangka (navbar, sidebar, footer) memakai kelas berawalan `k-` (kelompok) dan `a-` (admin) di `tema-kelompok.css`.
+  - `kerangka-navbar` (navbar + footer) atau `kerangka-sidebar` (sidebar penghuni & pemilik)
+- Kerangka memakai kelas berawalan `k-` (navbar & footer) dan `a-` (sidebar & header akun) di `tema-kelompok.css`.
+  Penghuni dan pemilik memakai sidebar + header yang sama (ikon Lucide, menu di `config.menuKelompok`).
+- Semua halaman bisa dipakai di HP: navbar dan sidebar punya tombol menu (☰), chip filter turun baris.
 - Isi halaman memakai nama kelas yang sama dengan repo kelompok; CSS-nya diambil dari `assets/css/kelompok/`.
 - Halaman pemilik memakai potongan HTML bersama di `assets/js/pages/pemilik/admin-ui.js` (badge, chip, modal).
+- Bagian yang **sengaja dibuat beda** dari repo kelompok (karena di sana rusak/kurang rapi): tombol menu di HP,
+  tata letak HP (Detail Kamar, Formulir, Tentang, chip filter), logo dengan ikon rumah di semua halaman,
+  satu warna biru `#1a6fd8`, kamar penuh tidak bisa dibuka, isian NIK di Daftar, nama di header membuka Profil.
 - `<body data-lebar="penuh">` = halaman mengatur `.container` sendiri (mis. Beranda dengan gambar selebar layar).
 
 ## Cara kerja satu halaman

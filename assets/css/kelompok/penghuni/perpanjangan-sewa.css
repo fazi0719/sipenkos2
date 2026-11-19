@@ -158,7 +158,7 @@ body.tema-kelompok.kerangka-sidebar .opsi:has(input:checked)::after {
     transform: translateY(-50%) scale(1);
 }
 body.tema-kelompok.kerangka-sidebar .opsi:has(input:focus-visible) {
-    outline: 3px solid #2563eb40;
+    outline: 3px solid #1a6fd840;
     outline-offset: 2px;
 }
 body.tema-kelompok.kerangka-sidebar .opsi.nonaktif {
@@ -394,7 +394,7 @@ body.tema-kelompok.kerangka-sidebar .timeline-item.selesai .timeline-dot {
 body.tema-kelompok.kerangka-sidebar .timeline-item.berjalan .timeline-dot {
     color: var(--primary-blue);
     background: #eef4fd;
-    box-shadow: 0 0 0 4px #e8f1ff;
+    box-shadow: 0 0 0 4px #e8f2fd;
 }
 body.tema-kelompok.kerangka-sidebar .timeline-item.menunggu .timeline-dot {
     color: #94a3b8;

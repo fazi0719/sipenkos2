@@ -30,6 +30,7 @@ SIPENKOS.halaman(async ({ pengguna }) => {
       $("bannerStatusIcon").textContent = konten[0];
       $("bannerStatusTitle").textContent = konten[1];
       $("bannerStatusDescription").textContent = konten[2];
+      $("bannerStatus").classList.add(`banner-status--${r.status}`);
       $("bannerStatus").hidden = false;
     }
   }

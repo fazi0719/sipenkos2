@@ -119,17 +119,16 @@
       ]
     },
 
-    // ---------- menu versi tampilan repo kelompok (PBL-Sipenkos) ----------
-    // penghuni: ikon simbol teks seperti sidebar penghuni kelompok
-    // pemilik : ikon Lucide (assets/icons/lucide) seperti sidebar admin kelompok
+    // ---------- menu sidebar versi tampilan repo kelompok (PBL-Sipenkos) ----------
+    // penghuni & pemilik memakai kerangka & ikon Lucide yang sama (gaya admin kelompok)
     menuKelompok: {
       penghuni: [
-        { kunci: "dashboard", label: "Dashboard", simbol: "▦", href: "pages/penghuni/dashboard.html" },
-        { kunci: "tagihan", label: "Tagihan", simbol: "▤", href: "pages/penghuni/tagihan.html" },
-        { kunci: "riwayat", label: "Riwayat Pembayaran", simbol: "◴", href: "pages/penghuni/riwayat.html" },
-        { kunci: "perpanjangan", label: "Perpanjangan Sewa", simbol: "▣", href: "pages/penghuni/perpanjangan.html" },
-        { kunci: "laporan", label: "Laporan Kerusakan", simbol: "⚒", href: "pages/penghuni/laporan.html" },
-        { kunci: "aturan", label: "Kebijakan & Aturan Kos", simbol: "⚑", href: "pages/akun/aturan.html" }
+        { kunci: "dashboard", label: "Dashboard", lucide: "layout-grid", href: "pages/penghuni/dashboard.html" },
+        { kunci: "tagihan", label: "Tagihan", lucide: "receipt-text", href: "pages/penghuni/tagihan.html" },
+        { kunci: "riwayat", label: "Riwayat Pembayaran", lucide: "clock", href: "pages/penghuni/riwayat.html" },
+        { kunci: "perpanjangan", label: "Perpanjangan Sewa", lucide: "calendar", href: "pages/penghuni/perpanjangan.html" },
+        { kunci: "laporan", label: "Laporan Kerusakan", lucide: "wrench", href: "pages/penghuni/laporan.html" },
+        { kunci: "aturan", label: "Kebijakan & Aturan Kos", lucide: "file-text", href: "pages/akun/aturan.html" }
       ],
       pemilik: [
         { kunci: "dashboard", label: "Dashboard", lucide: "layout-grid", href: "pages/pemilik/dashboard.html" },

@@ -71,7 +71,7 @@ body.tema-kelompok.kerangka-sidebar .btn-outline:hover {
     background: var(--bg-light);
 }
 body.tema-kelompok.kerangka-sidebar .btn-utama:focus-visible, body.tema-kelompok.kerangka-sidebar .btn-outline:focus-visible, body.tema-kelompok.kerangka-sidebar .filter-pill:focus-visible, body.tema-kelompok.kerangka-sidebar .link-detail:focus-visible, body.tema-kelompok.kerangka-sidebar .link-kembali:focus-visible, body.tema-kelompok.kerangka-sidebar .tombol-batal:focus-visible, body.tema-kelompok.kerangka-sidebar .tombol-teks:focus-visible {
-    outline: 3px solid #2563eb40;
+    outline: 3px solid #1a6fd840;
     outline-offset: 2px;
 }
 body.tema-kelompok.kerangka-sidebar .badge-status {
@@ -93,7 +93,7 @@ body.tema-kelompok.kerangka-sidebar .badge-status::before {
 }
 body.tema-kelompok.kerangka-sidebar .badge-status--baru {
     color: var(--primary-blue);
-    background: #e8f1ff;
+    background: #e8f2fd;
 }
 body.tema-kelompok.kerangka-sidebar .badge-status--diproses {
     color: #c2410c;
@@ -129,7 +129,7 @@ body.tema-kelompok.kerangka-sidebar .filter-pill:hover {
 body.tema-kelompok.kerangka-sidebar .filter-pill.aktif {
     color: var(--primary-blue);
     font-weight: 500;
-    background: #e8f1ff;
+    background: #e8f2fd;
     border-color: var(--primary-blue);
 }
 body.tema-kelompok.kerangka-sidebar .daftar-laporan {
@@ -214,7 +214,7 @@ body.tema-kelompok.kerangka-sidebar .kosong-ikon {
     height: 56px;
     margin-bottom: 14px;
     color: var(--primary-blue);
-    background: #e8f1ff;
+    background: #e8f2fd;
     border-radius: 50%;
 }
 body.tema-kelompok.kerangka-sidebar .kosong-ikon .ikon {
@@ -291,7 +291,7 @@ body.tema-kelompok.kerangka-sidebar .field input::placeholder, body.tema-kelompo
 body.tema-kelompok.kerangka-sidebar .field input:focus, body.tema-kelompok.kerangka-sidebar .field select:focus, body.tema-kelompok.kerangka-sidebar .field textarea:focus {
     border-color: var(--primary-blue);
     outline: none;
-    box-shadow: 0 0 0 3px #2563eb26;
+    box-shadow: 0 0 0 3px #1a6fd826;
 }
 body.tema-kelompok.kerangka-sidebar .field .salah {
     border-color: var(--badge-red-text);
@@ -345,7 +345,7 @@ body.tema-kelompok.kerangka-sidebar .unggah:hover, body.tema-kelompok.kerangka-s
     border-color: var(--primary-blue);
 }
 body.tema-kelompok.kerangka-sidebar .unggah:has(input:focus-visible) {
-    outline: 3px solid #2563eb40;
+    outline: 3px solid #1a6fd840;
     outline-offset: 2px;
 }
 body.tema-kelompok.kerangka-sidebar .unggah input {
@@ -569,7 +569,7 @@ body.tema-kelompok.kerangka-sidebar .timeline-item.selesai .timeline-dot {
 }
 body.tema-kelompok.kerangka-sidebar .timeline-item.berjalan .timeline-dot {
     color: var(--primary-blue);
-    background: #e8f1ff;
+    background: #e8f2fd;
 }
 body.tema-kelompok.kerangka-sidebar .timeline-item.menunggu .timeline-dot {
     color: #94a3b8;
